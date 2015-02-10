@@ -7,6 +7,7 @@ public class Main {
 	 PUT YOUR NAME HERE!
 	 
 	 Dan Sweetman
+	 Joe Diment
 	 
 	 */
 
