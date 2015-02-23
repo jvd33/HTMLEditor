@@ -15,6 +15,10 @@ public class Line {
 	
 	//either a toString method, or a getText method?
 	
+	public Line(){
+		text = "";
+	}
+	
 	public String toString()
 	{
 		return text + "\n";
