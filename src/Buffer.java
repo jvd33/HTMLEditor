@@ -14,7 +14,7 @@ public class Buffer extends Observable {
 		public List<Line> lines;//list of all lines in the buffer
 		
 		public Buffer() {
-
+			this.lines = new ArrayList<Line>();
 		}
 		
 		public void addTag(HTMLTag root) { 
