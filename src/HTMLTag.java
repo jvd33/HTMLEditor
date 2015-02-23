@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * 
  */
@@ -7,5 +9,10 @@
  *
  */
 public class HTMLTag {
-
+		
+		private List<HTMLTag> tags;
+		private int startline, endline;
+		private String tag;
+		private String attribute;
+		
 }

@@ -1,3 +1,5 @@
+import java.util.List;
+
 /**
  * 
  */
@@ -7,5 +9,7 @@
  *
  */
 public class HTMLEditor {
-
+		private Buffer activeBuffer;
+		private List<Buffer> buffers;
+		
 }
