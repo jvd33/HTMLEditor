@@ -17,7 +17,7 @@ public class Line {
 	
 	public String toString()
 	{
-		return text;
+		return text + "\n";
 	}
 	
 	public int getNum(){
