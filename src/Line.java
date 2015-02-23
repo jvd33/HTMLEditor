@@ -15,9 +15,18 @@ public class Line {
 	
 	//either a toString method, or a getText method?
 	
+	public Line(){
+		this.text = "";
+	}
+	
+	public String setText(String newText){
+		this.text = newText;
+		return this.text;
+	}
+	
 	public String toString()
 	{
-		return text;
+		return text + "\n";
 	}
 	
 	public int getNum(){
