@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 /**
  * 
@@ -10,9 +10,51 @@ import java.util.List;
  */
 public class HTMLTag {
 		
-		private List<HTMLTag> tags;
-		private int startline, endline;
+		private List<HTMLTag> children;
+		private int startLine, endLine;
 		private String tag;
 		private String attribute;
 		
+		//constructor, child param is optional. 
+		public HTMLTag(String t, String attr, HTMLTag...child) {
+			tag = t;
+			attribute = attr;
+			children = new ArrayList<HTMLTag>();
+			if(child[0] != null) { children.add(child[0]); }
+			
+		}
+		
+		//adds a child to the children list
+		public void addChild(HTMLTag child) {
+			children.add(child);
+		}
+		
+		//sets the start and end line
+		public void setLines(int start, int end) {
+			startLine = start;
+			endLine = end;
+		}
+		
+		//gets and returns ALL children of the tag
+		public List<HTMLTag> getChildren() { 
+			List<HTMLTag> allChildren = new ArrayList<HTMLTag>();
+			for(HTMLTag child : children) {
+				allChildren.add(child);
+				List<HTMLTag> childTags = child.getChildren();
+				allChildren.addAll(childTags);
+			}
+			return allChildren;
+		}
+		
+		public String getTag() {
+			return tag;
+		}
+		
+		public int getStart() { 
+			return startLine;
+		}
+		
+		public int getEnd() {
+			return endLine;
+		}
 }
