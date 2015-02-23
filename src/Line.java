@@ -16,7 +16,12 @@ public class Line {
 	//either a toString method, or a getText method?
 	
 	public Line(){
-		text = "";
+		this.text = "";
+	}
+	
+	public String setText(String newText){
+		this.text = newText;
+		return this.text;
 	}
 	
 	public String toString()
