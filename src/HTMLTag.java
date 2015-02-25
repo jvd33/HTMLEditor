@@ -15,10 +15,13 @@ public class HTMLTag {
 		private String tag;
 		private String attribute;
 		
+		public HTMLTag() { 
+		
+		}
 		//constructor, child param is optional. 
-		public HTMLTag(String t, String attr, HTMLTag...child) {
+		public HTMLTag(String t, HTMLTag...child) {
 			tag = t;
-			attribute = attr;
+			//attribute = attr[0];
 			children = new ArrayList<HTMLTag>();
 			if(child[0] != null) { children.add(child[0]); }
 			
@@ -33,6 +36,10 @@ public class HTMLTag {
 		public void setLines(int start, int end) {
 			startLine = start;
 			endLine = end;
+		}
+		
+		public void setTag(String in) { 
+			tag = in;
 		}
 		
 		//gets and returns ALL children of the tag

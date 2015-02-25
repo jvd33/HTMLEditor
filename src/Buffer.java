@@ -12,6 +12,7 @@ public class Buffer extends Observable {
 		
 		private HTMLTag tag; //root tag for buffer
 		public List<Line> lines;//list of all lines in the buffer
+		public String text;
 		
 		public Buffer() {
 			this.lines = new ArrayList<Line>();
@@ -21,6 +22,9 @@ public class Buffer extends Observable {
 			tag = root;
 		}
 		
+		public void addText(String s) { 
+			text = s;
+		}
 		//returns the full text of the buffer
 		public String toString() { 
 			String str = "";
