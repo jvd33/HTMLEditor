@@ -14,20 +14,40 @@ import java.io.PrintWriter;
  *
  */
 public class FileHandler {
-		public File file;
+
+		private File file;
+		public Buffer buff;
+		
+		
+		
+		/**
+		 * Constructor of FileHandler
+		 * Takes in a file which serves as a destination to save in the future
+		 * Converts the file's contents to a buffer
+		 * 
+		 * @param file	
+		 */
 		public FileHandler(File file){
 			this.file = file;
-			writeToFile(readFile(file));
+			readFile(file);
+			this.buff = readFile(file);
 		}
-		//needs a save (writeToFile) method and a load (readFile) method
-	
+		
+		/**
+		 * Load method
+		 * Returns the Buffer of a File that is provided in the arguments
+		 * 
+		 * @param file	The file to be turned into a buffer 
+		 * @return		The new buffer object
+		 */
 		public Buffer readFile(File file){
 			Buffer buff = new Buffer();				// HTML Document Buffer
-			
+
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 				String sCurrentLine = null;
-				while ((sCurrentLine = br.readLine()) != null) { // Iterator that adds lines from file to buffer
-					Line l = new Line();					// Temporary new line
+				// adds lines from file to buffer
+				while ((sCurrentLine = br.readLine()) != null) {
+					Line l = new Line();			// Temporary new line
 					l.setText(sCurrentLine);
 					buff.addLine(l);
 				}
@@ -39,7 +59,14 @@ public class FileHandler {
 			System.out.println("Loaded the file!");
 			return buff;
 		}
-		
+		/**
+		 * Save method
+		 * Takes in a buffer that has been edited and converts it into a file
+		 * object
+		 * 
+		 * @param parsedBuffer	The buffer to be saved as a file
+		 * @return				The File object that has just been written
+		 */
 		public File writeToFile(Buffer parsedBuffer){
 			try(PrintWriter out = new PrintWriter(file)) {
 				for(Line l : parsedBuffer.lines){
@@ -52,7 +79,7 @@ public class FileHandler {
 				e.printStackTrace();
 			}
 			System.out.println("Saved the file!");
-			return file;//place holder
+			return file;
 		}
 		
 }
