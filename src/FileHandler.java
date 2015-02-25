@@ -14,8 +14,10 @@ import java.io.PrintWriter;
  *
  */
 public class FileHandler {
-
+        
+        // Destination to save file
 		private File file;
+        // Buffer to be edited
 		public Buffer buff;
 		
 		
@@ -81,5 +83,4 @@ public class FileHandler {
 			System.out.println("Saved the file!");
 			return file;
 		}
-		
 }
