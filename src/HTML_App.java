@@ -10,7 +10,7 @@ import javax.swing.*;
  * @ Team Bash-Browns
  *
  */
-public class app {
+public class HTML_App {
 	
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable(){

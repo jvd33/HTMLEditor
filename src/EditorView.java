@@ -17,25 +17,65 @@ public class EditorView extends JFrame{
 		setLayout(new BorderLayout());
 		
 		//Components
-		JTextField textField = new JTextField();
-		JButton file = new JButton("File");
-		JButton edit = new JButton("Edit");
-		JButton shortcut = new JButton("Shortcuts");
+		JMenuBar menuBar = new JMenuBar();
+		
+		// File + items
+		
+		JMenu file = new JMenu("File");
+		JMenuItem New = new JMenuItem("New");
+		JMenuItem open = new JMenuItem("Open");
+		JMenuItem save = new JMenuItem("Save");
+		
+		//Edit + items
+		
+		JMenu edit = new JMenu("Edit");
+		JMenuItem undo = new JMenuItem("Undo");
+		JMenuItem redo = new JMenuItem("Redo");
+		JMenuItem cut = new JMenuItem("Cut");
+		JMenuItem copy = new JMenuItem("Copy");
+		JMenuItem paste = new JMenuItem("Paste");
+		
+		// Shortcuts + items
+		
+		JMenu shortcut = new JMenu("Shortcuts");
+		JMenuItem scview = new JMenuItem("View Shortcuts");
+		JMenuItem scedit = new JMenuItem("Edit Shortcuts");
+		
+		// Text area for the HTML
+		
+		JTextArea textArea = new JTextArea();
 		
 		
-		// Added components to the frame
-		//------------------------------
+		
+		/* Added components to the frame
+		------------------------------ */
 		//This is the menu tabs
-		JPanel menuTab = new JPanel();
-		menuTab.add(file);
-		menuTab.add(edit);
-		menuTab.add(shortcut);
-		this.add(menuTab, BorderLayout.NORTH);
 		
-		// this is the text field
-		JPanel textTab = new JPanel();
-		textTab.add(textField);
-		this.add(textTab, BorderLayout.CENTER);
+		menuBar.add(file);
+		file.add(New);
+		file.add(open);
+		file.add(save);
+		
+		menuBar.add(edit);
+		edit.add(undo);
+		edit.add(redo);
+		edit.addSeparator();
+		edit.add(cut);
+		edit.add(copy);
+		edit.add(paste);
+		
+		menuBar.add(shortcut);
+		shortcut.add(scview);
+		shortcut.add(scedit);
+		
+		
+		this.add(menuBar, BorderLayout.NORTH);
+		
+		// this is the text area
+		this.add(textArea, BorderLayout.CENTER);
+		
+		// Behavior of components
+		
 		
 	}
 	
