@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.*;
 /**
  * 
@@ -42,5 +41,21 @@ public class Buffer extends Observable {
 			lines.add(line);
 		}
 		
+		public boolean checkHTML() throws IncorrectHTMLException{
+			//checks if every start tag has an end tag
+			HTMLTag htmlToCheck = this.getTag();
+			for(HTMLTag html : htmlToCheck.getChildren()){
+				String startTag = new String(htmlToCheck.getTag());
+				if(startTag.charAt(0) != '<'){
+					throw new IncorrectHTMLException();
+				}
+				String endTag = startTag.charAt(0) + "/" + startTag.substring(1);
+				if(this.toString().lastIndexOf(endTag) == (this.toString().length() - startTag.length()) - 2){
+					throw new IncorrectHTMLException();
+				}
+				
+			}
+			return true;
+		}
 
 }
