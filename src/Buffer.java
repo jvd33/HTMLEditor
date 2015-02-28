@@ -61,7 +61,7 @@ public class Buffer extends Observable {
 		//for science...
 		public static void main(String args []){
 			
-			HTMLTag tag = new HTMLTag("<html>")
+			HTMLTag tag = new HTMLTag("<html>");
 		}
 
 }
