@@ -50,7 +50,6 @@ public class HTMLTag {
 				List<HTMLTag> childTags = child.getChildren();
 				allChildren.addAll(childTags);
 			}
-			allChildren.add(0, this);
 			return allChildren;
 		}
 		
