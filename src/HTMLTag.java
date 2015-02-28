@@ -12,7 +12,7 @@ public class HTMLTag {
 		
 		private List<HTMLTag> children;
 		private int startLine, endLine;
-		private String tag;
+		private String startTag, endTag;
 		private String attribute;
 		
 		public HTMLTag() { 
@@ -20,7 +20,7 @@ public class HTMLTag {
 		}
 		//constructor, child param is optional. 
 		public HTMLTag(String t, HTMLTag...child) {
-			tag = t;
+			startTag = t;
 			//attribute = attr[0];
 			children = new ArrayList<HTMLTag>();
 			if(child[0] != null) { children.add(child[0]); }
@@ -38,8 +38,8 @@ public class HTMLTag {
 			endLine = end;
 		}
 		
-		public void setTag(String in) { 
-			tag = in;
+		public void setEndTag(String in) { 
+			endTag = in;
 		}
 		
 		//gets and returns ALL children of the tag
@@ -54,7 +54,7 @@ public class HTMLTag {
 		}
 		
 		public String getTag() {
-			return tag;
+			return null;
 		}
 		
 		public int getStart() { 

@@ -27,8 +27,8 @@ public class ParserIterator implements Iterator {
 	}
 
 	@Override
-	public Object next() {
-		return internal.next();
+	public String next() {
+		return (String) internal.next();
 	}
 
 	@Override
