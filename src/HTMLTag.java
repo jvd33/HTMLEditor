@@ -10,6 +10,7 @@ import java.util.*;
  */
 public class HTMLTag {
 		
+		private HTMLTag parent;
 		private List<HTMLTag> children;
 		private int startLine, endLine;
 		private String startTag, endTag;
@@ -19,10 +20,11 @@ public class HTMLTag {
 		
 		}
 		//constructor, child param is optional. 
-		public HTMLTag(String t) {
+		public HTMLTag(String t, HTMLTag parent) {
 			startTag = t;
 			//attribute = attr[0];
 			children = new ArrayList<HTMLTag>();
+			this.setParent(parent);
 			
 			
 		}
@@ -72,4 +74,10 @@ public class HTMLTag {
         public String toString(){
             return startTag + " " + endTag;
         }
+		public HTMLTag getParent() {
+			return parent;
+		}
+		public void setParent(HTMLTag parent) {
+			this.parent = parent;
+		}
 }

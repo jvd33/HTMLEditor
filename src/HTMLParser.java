@@ -31,15 +31,15 @@ public class HTMLParser {
 	 */
 	public HTMLTag parse() { 
 		String rootTag = iterator.next();
-		HTMLTag root = new HTMLTag(rootTag);
-		iterator.remove();
+		HTMLTag root = new HTMLTag(rootTag, null);
 		while(iterator.hasNext()) { 
 			String temp = iterator.next();
-			if(isEndTag(root.getStartTag(), temp)) {
-				root.setEndTag(temp);
-			}
-			else { 
+			System.out.println("");
+			if(isStartTag(temp)) { 
 				tagHelper(root, temp);
+			}
+			else if(isEndTag(root.getStartTag(), temp)) {
+				root.setEndTag(temp);
 			}
 		}
 		return root;
@@ -55,20 +55,30 @@ public class HTMLParser {
 	 */
 	private void tagHelper(HTMLTag tag, String temp) { 
 		String startTag = temp;
-		HTMLTag child = new HTMLTag(temp);
+		HTMLTag child = new HTMLTag(temp, tag);
 		tag.addChild(child);
-		iterator.remove();
 		while(iterator.hasNext()) { 
 			temp = iterator.next();
-			if(isEndTag(child.getStartTag(), temp)) {
-				child.setEndTag(temp);
-				break;
-			}
-			else { 
+			if(isStartTag(temp)) { 
 				tagHelper(child, temp);
 			}
-		}
+			else if(isEndTag(child.getStartTag(), temp)) {
+				child.setEndTag(temp);
+				//break;
+			}
+			else { 
+				while(child.getParent() != null) { 
+					HTMLTag tempTag = child.getParent();
+					if(isEndTag(tempTag.getStartTag(), temp)) { 
+						child.getParent().setEndTag(temp);
+						break;
+					}
+					child = child.getParent();
+				}
+				tagHelper(child, temp);
+			}
 
+		}
 	}
 	
 	/*
@@ -79,13 +89,21 @@ public class HTMLParser {
 		return startTag.replace("<", "</").equals(endTag);
 	}
 	
+	private boolean isEnd(String tag) { 
+		return tag.contains("</");
+	}
+	
+	private boolean isStartTag(String tag) {
+		return !tag.contains("</");
+	}
+	
 	
 	//ignore this testing stuff
 	public static void main(String args[]) { 
 		String input = "<html><p></p><p></div></html>";
 		HTMLParser parser = new HTMLParser(input);
 		HTMLTag tag = parser.parse();
-		System.out.println(tag.getChildren());
+		System.out.println(tag.toString());
 		
 	}
 	
