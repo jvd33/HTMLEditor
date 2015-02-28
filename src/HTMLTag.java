@@ -68,4 +68,8 @@ public class HTMLTag {
 		public int getEnd() {
 			return endLine;
 		}
+
+        public String toString(){
+            return startTag + " " + endTag;
+        }
 }
