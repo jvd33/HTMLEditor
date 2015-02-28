@@ -44,13 +44,9 @@ public class Buffer extends Observable {
 		public boolean checkHTML() throws IncorrectHTMLException{
 			//checks if every start tag has an end tag
 			HTMLTag htmlToCheck = this.getTag();
-			for(HTMLTag html : htmlToCheck.getChildren()){
-				String startTag = new String(htmlToCheck.getTag());
-				if(startTag.charAt(0) != '<'){
-					throw new IncorrectHTMLException();
-				}
-				String endTag = startTag.charAt(0) + "/" + startTag.substring(1);
-				if(this.toString().lastIndexOf(endTag) == (this.toString().length() - startTag.length()) - 2){
+			for(HTMLTag tag : htmlToCheck.getChildren()){
+				System.out.println(tag.getEndTag());
+				if(tag.getEndTag() ==null){
 					throw new IncorrectHTMLException();
 				}
 				
@@ -62,6 +58,22 @@ public class Buffer extends Observable {
 		public static void main(String args []){
 			
 			HTMLTag tag = new HTMLTag("<html>");
+			tag.setEndTag("</html>");
+			HTMLTag ctag = new HTMLTag("<body>");
+			ctag.setEndTag("</body>");
+			tag.addChild(ctag);
+			HTMLTag ctag1 = new HTMLTag("<body>");
+			ctag1.setEndTag(null);
+			ctag.addChild(ctag1);
+			Buffer b = new Buffer();
+			b.addTag(tag);
+			
+			try{
+				System.out.println(b.checkHTML());
+			}
+			catch(IncorrectHTMLException e){
+				e.printStackTrace();
+			}
 		}
 
 }

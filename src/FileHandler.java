@@ -83,4 +83,14 @@ public class FileHandler {
 			System.out.println("Saved the file!");
 			return file;
 		}
+		
+		public static void main(String args[]){
+			
+			File file = new File("C:/Users/Dylan/testhtml.txt");
+			Buffer b= new Buffer();
+			FileHandler fh = new FileHandler(file);
+			b = fh.readFile(file);
+			
+			System.out.print(b.toString());
+		}
 }
