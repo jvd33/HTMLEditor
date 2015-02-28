@@ -57,5 +57,11 @@ public class Buffer extends Observable {
 			}
 			return true;
 		}
+		
+		//for science...
+		public static void main(String args []){
+			
+			HTMLTag tag = new HTMLTag("<html>")
+		}
 
 }
