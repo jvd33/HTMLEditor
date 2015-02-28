@@ -22,11 +22,11 @@ public class HTMLEditor {
 		public void saveBuffer(){
 			File file= new File("");
 			FileHandler fh = new FileHandler(file);
-			HTMLParser parser = new HTMLParser();
+			HTMLParser parser = new HTMLParser(activeBuffer.toString());
 			
 			
 			Buffer tempBuffer = new Buffer();
-			tempBuffer.addTag(parser.parse(activeBuffer));
+			tempBuffer.addTag(parser.parse());
 			try{
 				if(tempBuffer.checkHTML())
 				{
@@ -43,9 +43,10 @@ public class HTMLEditor {
 		
 		public void loadFile(File file){
 			FileHandler fh = new FileHandler(file);
-			HTMLParser parser = new HTMLParser();
 			Buffer newBuffer = fh.readFile(file);
-			newBuffer.addTag(parser.parse(newBuffer));
+			HTMLParser parser = new HTMLParser(newBuffer.toString());
+			
+			newBuffer.addTag(parser.parse());
 			try{
 				if(newBuffer.checkHTML())
 					this.addBuffer(newBuffer);
