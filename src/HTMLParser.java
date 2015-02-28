@@ -57,16 +57,6 @@ public class HTMLParser {
 		return tag;
 	}
 	
-	//Removes all comments in the input string- this will make it easier to parse (comments are irrelevant)
-	public String stripComments(String s) {
-		s = s.replaceAll("\\s+","");
-		commentMatcher.reset(s);
-		while(commentMatcher.find()) { 
-			s = commentMatcher.replaceAll("");
-			commentMatcher.reset(s);
-		}
-		return s;
-	}
 	
 	//might need this
 	public String tagHelper(String input, HTMLTag tag) { 
@@ -95,16 +85,17 @@ public class HTMLParser {
 		return input;
 	}
 	
-	
+	/*
 	//ignore this testing stuff
 	public static void main(String args[]) { 
 		String input = "<html><p>this is useless<!--and get rid of this--><div></div>.info yada yada</p><!--get rid of this--></html>";
 		Buffer b = new Buffer();
 		b.addText(input);
 		HTMLParser parser = new HTMLParser(b);
-		b.text = parser.stripComments(input);
+		//b.text = parser.stripComments(input);
 		parser.parse(b);
 		
 	}
+	*/
 
 }
