@@ -19,11 +19,11 @@ public class HTMLTag {
 		
 		}
 		//constructor, child param is optional. 
-		public HTMLTag(String t, HTMLTag...child) {
+		public HTMLTag(String t) {
 			startTag = t;
 			//attribute = attr[0];
 			children = new ArrayList<HTMLTag>();
-			if(child[0] != null) { children.add(child[0]); }
+			
 			
 		}
 		
@@ -50,11 +50,15 @@ public class HTMLTag {
 				List<HTMLTag> childTags = child.getChildren();
 				allChildren.addAll(childTags);
 			}
-			return allChildren;
+			return children;
 		}
 		
-		public String getTag() {
-			return null;
+		public String getStartTag() {
+			return startTag;
+		}
+		
+		public String getEndTag() { 
+			return endTag;
 		}
 		
 		public int getStart() { 
