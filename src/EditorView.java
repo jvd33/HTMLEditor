@@ -5,6 +5,10 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 
@@ -15,7 +19,7 @@ import javax.swing.*;
  */
 
 
-public class EditorView extends JFrame implements ActionListener {
+public class EditorView extends JFrame implements Observer{
 	
 	public EditorView(String title){
 		super(title);
@@ -86,13 +90,12 @@ public class EditorView extends JFrame implements ActionListener {
 		
 		this.add(menuBar, BorderLayout.NORTH);
 		
+		
 		// this is the text pane
 		
+		textpane.addKeyListener(buffedit);
 		this.add(textpane, BorderLayout.CENTER);
-		
-		
-		
-		
+			
 	}
 	// Behavior of components
 	
@@ -159,12 +162,30 @@ public class EditorView extends JFrame implements ActionListener {
 			
 		}
 	};
-	
-	
-	
+	KeyListener buffedit = new KeyListener(){
 
+		@Override
+		public void keyTyped(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	};
+	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
 		
 	}
