@@ -20,32 +20,41 @@ public class HTMLEditor {
 		 * 
 		 */
 		public void saveBuffer(){
-			FileHandler fh = new FileHandler();
+			File file= new File("");
+			FileHandler fh = new FileHandler(file);
 			HTMLParser parser = new HTMLParser();
-			HTMLChecker checker = new HTMLChecker();
 			
-			Buffer tempBuffer = parser.Parse(activeBuffer);
 			
-			if(checker.checkHTML(tempBuffer)){
-				fh.writeToFile(tempBuffer);
-				this.setActiveBuffer(tempBuffer);
+			Buffer tempBuffer = new Buffer();
+			tempBuffer.addTag(parser.parse(activeBuffer));
+			try{
+				if(tempBuffer.checkHTML())
+				{
+					fh.writeToFile(activeBuffer);
+				}
+			}
+			catch(IncorrectHTMLException e)
+			{
+				e.printStackTrace();
 			}
 			
 			
 		}
 		
 		public void loadFile(File file){
-			FileHandler fh = new FileHandler();
-			HTMLChecker checker = new HTMLChecker();
+			FileHandler fh = new FileHandler(file);
 			HTMLParser parser = new HTMLParser();
-			
 			Buffer newBuffer = fh.readFile(file);
-			
-			newBuffer = parser.Parse(newBuffer);
-			//may do a try catch here
-			if(checker.checkHTML(newBuffer)){
-				this.addBuffer(newBuffer);
+			newBuffer.addTag(parser.parse(newBuffer));
+			try{
+				if(newBuffer.checkHTML())
+					this.addBuffer(newBuffer);
 			}
+			catch(IncorrectHTMLException e)
+			{
+				e.printStackTrace();
+			}
+			
 		}
 		
 		public void addBuffer(Buffer buffer){
