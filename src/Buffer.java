@@ -44,14 +44,20 @@ public class Buffer extends Observable {
 		public boolean checkHTML() throws IncorrectHTMLException{
 			//checks if every start tag has an end tag
 			HTMLTag htmlToCheck = this.getTag();
-			for(HTMLTag tag : htmlToCheck.getChildren()){
-				System.out.println(tag.getEndTag());
-				if(tag.getEndTag() ==null){
-					throw new IncorrectHTMLException();
+			if(htmlToCheck.getEndTag()!=null){
+				for(HTMLTag tag : htmlToCheck.getChildren()){
+					if(tag.getEndTag() ==null){
+						throw new IncorrectHTMLException();
+					}
+					
 				}
-				
+				return true;
 			}
-			return true;
+			else
+			{
+				throw new IncorrectHTMLException();
+			}
+			
 		}
 		
 		//for science...
@@ -62,9 +68,15 @@ public class Buffer extends Observable {
 			HTMLTag ctag = new HTMLTag("<body>");
 			ctag.setEndTag("</body>");
 			tag.addChild(ctag);
-			HTMLTag ctag1 = new HTMLTag("<body>");
-			ctag1.setEndTag(null);
+			HTMLTag ctag2 = new HTMLTag("<body1>");
+			ctag2.setEndTag("</body1>");
+			tag.addChild(ctag2);
+			HTMLTag ctag1 = new HTMLTag("<p>");
+			ctag1.setEndTag("</p>");
 			ctag.addChild(ctag1);
+			HTMLTag ctag3 = new HTMLTag("<p>");
+			ctag3.setEndTag("</p>");
+			ctag2.addChild(ctag3);
 			Buffer b = new Buffer();
 			b.addTag(tag);
 			
