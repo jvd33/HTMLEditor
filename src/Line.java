@@ -9,7 +9,7 @@
 public class Line {
 	
 	//maybe have indentation here?
-	
+	private String indentation;
 	private String text;//string of all text for line object
 	private int lineNum;//integer to keep track of lines
 	
@@ -17,6 +17,7 @@ public class Line {
 	
 	public Line(){
 		this.text = "";
+		this.indentation = "";
 	}
 	
 	public String setText(String newText){
@@ -32,5 +33,15 @@ public class Line {
 	public int getNum(){
 		
 		return lineNum;
+	}
+	
+	public String getIndent()
+	{
+		return this.indentation;
+	}
+	
+	public void setIndent(String indent){
+		
+		this.indentation = indent;
 	}
 }

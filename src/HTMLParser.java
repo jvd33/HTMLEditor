@@ -19,7 +19,7 @@ public class HTMLParser {
 	private Pattern HTMLTail;
 	private Pattern comment;
 	private Pattern HTMLpattern;
-	private Buffer buffer;
+	//private Buffer buffer;
 	private Matcher head;
 	private Matcher tail;
 	private Matcher commentMatcher;
@@ -28,12 +28,12 @@ public class HTMLParser {
 	
 	
 	//constructor
-	public HTMLParser(Buffer b) {
+	public HTMLParser(/*Buffer b*/) {
 		HTMLHead = Pattern.compile("<.*?>"); //this regex matches the head of an html tag
 		HTMLTail = Pattern.compile("</\\w+>(?!\\p{Punct}+)"); //this only kind of works
 		HTMLpattern = Pattern.compile("<.*?>.*?</.*?>");
 		comment = Pattern.compile("<!--.*?-->");
-		buffer = b;
+		//buffer = b;
 		head = HTMLHead.matcher("");
 		tail = HTMLTail.matcher("");
 		commentMatcher = comment.matcher("");
@@ -98,7 +98,7 @@ public class HTMLParser {
 	
 	//ignore this testing stuff
 	public static void main(String args[]) { 
-		String input = "<html><p>this is useless<!--and get rid of this--><div></div>.info yada yada</p><!--get rid of this--></html>";
+		String input = "<html><p>this is useless<div></div>.info yada yada</p></html>";
 		Buffer b = new Buffer();
 		b.addText(input);
 		HTMLParser parser = new HTMLParser(b);
