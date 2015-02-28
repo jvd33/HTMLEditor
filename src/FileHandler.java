@@ -31,7 +31,6 @@ public class FileHandler {
 		 */
 		public FileHandler(File file){
 			this.file = file;
-			readFile(file);
 			this.buff = readFile(file);
 		}
 		
