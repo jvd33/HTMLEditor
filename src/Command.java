@@ -13,13 +13,11 @@ public interface Command {
 	 * 		New
 	 * 		Open
 	 * 		Save
-	 * 		Edit
 	 * 		Undo
 	 * 		Redo
 	 * 		Cut
 	 * 		Copy
 	 * 		Paste
-	 * 		Help
 	 * 		Open Readme
 	 */
     public abstract void execute();
