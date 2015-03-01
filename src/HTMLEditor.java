@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Observable;
 import java.io.File;
 /**
  * 
@@ -8,7 +9,8 @@ import java.io.File;
  * @author Team Bash-Browns
  *
  */
-public class HTMLEditor {
+public class HTMLEditor extends Observable{
+		
 		private Buffer activeBuffer;
 		private List<Buffer> buffers;
 		
@@ -19,27 +21,7 @@ public class HTMLEditor {
 		 * Filehandler then writes buffer to file.
 		 * 
 		 */
-		public void saveBuffer(){
-			File file= new File("");
-			FileHandler fh = new FileHandler(file);
-			HTMLParser parser = new HTMLParser(activeBuffer.toString());
-			
-			
-			Buffer tempBuffer = new Buffer();
-			tempBuffer.addTag(parser.parse());
-			try{
-				if(tempBuffer.checkHTML())
-				{
-					fh.writeToFile(activeBuffer);
-				}
-			}
-			catch(IncorrectHTMLException e)
-			{
-				e.printStackTrace();
-			}
-			
-			
-		}
+		
 		
 		public void loadFile(File file){
 			FileHandler fh = new FileHandler(file);

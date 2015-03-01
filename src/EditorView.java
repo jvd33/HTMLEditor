@@ -47,8 +47,11 @@ public class EditorView extends JFrame implements Observer{
 		// Text area for the HTML
 		private	JEditorPane textpane;
 			
-	public EditorView(String title){
+	public EditorView(String title, HTMLEditor htmleditor){
 		super(title);
+		
+		//editor that is observed.
+		editor = htmleditor;
 		
 		//Layout Manager
 		setLayout(new BorderLayout());

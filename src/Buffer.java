@@ -67,9 +67,6 @@ public class Buffer extends Observable {
 			
 		}
 		
-		public void setText(String s) { 
-			text = s;
-		}
 		
 		public void addUndo(String state) {
 			undoStack.push(state);

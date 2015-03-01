@@ -1,3 +1,5 @@
+import java.io.File;
+
 /**
  * 
  */
@@ -21,6 +23,27 @@ public class SaveCommand implements Command {
 	 */
 	@Override
 	public void execute() {
+			Buffer activeBuffer = htmlEditor.getCurrentBuffer();
+			File file= activeBuffer.getFile();
+			FileHandler fh = new FileHandler(file);
+			HTMLParser parser = new HTMLParser(activeBuffer.toString());
+			
+			
+			Buffer tempBuffer = new Buffer(file);
+			tempBuffer.addTag(parser.parse());
+			try{
+				if(tempBuffer.checkHTML())
+				{
+					fh.writeToFile(activeBuffer);
+				}
+			}
+			catch(IncorrectHTMLException e)
+			{
+				e.printStackTrace();
+			}
+			
+			
+		
 	}
 
 }
