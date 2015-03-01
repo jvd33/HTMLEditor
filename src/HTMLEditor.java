@@ -1,5 +1,6 @@
 import java.util.List;
 import java.util.Observable;
+import java.util.Observer;
 import java.io.File;
 /**
  * 
@@ -13,6 +14,7 @@ public class HTMLEditor extends Observable{
 		
 		private Buffer activeBuffer;
 		private List<Buffer> buffers;
+		private List<Observer> observers;
 		
 		/*
 		 * 
@@ -25,6 +27,7 @@ public class HTMLEditor extends Observable{
 		public HTMLEditor(){
 			this.buffers = new java.util.ArrayList<Buffer>();
 			this.activeBuffer = null;
+			this.observers = new java.util.ArrayList<Observer>();
 		}
 		
 		public void loadFile(File file){
@@ -47,6 +50,7 @@ public class HTMLEditor extends Observable{
 		public void addBuffer(Buffer buffer){
 			buffers.add(buffer);
 			activeBuffer = buffer;
+			this.hasChanged();
 			this.notifyObservers();
 		}
 		public Buffer getCurrentBuffer(){
@@ -67,5 +71,14 @@ public class HTMLEditor extends Observable{
 			buffers.remove(activeBuffer);
 			activeBuffer = buffers.get(0);
 			this.notifyObservers();
+		}
+		@Override
+		public void notifyObservers(){
+			for(Observer o : this.observers){
+				o.update(this, this.getBuffers());
+			}
+		}
+		public void addObserver(Observer o){
+			this.observers.add(o);
 		}
 }

@@ -10,6 +10,7 @@ import java.io.File;
  */
 public class Buffer extends Observable {
 		
+		private List<Observer> Observers;
 		private File sourceFile;
 		private Stack<String> undoStack;
 		private Stack<String> redoStack;
@@ -29,7 +30,29 @@ public class Buffer extends Observable {
 		}
 		
 		public void addText(String s) { 
+			this.lines.clear();
+			
 			text = s;
+			Line line = new Line();
+			
+			boolean stillLines = true;
+			int start = 0;
+			int end = 0;
+			
+			while(stillLines){
+				end = s.substring(start).indexOf('\n');
+				if(end >=0){
+					
+					line.setText(s.substring(start, end));
+					start = end;
+					this.addLine(line);
+				}
+				else{
+					line.setText(s.substring(start));
+					stillLines = false;
+				}
+			}
+			this.notifyObservers();
 		}
 		//returns the full text of the buffer
 		public String toString() { 
@@ -46,6 +69,7 @@ public class Buffer extends Observable {
 		
 		public void addLine(Line line) { 
 			lines.add(line);
+			
 		}
 		
 		public boolean checkHTML() throws IncorrectHTMLException{
@@ -83,6 +107,7 @@ public class Buffer extends Observable {
 			String temp = undoStack.pop();
 			text = temp;
 			addRedo(temp);
+			this.notifyObservers();
 					
 		}
 		
@@ -93,12 +118,19 @@ public class Buffer extends Observable {
 			String temp = redoStack.pop();
 			text = temp;
 			addUndo(temp);
+			this.notifyObservers();
 		}
 		
 		public File getFile() { 
 			return sourceFile;
 		}
 		
+		@Override
+		public void notifyObservers(){
+			for( Observer o: this.Observers){
+				o.update(this, this.toString());
+			}
+		}
 		//for science...
 		public static void main(String args []){
 			

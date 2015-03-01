@@ -26,7 +26,10 @@ public class EditorView extends JFrame implements Observer{
 		HTMLEditor editor;
 	
 		//Components
+		private JPanel panel = new JPanel();
+		
 		private	JMenuBar menuBar;
+		private JTabbedPane tabBar;
 			
 		// File + items
 		private	JMenu file;
@@ -60,6 +63,7 @@ public class EditorView extends JFrame implements Observer{
 		
 		//Components
 		menuBar = new JMenuBar();
+		//tabBar = new JTabbedPane();
 		
 		// File + items
 		file = new JMenu("File");
@@ -78,6 +82,7 @@ public class EditorView extends JFrame implements Observer{
 		// Help + items
 		help = new JMenu("Help");
 		readme = new JMenuItem("Open Readme");
+		
 		
 		// Text area for the HTML
 		textpane = new JEditorPane(); 
@@ -115,11 +120,23 @@ public class EditorView extends JFrame implements Observer{
 		
 		this.add(menuBar, BorderLayout.NORTH);
 		
+		// For tab items 
+		
+		try{
+		panel.add(tabBar,BorderLayout.NORTH);
+		
+		}catch(java.lang.NullPointerException e){
+			
+		}
+		
 		
 		// this is the text pane
 		
 		textpane.addKeyListener(buffedit);
-		this.add(textpane, BorderLayout.CENTER);
+		panel.add(textpane,BorderLayout.CENTER);
+		textpane.setVisible(false);
+		
+		this.add(panel, BorderLayout.CENTER);
 			
 	}
 	// Behavior of components
@@ -217,6 +234,7 @@ public class EditorView extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		
 		if( arg instanceof ArrayList && o instanceof HTMLEditor){
 			editor = (HTMLEditor) o;
 			List<Buffer> list = (ArrayList<Buffer>) arg;
@@ -225,6 +243,7 @@ public class EditorView extends JFrame implements Observer{
 				
 			}
 		}
+		
 		
 	}
 	
