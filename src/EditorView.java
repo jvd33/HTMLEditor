@@ -21,6 +21,8 @@ import javax.swing.*;
 
 public class EditorView extends JFrame implements Observer{
 	
+		HTMLEditor editor;
+	
 		//Components
 		private	JMenuBar menuBar;
 			
@@ -127,7 +129,10 @@ public class EditorView extends JFrame implements Observer{
 	ActionListener fileopen = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.print("Open Button pushed!");
+			
+			String filepath = JOptionPane.showInputDialog("Please input a path");
+			OpenCommand OPEN = new OpenCommand( editor, filepath );
+			OPEN.execute();
 			
 		}
 	};
