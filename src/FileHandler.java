@@ -42,7 +42,7 @@ public class FileHandler {
 		 * @return		The new buffer object
 		 */
 		public Buffer readFile(File file){
-			Buffer buff = new Buffer();				// HTML Document Buffer
+			Buffer buff = new Buffer(file);				// HTML Document Buffer
 
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 				String sCurrentLine = null;
@@ -86,7 +86,7 @@ public class FileHandler {
 		public static void main(String args[]){
 			
 			File file = new File("C:/Users/Dylan/testhtml.txt");
-			Buffer b= new Buffer();
+			Buffer b= new Buffer(file);
 			FileHandler fh = new FileHandler(file);
 			b = fh.readFile(file);
 			
