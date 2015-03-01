@@ -12,7 +12,6 @@ public interface Command {
 	 * Command pattern
 	 * 
 	 * Currently this should handle the following commands in the interface:
-	 * 		File		
 	 * 		New
 	 * 		Open
 	 * 		Save
