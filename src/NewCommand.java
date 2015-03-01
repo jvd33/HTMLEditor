@@ -23,7 +23,7 @@ public class NewCommand implements Command {
 	 */	
 	@Override
 	public void execute() {
-		Buffer b = new Buffer();
+		Buffer b = new Buffer(null);
 		htmlEditor.addBuffer(b);
 	}
 }

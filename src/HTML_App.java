@@ -15,7 +15,9 @@ public class HTML_App {
 	public static void main(String[] args){
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				JFrame frame = new EditorView("Team Bash-Browns HTML Editor");
+				
+				HTMLEditor editor = new HTMLEditor();
+				JFrame frame = new EditorView("Team Bash-Browns HTML Editor", editor);
 				frame.setSize(500, 400);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
