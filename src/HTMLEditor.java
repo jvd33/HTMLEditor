@@ -22,6 +22,10 @@ public class HTMLEditor extends Observable{
 		 * 
 		 */
 		
+		public HTMLEditor(){
+			this.buffers = new java.util.ArrayList<Buffer>();
+			this.activeBuffer = null;setChanged();
+		}
 		
 		public void loadFile(File file){
 			FileHandler fh = new FileHandler(file);
