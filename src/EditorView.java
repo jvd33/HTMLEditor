@@ -21,6 +21,30 @@ import javax.swing.*;
 
 public class EditorView extends JFrame implements Observer{
 	
+		//Components
+		private	JMenuBar menuBar;
+			
+		// File + items
+		private	JMenu file;
+		private	JMenuItem New;
+		private	JMenuItem open;
+		private	JMenuItem save;
+			
+		//Edit + items
+		private	JMenu edit;
+		private	JMenuItem undo;
+		private	JMenuItem redo;
+		private	JMenuItem cut;
+		private	JMenuItem copy ;
+		private	JMenuItem paste;
+			
+		// Help + items
+		private	JMenu help;
+		private	JMenuItem readme;
+			
+		// Text area for the HTML
+		private	JEditorPane textpane;
+			
 	public EditorView(String title){
 		super(title);
 		
@@ -28,34 +52,28 @@ public class EditorView extends JFrame implements Observer{
 		setLayout(new BorderLayout());
 		
 		//Components
-		JMenuBar menuBar = new JMenuBar();
+		menuBar = new JMenuBar();
 		
 		// File + items
-		
-		JMenu file = new JMenu("File");
-		JMenuItem New = new JMenuItem("New");
-		
-		JMenuItem open = new JMenuItem("Open");
-		
-		JMenuItem save = new JMenuItem("Save");
+		file = new JMenu("File");
+		New = new JMenuItem("New");
+		open = new JMenuItem("Open");
+		save = new JMenuItem("Save");
 		
 		//Edit + items
-		
-		JMenu edit = new JMenu("Edit");
-		JMenuItem undo = new JMenuItem("Undo");
-		JMenuItem redo = new JMenuItem("Redo");
-		JMenuItem cut = new JMenuItem("Cut");
-		JMenuItem copy = new JMenuItem("Copy");
-		JMenuItem paste = new JMenuItem("Paste");
+		edit = new JMenu("Edit");
+		undo = new JMenuItem("Undo");
+		redo = new JMenuItem("Redo");
+		cut = new JMenuItem("Cut");
+		copy = new JMenuItem("Copy");
+		paste = new JMenuItem("Paste");
 		
 		// Help + items
-		
-		JMenu help = new JMenu("Help");
-		JMenuItem readme = new JMenuItem("Open Readme");
+		help = new JMenu("Help");
+		readme = new JMenuItem("Open Readme");
 		
 		// Text area for the HTML
-		
-		JEditorPane textpane = new JEditorPane();
+		textpane = new JEditorPane(); 
 		
 		
 		

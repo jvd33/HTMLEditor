@@ -63,7 +63,7 @@ public class Buffer extends Observable {
 		//for science...
 		public static void main(String args []){
 			
-			HTMLTag tag = new HTMLTag("<html>");
+			/*HTMLTag tag = new HTMLTag("<html>");
 			tag.setEndTag("</html>");
 			HTMLTag ctag = new HTMLTag("<body>");
 			ctag.setEndTag("</body>");
@@ -85,7 +85,7 @@ public class Buffer extends Observable {
 			}
 			catch(IncorrectHTMLException e){
 				e.printStackTrace();
-			}
+			}*/
 		}
 
 }
