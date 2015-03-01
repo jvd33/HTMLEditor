@@ -17,8 +17,6 @@ public class FileHandler {
         
         // Destination to save file
 		private File file;
-        // Buffer to be edited
-		public Buffer buff;
 		
 		
 		
@@ -31,7 +29,6 @@ public class FileHandler {
 		 */
 		public FileHandler(File file){
 			this.file = file;
-			this.buff = readFile(file);
 		}
 		
 		/**
@@ -57,7 +54,7 @@ public class FileHandler {
 				e.printStackTrace();
 			}
 			
-			System.out.println("Loaded the file!");
+			System.out.println("Contents of file: " + buff);
 			return buff;
 		}
 		/**
