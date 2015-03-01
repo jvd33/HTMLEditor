@@ -31,18 +31,18 @@ public class HTMLParser {
 	 */
 	public HTMLTag parse() { 
 		String rootTag = iterator.next();
-		HTMLTag root = new HTMLTag(rootTag, null);
+		HTMLTag root = new HTMLTag(rootTag, null); //create a new root tag
 		iterator.remove();
-		while(iterator.hasNext()) { 
+		while(iterator.hasNext()) { //while there are tags to parse
 			String temp = iterator.next();
-			if(isStartTag(temp)) { 
-				tagHelper(root, temp);
+			if(isStartTag(temp)) { //if its a start tag
+				tagHelper(root, temp); //call the helper method
 			}
-			else if(isEndTag(root.getStartTag(), temp)) {
-				root.setEndTag(temp);
+			else if(isEndTag(root.getStartTag(), temp)) { //if its the end tag
+				root.setEndTag(temp); //set it and break
 			}
 		}
-		return root;
+		return root; //return the root (aggregate of html tags)
 	}
 	
 	
@@ -54,31 +54,45 @@ public class HTMLParser {
 	 * have been processed
 	 */
 	private void tagHelper(HTMLTag tag, String temp) { 
-		String startTag = temp;
-		HTMLTag child = new HTMLTag(temp, tag);
-		tag.addChild(child);
-		while(iterator.hasNext()) { 
-			temp = iterator.next();
-			if(isStartTag(temp)) {
+		HTMLTag child = new HTMLTag(temp, tag); //create a new child tag
+		tag.addChild(child); //add it as a child to the tag passed in,
+		while(iterator.hasNext()) { //while there are still tags to parse,
+			temp = iterator.next(); 
+			if(isStartTag(temp)) { //if it's a start tag, recursively call again
 				tagHelper(child, temp);
 			}
-			else if(isEndTag(child.getStartTag(), temp)) {
-				if(child.getEndTag() != null) { 
-					setParentTag(temp, child);
+			//if its the end tag of the tag we created,
+			else if(isEndTag(child.getStartTag(), temp)) { 
+				if(child.getEndTag() != null) { //check if it already has an endtag,
+					setParentTag(temp, child); //check its parents
 				}
 				else { 
-					child.setEndTag(temp);
+					child.setEndTag(temp); //else set the tag
 				}
 			}
 			else { 
-				setParentTag(temp, child);
-				//if(temp != null) { 
-					//tagHelper(child, temp);
-				//}
+				setParentTag(temp, child); //else check parents
 			}
 
 		}
 	}
+	
+	/*
+	 * Iterates up through parent tags and tries to find
+	 * the matching start tag for the end tag that was matched
+	 * @param s, the html tag that was matched
+	 * @param tag, the HTMLTag with parents to check
+	 */
+	private void setParentTag(String s, HTMLTag tag) { 
+		while(tag.getParent() != null) { //while the tag isnt the root,
+			HTMLTag tempTag = tag.getParent(); //store the parent temp
+			if(isEndTag(tempTag.getStartTag(), s)) { //if the string passed in is the end tag,
+				tempTag.setEndTag(s); //set the end tag of the parent
+			}
+			tag = tag.getParent(); 
+		}
+	}
+	
 	
 	/*
 	 * Checks to see if the tag given is the 
@@ -88,22 +102,11 @@ public class HTMLParser {
 		return startTag.replace("<", "</").equals(endTag);
 	}
 	
-	private boolean isEnd(String tag) { 
-		return tag.contains("</");
-	}
-	
+	/*
+	 * Just checks a tag to see if it is a start html tag
+	 */
 	private boolean isStartTag(String tag) {
 		return !tag.contains("</");
-	}
-	
-	private void setParentTag(String s, HTMLTag tag) { 
-		while(tag.getParent() != null) { 
-			HTMLTag tempTag = tag.getParent();
-			if(isEndTag(tempTag.getStartTag(), s)) { 
-				tempTag.setEndTag(s);
-			}
-			tag = tag.getParent();
-		}
 	}
 	
 	
