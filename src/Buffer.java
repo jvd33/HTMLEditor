@@ -1,4 +1,5 @@
 import java.util.*;
+import java.io.File;
 /**
  * 
  */
@@ -9,11 +10,13 @@ import java.util.*;
  */
 public class Buffer extends Observable {
 		
+		private File sourceFile;
 		private HTMLTag tag; //root tag for buffer
 		public List<Line> lines;//list of all lines in the buffer
 		public String text;
 		
-		public Buffer() {
+		public Buffer(File f) {
+			sourceFile = f;
 			this.lines = new ArrayList<Line>();
 		}
 		
@@ -58,6 +61,10 @@ public class Buffer extends Observable {
 				throw new IncorrectHTMLException();
 			}
 			
+		}
+		
+		public File getFile() { 
+			return sourceFile;
 		}
 		
 		//for science...
