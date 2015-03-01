@@ -41,12 +41,13 @@ public class HTMLEditor extends Observable{
 			{
 				e.printStackTrace();
 			}
-			
+			this.notifyObservers();
 		}
 		
 		public void addBuffer(Buffer buffer){
 			buffers.add(buffer);
 			activeBuffer = buffer;
+			this.notifyObservers();
 		}
 		public Buffer getCurrentBuffer(){
 			return activeBuffer;
@@ -58,12 +59,13 @@ public class HTMLEditor extends Observable{
 		//could take in index from list if that makes it better.
 		public void setActiveBuffer(Buffer buffer){
 			this.activeBuffer = buffer;
+			this.notifyObservers();
 		}
 		
 		//only closes the active buffer since that will be the only one you can close.
 		public void closeBuffer(){
 			buffers.remove(activeBuffer);
 			activeBuffer = buffers.get(0);
-			
+			this.notifyObservers();
 		}
 }
