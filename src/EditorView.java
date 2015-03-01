@@ -7,6 +7,8 @@ import java.awt.event.ContainerEvent;
 import java.awt.event.ContainerListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -52,7 +54,7 @@ public class EditorView extends JFrame implements Observer{
 		
 		//editor that is observed.
 		editor = htmleditor;
-		
+		htmleditor.addObserver(this);
 		//Layout Manager
 		setLayout(new BorderLayout());
 		
@@ -215,6 +217,14 @@ public class EditorView extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		if( arg instanceof ArrayList && o instanceof HTMLEditor){
+			editor = (HTMLEditor) o;
+			List<Buffer> list = (ArrayList<Buffer>) arg;
+			for(Buffer b : list){
+				
+				
+			}
+		}
 		
 	}
 	
