@@ -11,12 +11,16 @@ import java.io.File;
 public class Buffer extends Observable {
 		
 		private File sourceFile;
+		private Stack<String> undoStack;
+		private Stack<String> redoStack;
 		private HTMLTag tag; //root tag for buffer
 		public List<Line> lines;//list of all lines in the buffer
 		public String text;
 		
 		public Buffer(File f) {
 			sourceFile = f;
+			undoStack = new Stack<String>();
+			redoStack = new Stack<String>();
 			this.lines = new ArrayList<Line>();
 		}
 		
@@ -61,6 +65,37 @@ public class Buffer extends Observable {
 				throw new IncorrectHTMLException();
 			}
 			
+		}
+		
+		public void setText(String s) { 
+			text = s;
+		}
+		
+		public void addUndo(String state) {
+			undoStack.push(state);
+		}
+		
+		public void addRedo(String state) { 
+			redoStack.push(state);
+		}
+		
+		/*
+		 * performs the undo operation on the buffer's text
+		 */
+		public void undo() { 
+			String temp = undoStack.pop();
+			text = temp;
+			addRedo(temp);
+					
+		}
+		
+		/*
+		 * performs the redo operation on the buffer's text
+		 */
+		public void redo() {
+			String temp = redoStack.pop();
+			text = temp;
+			addUndo(temp);
 		}
 		
 		public File getFile() { 
