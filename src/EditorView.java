@@ -133,8 +133,10 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			
-			String filepath = JOptionPane.showInputDialog("Please input a path");
-			OpenCommand OPEN = new OpenCommand( editor, filepath );
+			JFileChooser jfc = new JFileChooser();
+			jfc.showDialog(getParent(), "Select");
+			
+			OpenCommand OPEN = new OpenCommand( editor, jfc.getSelectedFile().getPath() );
 			OPEN.execute();
 			
 		}
