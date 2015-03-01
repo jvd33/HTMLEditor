@@ -217,6 +217,9 @@ public class EditorView extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
+		
+		this.textpane.setText(editor.getCurrentBuffer().toString());
+		
 		if( arg instanceof ArrayList && o instanceof HTMLEditor){
 			editor = (HTMLEditor) o;
 			List<Buffer> list = (ArrayList<Buffer>) arg;
