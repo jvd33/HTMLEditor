@@ -27,6 +27,10 @@ public class Buffer extends Observable {
 			this.hasView = false;
 		}
 		
+		public List<Observer> getObservers(){
+			return Observers;
+		}
+		
 		public void addTag(HTMLTag root) { 
 			tag = root;
 		}

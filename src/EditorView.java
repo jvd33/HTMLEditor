@@ -133,7 +133,8 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("New Button pushed!");
-			
+			Command newFile = new NewCommand(editor, null);
+			newFile.execute();
 		}
 	};
 	ActionListener fileopen = new ActionListener(){
@@ -154,58 +155,68 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Save Button pushed!");
-			
+			Command save = new SaveCommand(editor);
+			save.execute();
 		}
 	};
 	ActionListener editundo = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Undo Button pushed!");
-			
+			Command undo = new UndoCommand(editor.getCurrentBuffer());
+			undo.execute();
 		}
 	};
 	ActionListener editredo = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Redo Button pushed!");
-			
+			Command redo = new RedoCommand(editor.getCurrentBuffer());
+			redo.execute();
 		}
 	};
 	ActionListener editcut = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Cut Button pushed!");
-			
+			Command cut = new CutCommand("");
+			cut.execute();
 		}
 	};
 	ActionListener editcopy = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Copy Button pushed!");
-			
+			//Command copy = new CopyCommand();
+			//copy.execute();
 		}
 	};
 	ActionListener editpaste = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Paste Button pushed!");
-			
+			//Command paste = new PasteCommand();
+			//paste.execute();
 		}
 	};
 	ActionListener helpreadme = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("readme Button pushed!");
-			
+			//Command readmecommand = new ReadMeCommand();
+			//readmecommand.execute();
 		}
 	};
 	KeyListener buffedit = new KeyListener(){
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
+/*			Buffer currentBuffer = editor.getCurrentBuffer();
+			String textInBuffView = ((BufferView) e.getSource()).getText();
+			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
+			buffState.execute();
+			System.out.println(textInBuffView);
+*/		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
