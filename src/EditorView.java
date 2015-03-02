@@ -44,6 +44,17 @@ public class EditorView extends JFrame implements Observer{
 		private	JMenuItem cut;
 		private	JMenuItem copy ;
 		private	JMenuItem paste;
+		
+		//Insert + items
+		private JMenu insert;
+		private JMenuItem header;
+		private JMenuItem bold;
+		private JMenuItem italics;
+		private JMenuItem numberedList;
+		private JMenuItem bulletedList;
+		private JMenuItem dictList;
+		private JMenuItem table;
+
 			
 		// Help + items
 		private	JMenu help;
@@ -79,6 +90,17 @@ public class EditorView extends JFrame implements Observer{
 		copy = new JMenuItem("Copy");
 		paste = new JMenuItem("Paste");
 		
+		//Insert + items
+		insert = new JMenu("Insert");
+		header = new JMenuItem("Header");
+		bold = new JMenuItem("Bold");
+		italics = new JMenuItem("Italics");
+		numberedList = new JMenuItem("Numbered List");
+		bulletedList = new JMenuItem("Bulleted List");
+		dictList = new JMenuItem("Dictionary List");
+		table = new JMenuItem("Table");
+
+		
 		// Help + items
 		help = new JMenu("Help");
 		readme = new JMenuItem("Open Readme");
@@ -108,6 +130,34 @@ public class EditorView extends JFrame implements Observer{
 		copy.addActionListener(editcopy);
 		edit.add(paste);
 		paste.addActionListener(editpaste);
+		
+		//Insert + items
+		menuBar.add(insert);
+		insert.add(header);
+		//header.addActionListener(insertHeader);
+		insert.add(bold);
+		//bold.addActionListener(insertBold);
+		insert.add(italics);
+		//italics.addActionListener(insertItalics);
+		insert.add(numberedList);
+		//numberedList.addActionListener(insertNumberedList);
+		insert.add(bulletedList);
+		//bulletedList.addActionListener(insertBulletedList);
+		insert.add(dictList);
+		//dictList.addActionListener(insertDictList);
+		insert.add(table);
+		//table.addActionListener(insertTable);
+		
+		header.addActionListener(insertButton);
+		bold.addActionListener(insertButton);
+		italics.addActionListener(insertButton);
+		numberedList.addActionListener(insertButton);
+		bulletedList.addActionListener(insertButton);
+		dictList.addActionListener(insertButton);
+		table.addActionListener(insertButton);
+
+
+		
 		
 		menuBar.add(help);
 		help.add(readme);
@@ -228,6 +278,16 @@ public class EditorView extends JFrame implements Observer{
 			//readmecommand.execute();
 		}
 	};
+	
+	ActionListener insertButton = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("One of the insert buttons has been pressed");
+			//Command insertcommand = new InsertCommand("TAG DATA HERE");
+			//insertcommand.execute();
+		}
+	};
+	
 	KeyListener buffedit = new KeyListener(){
 
 		@Override
