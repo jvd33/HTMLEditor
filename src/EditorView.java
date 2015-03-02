@@ -143,9 +143,12 @@ public class EditorView extends JFrame implements Observer{
 			
 			JFileChooser jfc = new JFileChooser();
 			jfc.showDialog(getParent(), "Select");
-			
-			OpenCommand OPEN = new OpenCommand( editor, jfc.getSelectedFile().getPath() );
-			OPEN.execute();
+			try { 
+				OpenCommand OPEN = new OpenCommand( editor, jfc.getSelectedFile().getPath() );
+				OPEN.execute();
+			} catch(NullPointerException n) { 
+				return;
+			}
 			
 			
 			
@@ -251,7 +254,11 @@ public class EditorView extends JFrame implements Observer{
 				}
 				else {
 					b.setView(true);
-					tabBar.addTab(b.getFile().getName(), bv);
+					try { 
+						tabBar.addTab(b.getFile().getName(), bv);
+					} catch(NullPointerException e) { 
+						tabBar.addTab("New File", bv);
+					}
 				}
 			}
 		}

@@ -40,6 +40,7 @@ public class SaveCommand implements Command {
 			catch(IncorrectHTMLException e)
 			{
 				e.printStackTrace();
+				System.out.println(tempBuffer.text);
 			}
 			
 			

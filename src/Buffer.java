@@ -92,7 +92,8 @@ public class Buffer extends Observable {
 			if(htmlToCheck.getEndTag()!=null){
 				for(HTMLTag tag : htmlToCheck.getChildren()){
 					if(tag.getEndTag() ==null){
-						throw new IncorrectHTMLException();
+						//throw new IncorrectHTMLException();
+						System.out.println("Incorrect HTML at" + this.getTag());
 					}
 					
 				}
