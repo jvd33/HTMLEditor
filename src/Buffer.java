@@ -42,7 +42,7 @@ public class Buffer extends Observable {
 		
 		public void addText(String s) { 
 			this.lines.clear();
-			
+			//addUndo(s);
 			text = s;
 			Line line = new Line();
 			
@@ -62,7 +62,6 @@ public class Buffer extends Observable {
 				}
 				else{
 					line.setText(s.substring(start));
-					System.out.println(this.text);
 					stillLines = false;
 					
 				}
@@ -108,6 +107,7 @@ public class Buffer extends Observable {
 		
 		
 		public void addUndo(String state) {
+			System.out.println("Added to the stack");
 			undoStack.push(state);
 		}
 		
@@ -120,9 +120,13 @@ public class Buffer extends Observable {
 		 */
 		public void undo() { 
 			String temp = undoStack.pop();
-			text = temp;
+			//System.out.println(undoStack);
+			//text = temp;
 			addRedo(temp);
-			this.notifyObservers();
+			System.out.println(temp);
+			this.addText(temp);
+			//addRedo(temp);
+			//this.notifyObservers();
 					
 		}
 		
@@ -131,7 +135,7 @@ public class Buffer extends Observable {
 		 */
 		public void redo() {
 			String temp = redoStack.pop();
-			text = temp;
+			this.addText(temp);
 			addUndo(temp);
 			this.notifyObservers();
 		}
@@ -143,7 +147,7 @@ public class Buffer extends Observable {
 		@Override
 		public void notifyObservers(){
 			for( Observer o: this.Observers){
-				o.update(this, this.toString());
+				o.update(this, this.text);
 			}
 		}
 		

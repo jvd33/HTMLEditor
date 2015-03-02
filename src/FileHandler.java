@@ -82,7 +82,7 @@ public class FileHandler {
 		
 		public static void main(String args[]){
 			
-			File file = new File("C:/Users/Dylan/testhtml.txt");
+			File file = new File("C:/Users/Joe/Desktop/SWEN262/test.txt");
 			Buffer b= new Buffer(file);
 			FileHandler fh = new FileHandler(file);
 			b = fh.readFile(file);

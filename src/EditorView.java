@@ -213,6 +213,7 @@ public class EditorView extends JFrame implements Observer{
 		public void keyTyped(KeyEvent e) {
 			Buffer currentBuffer = editor.getCurrentBuffer();
 			String textInBuffView = ((BufferView) e.getSource()).getText();
+			//currentBuffer.addUndo(textInBuffView);
 			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
 			buffState.execute();
 			//System.out.println(textInBuffView);
