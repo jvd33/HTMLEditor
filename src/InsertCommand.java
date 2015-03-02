@@ -1,3 +1,5 @@
+import java.io.File;
+
 /**
  * 
  */
@@ -7,12 +9,11 @@
  *
  */
 public class InsertCommand implements Command {
-	BufferView bv;
-	Buffer buff;
-	String tagName;
-	public InsertCommand(Buffer buffer, String tag_name, int cursorPos){
-		buff = buffer;
-		tagName = tag_name;
+	BufferView buffview;
+	String insertedText;
+	public InsertCommand(BufferView bv, String tag_name){
+		insertedText = tagNameToTag(tag_name);
+		this.buffview = bv;
 	}
 
 	/* (non-Javadoc)
@@ -20,12 +21,15 @@ public class InsertCommand implements Command {
 	 */
 	@Override
 	public void execute() {
-		
-		String origText = bv.getText();
+		String origText = buffview.getText();
 		String newText = "";
-		newText = origText.substring(0, bv.getCaretPosition()) + origText.substring(bv.getCaretPosition());
-		bv.setText(newText);
-		
+		newText = origText.substring(0, buffview.getCaretPosition()) + insertedText +
+				origText.substring(buffview.getCaretPosition());
+		buffview.setText(newText);
 	}
-
+	
+	private String tagNameToTag(String s){
+		s = "<"+s+"></"+s+">";
+		return s;
+	}
 }
