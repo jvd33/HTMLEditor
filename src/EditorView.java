@@ -26,10 +26,10 @@ public class EditorView extends JFrame implements Observer{
 		HTMLEditor editor;
 	
 		//Components
-		private JPanel panel = new JPanel();
+		private JPanel panel;
 		
 		private	JMenuBar menuBar;
-		private JTabbedPane tabBar = new JTabbedPane();
+		private JTabbedPane tabBar;
 			
 		// File + items
 		private	JMenu file;
@@ -53,6 +53,8 @@ public class EditorView extends JFrame implements Observer{
 	public EditorView(String title, HTMLEditor htmleditor){
 		super(title);
 		
+		//The main panel of the document
+		panel = new JPanel(new BorderLayout());
 		//editor that is observed.
 		editor = htmleditor;
 		htmleditor.addObserver(this);
@@ -61,7 +63,7 @@ public class EditorView extends JFrame implements Observer{
 		
 		//Components
 		menuBar = new JMenuBar();
-		//tabBar = new JTabbedPane();
+		tabBar = new JTabbedPane();
 		
 		// File + items
 		file = new JMenu("File");
@@ -116,7 +118,7 @@ public class EditorView extends JFrame implements Observer{
 		// For tab items 
 		
 		try{
-		panel.add(tabBar,BorderLayout.NORTH);
+		panel.add(tabBar,BorderLayout.CENTER);
 		
 		}catch(java.lang.NullPointerException e){
 			
@@ -234,8 +236,7 @@ public class EditorView extends JFrame implements Observer{
 				panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
 				tabBar.addTab(b.getFile().getName(), bv);
-				
-				
+				System.out.println(panel.getLayout());
 			}
 		}
 		
