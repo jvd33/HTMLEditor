@@ -101,6 +101,8 @@ public class Buffer extends Observable {
 			}
 			else
 			{
+				System.out.println(getTag());
+				System.out.println(getTag().getChildren());
 				throw new IncorrectHTMLException();
 			}
 			
@@ -145,6 +147,10 @@ public class Buffer extends Observable {
 		
 		public File getFile() { 
 			return sourceFile;
+		}
+		
+		public void setFile(String path) {
+			sourceFile = new File(path);
 		}
 		
 		

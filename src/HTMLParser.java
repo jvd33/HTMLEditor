@@ -112,7 +112,7 @@ public class HTMLParser {
 	
 	//ignore this testing stuff
 	public static void main(String args[]) { 
-		String input = "<html><p><p><div></div></p></p></html>";
+		String input = "<html><p>";
 		HTMLParser parser = new HTMLParser(input);
 		HTMLTag tag = parser.parse();
 		System.out.println(tag.getChildren());

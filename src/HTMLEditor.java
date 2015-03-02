@@ -13,6 +13,7 @@ import java.io.File;
 public class HTMLEditor extends Observable{
 		
 		private Buffer activeBuffer;
+		private BufferView bufferView;
 		private List<Buffer> buffers;
 		private List<Observer> observers;
 		
@@ -52,6 +53,14 @@ public class HTMLEditor extends Observable{
 			activeBuffer = buffer;
 			hasChanged();
 			notifyObservers();
+		}
+		public void setActiveView(BufferView bv) { 
+			bufferView = bv;
+			
+		}
+		
+		public BufferView getActiveView() { 
+			return bufferView;
 		}
 		public Buffer getCurrentBuffer(){
 			return activeBuffer;

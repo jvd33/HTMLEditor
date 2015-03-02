@@ -158,6 +158,24 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Save Button pushed!");
+			Buffer currentBuffer = editor.getCurrentBuffer();
+			String textInBuffView = editor.getActiveView().getText();
+			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
+			buffState.execute();
+			if(editor.getCurrentBuffer().getFile() == null) { 
+				JFileChooser jfc = new JFileChooser();
+				jfc.showDialog(getParent(), "Save as");
+				try { 
+					String path = jfc.getSelectedFile().toString();
+					editor.getCurrentBuffer().setFile(path);
+					editor.notifyObservers();
+					Command save = new SaveCommand(editor);
+					save.execute();
+				} catch(NullPointerException n) { 
+					System.out.println("No file entered");
+				}
+				
+			}
 			Command save = new SaveCommand(editor);
 			save.execute();
 		}
@@ -246,6 +264,7 @@ public class EditorView extends JFrame implements Observer{
 			for(Buffer b : list){
 				
 				BufferView bv = new BufferView(b);
+				editor.setActiveView(bv);
 				bv.addKeyListener(buffedit);
 				panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
