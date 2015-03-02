@@ -10,7 +10,7 @@ import java.io.File;
  */
 public class Buffer extends Observable {
 		
-		private List<Observer> Observers;
+		//private List<Observer> Observers;
 		private File sourceFile;
 		private Stack<String> undoStack;
 		private Stack<String> redoStack;
@@ -20,7 +20,7 @@ public class Buffer extends Observable {
 		public String text;
 		
 		public Buffer(File f) {
-			Observers = new ArrayList<Observer>();
+			//Observers = new ArrayList<Observer>();
 			sourceFile = f;
 			undoStack = new Stack<String>();
 			redoStack = new Stack<String>();
@@ -28,9 +28,9 @@ public class Buffer extends Observable {
 			this.hasView = false;
 		}
 		
-		public List<Observer> getObservers(){
-			return Observers;
-		}
+		//public List<Observer> getObservers(){
+		//	return Observers;
+		//}
 		
 		public void addTag(HTMLTag root) { 
 			tag = root;
@@ -66,7 +66,7 @@ public class Buffer extends Observable {
 					
 				}
 			}
-			this.notifyObservers();
+			notifyObservers(text);
 		}
 		//returns the full text of the buffer
 		public String toString() { 
@@ -107,7 +107,6 @@ public class Buffer extends Observable {
 		
 		
 		public void addUndo(String state) {
-			System.out.println("Added to the stack");
 			undoStack.push(state);
 		}
 		
@@ -119,14 +118,13 @@ public class Buffer extends Observable {
 		 * performs the undo operation on the buffer's text
 		 */
 		public void undo() { 
+			addRedo(text);
 			String temp = undoStack.pop();
 			//System.out.println(undoStack);
-			//text = temp;
-			addRedo(temp);
-			System.out.println(temp);
-			this.addText(temp);
-			//addRedo(temp);
-			//this.notifyObservers();
+			text = temp;
+			addText(temp);
+			setChanged();
+			notifyObservers(text);
 					
 		}
 		
@@ -134,26 +132,25 @@ public class Buffer extends Observable {
 		 * performs the redo operation on the buffer's text
 		 */
 		public void redo() {
+			addUndo(text);
 			String temp = redoStack.pop();
-			this.addText(temp);
-			addUndo(temp);
-			this.notifyObservers();
+			//System.out.println(temp);
+			text=temp;
+			addText(temp);
+			//System.out.println(text);
+			setChanged();
+			notifyObservers(text);
 		}
 		
 		public File getFile() { 
 			return sourceFile;
 		}
 		
-		@Override
-		public void notifyObservers(){
-			for( Observer o: this.Observers){
-				o.update(this, this.text);
-			}
-		}
 		
 		public void setView(boolean b) { 
 			this.hasView = b;
 		}
+		
 		//for science...
 		public static void main(String args []){
 			

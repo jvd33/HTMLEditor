@@ -50,8 +50,8 @@ public class HTMLEditor extends Observable{
 		public void addBuffer(Buffer buffer){
 			buffers.add(buffer);
 			activeBuffer = buffer;
-			this.hasChanged();
-			this.notifyObservers();
+			hasChanged();
+			notifyObservers();
 		}
 		public Buffer getCurrentBuffer(){
 			return activeBuffer;

@@ -227,7 +227,6 @@ public class EditorView extends JFrame implements Observer{
 
 		@Override
 		public void keyReleased(KeyEvent e) {
-			// TODO Auto-generated method stub
 			
 		}
 		

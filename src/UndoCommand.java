@@ -1,4 +1,4 @@
-
+import java.util.EmptyStackException;
 public class UndoCommand implements Command {
 	private Buffer b;
 	
@@ -8,7 +8,13 @@ public class UndoCommand implements Command {
 
 	@Override
 	public void execute() {
-		b.undo();
+		try {
+			b.addRedo(b.text);
+			b.undo();
+			b.notifyObservers(b.text);
+		} catch(EmptyStackException e) { 
+			return;
+		}
 		
 	} 
 
