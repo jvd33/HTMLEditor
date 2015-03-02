@@ -235,8 +235,13 @@ public class EditorView extends JFrame implements Observer{
 				bv.addKeyListener(buffedit);
 				panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
-				tabBar.addTab(b.getFile().getName(), bv);
-				System.out.println(panel.getLayout());
+				if(b.hasView()) { 
+					continue;
+				}
+				else {
+					b.setView(true);
+					tabBar.addTab(b.getFile().getName(), bv);
+				}
 			}
 		}
 		

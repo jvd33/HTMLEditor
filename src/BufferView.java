@@ -9,7 +9,6 @@ public class BufferView  extends JEditorPane implements Observer{
 	private Buffer buffer; 
 	
 	public BufferView(Buffer b){
-		
 		this.buffer = b;
 		this.setText(buffer.toString());
 		buffer.addObserver(this);

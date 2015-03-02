@@ -22,6 +22,18 @@ public class OpenCommand implements Command {
 	public void execute() {
 		FileHandler FH = new FileHandler(file);
 		Buffer b = FH.readFile(file);
+		for(Buffer buff : editor.getBuffers()) {
+			if(buff.getFile().equals(file)) { 
+				editor.setActiveBuffer(buff);
+				System.out.println(editor.getBuffers());
+				return;
+			}
+			else { 
+				continue;
+		
+			}
+			
+		}
 		editor.addBuffer(b);
 	}
 

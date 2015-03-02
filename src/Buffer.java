@@ -15,6 +15,7 @@ public class Buffer extends Observable {
 		private Stack<String> undoStack;
 		private Stack<String> redoStack;
 		private HTMLTag tag; //root tag for buffer
+		private boolean hasView;
 		public List<Line> lines;//list of all lines in the buffer
 		public String text;
 		
@@ -23,10 +24,15 @@ public class Buffer extends Observable {
 			undoStack = new Stack<String>();
 			redoStack = new Stack<String>();
 			this.lines = new ArrayList<Line>();
+			this.hasView = false;
 		}
 		
 		public void addTag(HTMLTag root) { 
 			tag = root;
+		}
+		
+		public boolean hasView() { 
+			return this.hasView;
 		}
 		
 		public void addText(String s) { 
@@ -130,6 +136,10 @@ public class Buffer extends Observable {
 			for( Observer o: this.Observers){
 				o.update(this, this.toString());
 			}
+		}
+		
+		public void setView(boolean b) { 
+			this.hasView = b;
 		}
 		//for science...
 		public static void main(String args []){
