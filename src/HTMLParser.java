@@ -32,7 +32,7 @@ public class HTMLParser {
 	public HTMLTag parse() { 
 		String rootTag = iterator.next();
 		HTMLTag root = new HTMLTag(rootTag, null); //create a new root tag
-		iterator.remove();
+		//iterator.remove();
 		while(iterator.hasNext()) { //while there are tags to parse
 			String temp = iterator.next();
 			if(isStartTag(temp)) { //if its a start tag

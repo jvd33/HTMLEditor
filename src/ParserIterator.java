@@ -28,12 +28,23 @@ public class ParserIterator implements Iterator {
 
 	@Override
 	public String next() {
-		return (String) internal.next();
+		String next;
+		try { 
+			next = (String) internal.next();
+		} catch(NoSuchElementException e) { 
+			next = null;
+		}
+		return next;
 	}
 
 	@Override
 	public void remove() {
-		internal.remove();
+		try { 
+			internal.remove();
+		} catch(NoSuchElementException e) { 
+			return;
+		}
+		//internal.remove();
 	}
 	
 	//Removes all comments in the input string- this will make it easier to parse (comments are irrelevant)
