@@ -29,7 +29,7 @@ public class EditorView extends JFrame implements Observer{
 		private JPanel panel = new JPanel();
 		
 		private	JMenuBar menuBar;
-		private JTabbedPane tabBar;
+		private JTabbedPane tabBar = new JTabbedPane();
 			
 		// File + items
 		private	JMenu file;
@@ -49,8 +49,6 @@ public class EditorView extends JFrame implements Observer{
 		private	JMenu help;
 		private	JMenuItem readme;
 			
-		// Text area for the HTML
-		private	JEditorPane textpane;
 			
 	public EditorView(String title, HTMLEditor htmleditor){
 		super(title);
@@ -82,11 +80,6 @@ public class EditorView extends JFrame implements Observer{
 		// Help + items
 		help = new JMenu("Help");
 		readme = new JMenuItem("Open Readme");
-		
-		
-		// Text area for the HTML
-		textpane = new JEditorPane(); 
-		
 		
 		
 		/* Added components to the frame
@@ -129,13 +122,6 @@ public class EditorView extends JFrame implements Observer{
 			
 		}
 		
-		
-		// this is the text pane
-		
-		textpane.addKeyListener(buffedit);
-		panel.add(textpane,BorderLayout.CENTER);
-		textpane.setVisible(false);
-		
 		this.add(panel, BorderLayout.CENTER);
 			
 	}
@@ -157,6 +143,8 @@ public class EditorView extends JFrame implements Observer{
 			
 			OpenCommand OPEN = new OpenCommand( editor, jfc.getSelectedFile().getPath() );
 			OPEN.execute();
+			
+			
 			
 		}
 	};
@@ -240,6 +228,12 @@ public class EditorView extends JFrame implements Observer{
 			editor = (HTMLEditor) o;
 			List<Buffer> list = (ArrayList<Buffer>) arg;
 			for(Buffer b : list){
+				
+				BufferView bv = new BufferView(b);
+				bv.addKeyListener(buffedit);
+				panel.add(bv, BorderLayout.CENTER);
+				bv.setVisible(true);
+				tabBar.addTab(b.getFile().getName(), bv);
 				
 				
 			}
