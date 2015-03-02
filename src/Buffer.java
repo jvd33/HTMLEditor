@@ -20,6 +20,7 @@ public class Buffer extends Observable {
 		public String text;
 		
 		public Buffer(File f) {
+			Observers = new ArrayList<Observer>();
 			sourceFile = f;
 			undoStack = new Stack<String>();
 			redoStack = new Stack<String>();
@@ -50,16 +51,20 @@ public class Buffer extends Observable {
 			int end = 0;
 			
 			while(stillLines){
-				end = s.substring(start).indexOf('\n');
-				if(end >=0){
-					
-					line.setText(s.substring(start, end));
-					start = end;
+				start = 0;
+				end = s.indexOf('\n');
+				if(end > 0){
+					String tempText = s.substring(start, end);
+					line.setText(tempText);
 					this.addLine(line);
+					start = end;
+					s = s.substring(start);
 				}
 				else{
 					line.setText(s.substring(start));
+					System.out.println(this.text);
 					stillLines = false;
+					
 				}
 			}
 			this.notifyObservers();

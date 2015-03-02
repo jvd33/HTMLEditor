@@ -211,12 +211,12 @@ public class EditorView extends JFrame implements Observer{
 
 		@Override
 		public void keyTyped(KeyEvent e) {
-/*			Buffer currentBuffer = editor.getCurrentBuffer();
+			Buffer currentBuffer = editor.getCurrentBuffer();
 			String textInBuffView = ((BufferView) e.getSource()).getText();
 			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
 			buffState.execute();
-			System.out.println(textInBuffView);
-*/		}
+			//System.out.println(textInBuffView);
+		}
 
 		@Override
 		public void keyPressed(KeyEvent e) {
