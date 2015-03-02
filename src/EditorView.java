@@ -244,3 +244,4 @@ public class EditorView extends JFrame implements Observer{
 	}
 	
 }
+
