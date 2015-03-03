@@ -10,12 +10,14 @@ import java.io.File;
  */
 public class SaveCommand implements Command {
 	HTMLEditor htmlEditor;
+	Buffer buff;
 	/**
 	 * Creates a new New Concrete Command taking in HTMLEditor
 	 * @param htmle
 	 */	
-	public SaveCommand(HTMLEditor htmle){
+	public SaveCommand(HTMLEditor htmle, Buffer b){
 		this.htmlEditor = htmle;
+		buff = b;
 	}
 	
 	/* (non-Javadoc)
@@ -23,24 +25,20 @@ public class SaveCommand implements Command {
 	 */
 	@Override
 	public void execute() {
-			Buffer activeBuffer = htmlEditor.getCurrentBuffer();
-			File file= activeBuffer.getFile();
+			File file= buff.getFile();
 			FileHandler fh = new FileHandler(file);
-			HTMLParser parser = new HTMLParser(activeBuffer.toString());
+			HTMLParser parser = new HTMLParser(buff.text);
 			
-			
-			Buffer tempBuffer = new Buffer(file);
-			tempBuffer.addTag(parser.parse());
+			buff.addTag(parser.parse());
 			try{
-				if(tempBuffer.checkHTML())
+				if(buff.checkHTML())
 				{
-					fh.writeToFile(activeBuffer);
+					fh.writeToFile(buff);
 				}
 			}
 			catch(IncorrectHTMLException e)
 			{
 				e.printStackTrace();
-				System.out.println(tempBuffer.text);
 			}
 			
 			

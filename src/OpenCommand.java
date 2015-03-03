@@ -35,6 +35,9 @@ public class OpenCommand implements Command {
 			
 		}
 		editor.addBuffer(b);
+		editor.setActiveBuffer(b);
+		editor.hasChanged();
+		editor.notifyObservers();
 	}
 
 }

@@ -15,7 +15,6 @@ public class HTMLEditor extends Observable{
 		private Buffer activeBuffer;
 		private BufferView bufferView;
 		private List<Buffer> buffers;
-		private List<Observer> observers;
 		
 		/*
 		 * 
@@ -28,7 +27,6 @@ public class HTMLEditor extends Observable{
 		public HTMLEditor(){
 			this.buffers = new java.util.ArrayList<Buffer>();
 			this.activeBuffer = null;
-			this.observers = new java.util.ArrayList<Observer>();
 		}
 		
 		public void loadFile(File file){
@@ -45,14 +43,15 @@ public class HTMLEditor extends Observable{
 			{
 				e.printStackTrace();
 			}
-			this.notifyObservers();
+			setChanged();
+			notifyObservers(buffers);
 		}
 		
 		public void addBuffer(Buffer buffer){
 			buffers.add(buffer);
-			activeBuffer = buffer;
-			hasChanged();
-			notifyObservers();
+			setActiveBuffer(buffer);
+			setChanged();
+			notifyObservers(buffers);
 		}
 		public void setActiveView(BufferView bv) { 
 			bufferView = bv;
@@ -72,22 +71,15 @@ public class HTMLEditor extends Observable{
 		//could take in index from list if that makes it better.
 		public void setActiveBuffer(Buffer buffer){
 			this.activeBuffer = buffer;
-			this.notifyObservers();
+			setChanged();
+			notifyObservers(buffers);
 		}
 		
 		//only closes the active buffer since that will be the only one you can close.
 		public void closeBuffer(){
 			buffers.remove(activeBuffer);
 			activeBuffer = buffers.get(0);
-			this.notifyObservers();
-		}
-		@Override
-		public void notifyObservers(){
-			for(Observer o : this.observers){
-				o.update(this, this.getBuffers());
-			}
-		}
-		public void addObserver(Observer o){
-			this.observers.add(o);
+			setChanged();
+			notifyObservers(buffers);
 		}
 }
