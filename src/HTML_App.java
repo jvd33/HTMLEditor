@@ -1,3 +1,5 @@
+import java.io.File;
+
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
@@ -13,6 +15,7 @@ import javax.swing.SwingUtilities;
 public class HTML_App {
 	
 	public static void main(String[] args){
+		final String [] arg = args;
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				
@@ -21,6 +24,15 @@ public class HTML_App {
 				frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
+				try{
+					if(arg[0]!=(null)){
+						File file = new File(arg[0]);
+						Command open = new OpenCommand(editor, file.getPath());
+						open.execute();
+					}
+				}catch(ArrayIndexOutOfBoundsException e){
+					System.err.println("No Command Line arguments");
+				}
 			}
 		});
 	}
