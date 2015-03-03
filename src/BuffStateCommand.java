@@ -12,6 +12,7 @@ public class BuffStateCommand implements Command {
 		s = newText;
 		
 	}
+	
 	@Override
 	public void execute() {
 		b.addUndo(s);

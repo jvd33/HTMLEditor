@@ -10,7 +10,6 @@ import java.io.File;
  */
 public class Buffer extends Observable {
 		
-		//private List<Observer> Observers;
 		private File sourceFile;
 		private Stack<String> undoStack;
 		private Stack<String> redoStack;
@@ -19,8 +18,10 @@ public class Buffer extends Observable {
 		public List<Line> lines;//list of all lines in the buffer
 		public String text;
 		
+		/*
+		 * Constructor
+		 */
 		public Buffer(File f) {
-			//Observers = new ArrayList<Observer>();
 			sourceFile = f;
 			undoStack = new Stack<String>();
 			redoStack = new Stack<String>();
@@ -28,21 +29,25 @@ public class Buffer extends Observable {
 			this.hasView = false;
 		}
 		
-		//public List<Observer> getObservers(){
-		//	return Observers;
-		//}
-		
+		/*
+		 * Adds the root node of an aggregate HTMLTag to the buffer
+		 */
 		public void addTag(HTMLTag root) { 
 			tag = root;
 		}
 		
+		/*
+		 * Has a view been intialized for this buffer?
+		 */
 		public boolean hasView() { 
 			return this.hasView;
 		}
 		
+		/*
+		 * Sets the text of the buffer
+		 */
 		public void addText(String s) { 
 			this.lines.clear();
-			//addUndo(s);
 			text = s;
 			Line line = new Line();
 			
@@ -68,7 +73,11 @@ public class Buffer extends Observable {
 			}
 			notifyObservers(text);
 		}
-		//returns the full text of the buffer
+		
+		/*
+		 * (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		public String toString() { 
 			String str = "";
 			for(Line line : lines) {
@@ -77,15 +86,24 @@ public class Buffer extends Observable {
 			return str;
 		}
 		
+		/*
+		 * Returns the root tag
+		 */
 		public HTMLTag getTag() {
 			return tag;
 		}
 		
+		/*
+		 * Add a line to the line's list
+		 */
 		public void addLine(Line line) { 
 			lines.add(line);
 			
 		}
 		
+		/*
+		 * Checks to see if the tag is well-formed HTML
+		 */
 		public boolean checkHTML() throws IncorrectHTMLException{
 			//checks if every start tag has an end tag
 			HTMLTag htmlToCheck = this.getTag();
@@ -109,11 +127,16 @@ public class Buffer extends Observable {
 			return true;
 		}
 		
-		
+		/*
+		 * Push to the undo stack
+		 */
 		public void addUndo(String state) {
 			undoStack.push(state);
 		}
 		
+		/*
+		 * Push to the redo stack
+		 */
 		public void addRedo(String state) { 
 			redoStack.push(state);
 		}
@@ -143,45 +166,25 @@ public class Buffer extends Observable {
 			notifyObservers(text);
 		}
 		
+		/*
+		 * Gets the file
+		 */
 		public File getFile() { 
 			return sourceFile;
 		}
 		
+		/*
+		 * Sets the file
+		 */
 		public void setFile(String path) {
 			sourceFile = new File(path);
 		}
 		
-		
+		/*
+		 * Sets the view
+		 */
 		public void setView(boolean b) { 
 			this.hasView = b;
-		}
-		
-		//for science...
-		public static void main(String args []){
-			
-			/*HTMLTag tag = new HTMLTag("<html>");
-			tag.setEndTag("</html>");
-			HTMLTag ctag = new HTMLTag("<body>");
-			ctag.setEndTag("</body>");
-			tag.addChild(ctag);
-			HTMLTag ctag2 = new HTMLTag("<body1>");
-			ctag2.setEndTag("</body1>");
-			tag.addChild(ctag2);
-			HTMLTag ctag1 = new HTMLTag("<p>");
-			ctag1.setEndTag("</p>");
-			ctag.addChild(ctag1);
-			HTMLTag ctag3 = new HTMLTag("<p>");
-			ctag3.setEndTag("</p>");
-			ctag2.addChild(ctag3);
-			Buffer b = new Buffer();
-			b.addTag(tag);
-			
-			try{
-				System.out.println(b.checkHTML());
-			}
-			catch(IncorrectHTMLException e){
-				e.printStackTrace();
-			}*/
 		}
 
 }

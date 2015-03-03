@@ -1,4 +1,6 @@
-
+/*
+ * Thrown when HTML passed is not wellformed
+ */
 public class IncorrectHTMLException extends Exception {
 	
 	public IncorrectHTMLException(){

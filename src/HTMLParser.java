@@ -19,7 +19,9 @@ public class HTMLParser {
 	private String s;
 	private ParserIterator iterator;
 	
-	//constructor, creates an iterator for the string
+	/*
+	 * constructor, creates an iterator for the string
+	 */
 	public HTMLParser(String s) {
 		iterator = new ParserIterator(s);
 		
@@ -32,7 +34,6 @@ public class HTMLParser {
 	public HTMLTag parse() { 
 		String rootTag = iterator.next();
 		HTMLTag root = new HTMLTag(rootTag, null); //create a new root tag
-		//iterator.remove();
 		while(iterator.hasNext()) { //while there are tags to parse
 			String temp = iterator.next();
 			if(isStartTag(temp)) { //if its a start tag
@@ -109,16 +110,5 @@ public class HTMLParser {
 	private boolean isStartTag(String tag) {
 		return !tag.contains("</");
 	}
-	
-	
-	//ignore this testing stuff
-	public static void main(String args[]) { 
-		String input = "<html><p>";
-		HTMLParser parser = new HTMLParser(input);
-		HTMLTag tag = parser.parse();
-		System.out.println(tag.getChildren());
-		
-	}
-	
 
 }

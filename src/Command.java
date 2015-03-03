@@ -4,6 +4,10 @@
  * @author Team Bash-Browns
  *
  */
+
+/*
+ * Command object interface
+ */
 public interface Command {
 	/**
 	 * Abstract method implying what needs to go into each command

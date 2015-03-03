@@ -179,6 +179,9 @@ public class EditorView extends JFrame implements Observer{
 	}
 	// Behavior of components
 	
+	/*
+	 * New file listener
+	 */
 	ActionListener filenew = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -187,6 +190,10 @@ public class EditorView extends JFrame implements Observer{
 			newFile.execute();
 		}
 	};
+	
+	/*
+	 * Open file listener
+	 */
 	ActionListener fileopen = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -204,6 +211,10 @@ public class EditorView extends JFrame implements Observer{
 			
 		}
 	};
+	
+	/*
+	 * Save file listener
+	 */
 	ActionListener filesave = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -230,6 +241,10 @@ public class EditorView extends JFrame implements Observer{
 			save.execute();
 		}
 	};
+	
+	/*
+	 * Undo listener
+	 */
 	ActionListener editundo = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -238,6 +253,10 @@ public class EditorView extends JFrame implements Observer{
 			undo.execute();
 		}
 	};
+	
+	/*
+	 * redo listener
+	 */
 	ActionListener editredo = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -246,6 +265,10 @@ public class EditorView extends JFrame implements Observer{
 			redo.execute();
 		}
 	};
+	
+	/*
+	 * Cut listener
+	 */
 	ActionListener editcut = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -254,6 +277,10 @@ public class EditorView extends JFrame implements Observer{
 			cut.execute();
 		}
 	};
+	
+	/*
+	 * Copy listener
+	 */
 	ActionListener editcopy = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -262,6 +289,10 @@ public class EditorView extends JFrame implements Observer{
 			//copy.execute();
 		}
 	};
+	
+	/*
+	 * Paste listener
+	 */
 	ActionListener editpaste = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -270,6 +301,10 @@ public class EditorView extends JFrame implements Observer{
 			//paste.execute();
 		}
 	};
+	
+	/*
+	 * ReadMe listener
+	 */
 	ActionListener helpreadme = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -279,6 +314,9 @@ public class EditorView extends JFrame implements Observer{
 		}
 	};
 	
+	/*
+	 * Insert listener
+	 */
 	ActionListener insertButton = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -288,6 +326,9 @@ public class EditorView extends JFrame implements Observer{
 		}
 	};
 	
+	/*
+	 * Buffer change listener
+	 */
 	KeyListener buffedit = new KeyListener(){
 
 		@Override
