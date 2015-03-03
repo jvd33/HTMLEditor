@@ -13,9 +13,9 @@ public class OpenCommand implements Command {
 	private HTMLEditor editor;
 	private File file;
 	
-	public OpenCommand(HTMLEditor edit, String filename) { 
+	public OpenCommand(HTMLEditor edit, String filepath) { 
 		editor = edit;
-		file = new File(filename);
+		file = new File(filepath);
 	}
 	
 	@Override
