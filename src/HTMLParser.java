@@ -40,6 +40,7 @@ public class HTMLParser {
 			}
 			else if(isEndTag(root.getStartTag(), temp)) { //if its the end tag
 				root.setEndTag(temp); //set it and break
+				return root;
 			}
 		}
 		return root; //return the root (aggregate of html tags)

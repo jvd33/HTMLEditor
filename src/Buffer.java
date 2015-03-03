@@ -89,23 +89,24 @@ public class Buffer extends Observable {
 		public boolean checkHTML() throws IncorrectHTMLException{
 			//checks if every start tag has an end tag
 			HTMLTag htmlToCheck = this.getTag();
+			System.out.println(htmlToCheck.toString());
 			if(htmlToCheck.getEndTag()!=null){
 				for(HTMLTag tag : htmlToCheck.getChildren()){
-					if(tag.getEndTag() ==null){
-						//throw new IncorrectHTMLException();
-						System.out.println("Incorrect HTML at" + this.getTag());
+					if(tag.getEndTag() != null){
+						continue;
 					}
-					
+					else { 
+						throw new IncorrectHTMLException();
+					}
+				
 				}
-				return true;
-			}
-			else
-			{
-				System.out.println(getTag());
-				System.out.println(getTag().getChildren());
+				
+				
+			} else { 
 				throw new IncorrectHTMLException();
 			}
-			
+
+			return true;
 		}
 		
 		
@@ -123,7 +124,6 @@ public class Buffer extends Observable {
 		public void undo() { 
 			addRedo(text);
 			String temp = undoStack.pop();
-			//System.out.println(undoStack);
 			text = temp;
 			addText(temp);
 			setChanged();
@@ -137,10 +137,8 @@ public class Buffer extends Observable {
 		public void redo() {
 			addUndo(text);
 			String temp = redoStack.pop();
-			//System.out.println(temp);
 			text=temp;
 			addText(temp);
-			//System.out.println(text);
 			setChanged();
 			notifyObservers(text);
 		}

@@ -209,7 +209,7 @@ public class EditorView extends JFrame implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Save Button pushed!");
 			Buffer currentBuffer = editor.getCurrentBuffer();
-			String textInBuffView = editor.getActiveView().getText();
+			String textInBuffView = editor.getCurrentBuffer().text;
 			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
 			buffState.execute();
 			if(editor.getCurrentBuffer().getFile() == null) { 
@@ -219,14 +219,14 @@ public class EditorView extends JFrame implements Observer{
 					String path = jfc.getSelectedFile().toString();
 					editor.getCurrentBuffer().setFile(path);
 					editor.notifyObservers();
-					Command save = new SaveCommand(editor);
+					Command save = new SaveCommand(editor, currentBuffer);
 					save.execute();
 				} catch(NullPointerException n) { 
 					System.out.println("No file entered");
 				}
 				
 			}
-			Command save = new SaveCommand(editor);
+			Command save = new SaveCommand(editor, currentBuffer);
 			save.execute();
 		}
 	};
@@ -316,8 +316,6 @@ public class EditorView extends JFrame implements Observer{
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
-		
-
 		if( arg instanceof ArrayList && o instanceof HTMLEditor){
 			editor = (HTMLEditor) o;
 			List<Buffer> list = (ArrayList<Buffer>) arg;

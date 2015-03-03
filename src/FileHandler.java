@@ -45,7 +45,8 @@ public class FileHandler {
 				String sCurrentLine = null;
 				// adds lines from file to buffer
 				while ((sCurrentLine = br.readLine()) != null) {
-					Line l = new Line();			// Temporary new line
+					Line l = new Line();	// Temporary new line
+					System.out.println(sCurrentLine);
 					l.setText(sCurrentLine);
 					buff.addLine(l);
 				}
