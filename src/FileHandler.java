@@ -68,9 +68,7 @@ public class FileHandler {
 		 */
 		public File writeToFile(Buffer parsedBuffer){
 			try(PrintWriter out = new PrintWriter(file)) {
-				for(Line l : parsedBuffer.lines){
-					out.print(l.toString());
-				}
+				out.print(parsedBuffer.text);
 				out.close();
 			}
 			
