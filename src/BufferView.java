@@ -84,8 +84,7 @@ public class BufferView extends JPanel implements Observer{
 		inserttag.addActionListener(buttonListener);
 		toolBar.add(multipleindent);
 		multipleindent.addActionListener(buttonListener);
-		toolBar.setOrientation(SwingConstants.VERTICAL);
-		this.add(toolBar, BorderLayout.EAST);
+		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
 		
 		textArea.addKeyListener(buffedit);

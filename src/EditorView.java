@@ -183,7 +183,6 @@ public class EditorView extends JFrame implements Observer{
 				BufferView bv = new BufferView(b);
 				editor.setActiveView(bv);
 				//bv.addKeyListener(buffedit);
-				panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
 				if(b.hasView()) { 
 					continue;
