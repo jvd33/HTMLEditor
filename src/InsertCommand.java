@@ -1,5 +1,7 @@
 import java.io.File;
 
+import javax.swing.JTextArea;
+
 /**
  * 
  */
@@ -9,11 +11,11 @@ import java.io.File;
  *
  */
 public class InsertCommand implements Command {
-	BufferView buffview;
+	JTextArea textArea;
 	String insertedText;
-	public InsertCommand(BufferView bv, String tag_name){
+	public InsertCommand(JTextArea text_area, String tag_name){
 		insertedText = tagNameToTag(tag_name);
-		this.buffview = bv;
+		textArea = text_area;
 	}
 
 	/* (non-Javadoc)
@@ -21,11 +23,11 @@ public class InsertCommand implements Command {
 	 */
 	@Override
 	public void execute() {
-		String origText = buffview.getText();
+		String origText = textArea.getText();
 		String newText = "";
-		newText = origText.substring(0, buffview.getCaretPosition()) + insertedText +
-				origText.substring(buffview.getCaretPosition());
-		buffview.setText(newText);
+		newText = origText.substring(0, textArea.getCaretPosition()) + insertedText +
+				origText.substring(textArea.getCaretPosition());
+		textArea.setText(newText);
 	}
 	
 	private String tagNameToTag(String s){

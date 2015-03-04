@@ -1,5 +1,7 @@
 import java.io.File;
 
+import javax.swing.JFileChooser;
+
 /**
  * 
  */
@@ -9,14 +11,12 @@ import java.io.File;
  *
  */
 public class SaveCommand implements Command {
-	HTMLEditor htmlEditor;
 	Buffer buff;
 	/**
 	 * Creates a new New Concrete Command taking in HTMLEditor
 	 * @param htmle
 	 */	
-	public SaveCommand(HTMLEditor htmle, Buffer b){
-		this.htmlEditor = htmle;
+	public SaveCommand(Buffer b){
 		buff = b;
 	}
 	
@@ -25,6 +25,22 @@ public class SaveCommand implements Command {
 	 */
 	@Override
 	public void execute() {
+			if(buff.getFile() == null) { 
+				JFileChooser jfc = new JFileChooser();
+				jfc.showDialog(null, "Save as");
+				try { 
+					String path = jfc.getSelectedFile().toString();
+					System.out.println("SELECTED " + path);
+					buff.setFile(path);
+					buff.notifyObservers();
+					Command save = new SaveCommand(buff);
+					save.execute();
+				} catch(NullPointerException n) { 
+					System.out.println("No file entered");
+				}
+				
+			}
+			
 			File file= buff.getFile();
 			FileHandler fh = new FileHandler(file);
 			HTMLParser parser = new HTMLParser(buff.text);
