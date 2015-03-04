@@ -21,7 +21,7 @@ public class HTML_App {
 				
 				HTMLEditor editor = new HTMLEditor();
 				JFrame frame = new EditorView("Team Bash-Browns HTML Editor", editor);
-				frame.setExtendedState(JFrame.MAXIMIZED_VERT); 
+				frame.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setVisible(true);
 				try{
