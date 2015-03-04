@@ -171,33 +171,6 @@ public class EditorView extends JFrame implements Observer{
 		}
 	};
 
-	/*
-	 * Buffer change listener
-	 */
-	KeyListener buffedit = new KeyListener(){
-
-		@Override
-		public void keyTyped(KeyEvent e) {
-			Buffer currentBuffer = editor.getCurrentBuffer();
-			String textInBuffView = ((BufferView) e.getSource()).getTextArea().getText();
-			//currentBuffer.addUndo(textInBuffView);
-			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
-			buffState.execute();
-			//System.out.println(textInBuffView);
-		}
-
-		@Override
-		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
-			
-		}
-
-		@Override
-		public void keyReleased(KeyEvent e) {
-			
-		}
-		
-	};
 	
 	@Override
 	public void update(Observable o, Object arg) {
@@ -209,7 +182,7 @@ public class EditorView extends JFrame implements Observer{
 				
 				BufferView bv = new BufferView(b);
 				editor.setActiveView(bv);
-				bv.addKeyListener(buffedit);
+				//bv.addKeyListener(buffedit);
 				panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
 				if(b.hasView()) { 

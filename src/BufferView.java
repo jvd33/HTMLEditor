@@ -1,6 +1,8 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -70,15 +72,42 @@ public class BufferView extends JPanel implements Observer{
 
 		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
+		
+		textArea.addKeyListener(buffedit);
 	}
 	
+
+	/*
+	 * Buffer change listener
+	 */
+	KeyListener buffedit = new KeyListener(){
+
+		@Override
+		public void keyTyped(KeyEvent e) {
+			Command buffState = new BuffStateCommand(buffer, textArea.getText());
+			buffState.execute();
+			System.out.println(textArea.getText());
+		}
+
+		@Override
+		public void keyPressed(KeyEvent e) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void keyReleased(KeyEvent e) {
+			
+		}
+		
+	};
 	
 	ActionListener buttonListener = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {			
 			JButton sourceButton = (JButton) e.getSource();
 			String sourceText = sourceButton.getText();
-			new BuffStateCommand(buffer, textArea.getText()).execute();
+			//new BuffStateCommand(buffer, textArea.getText()).execute();
 
 			Command newCommand = null;
 			if(sourceText=="Save"){
