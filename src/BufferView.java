@@ -31,6 +31,7 @@ public class BufferView extends JPanel implements Observer{
 	private JButton wordwrap;
 	private JButton newline;
 	private JButton inserttag;
+	private JButton multipleindent;
 	
 	/*
 	 * Constructor
@@ -59,6 +60,7 @@ public class BufferView extends JPanel implements Observer{
 		wordwrap = new JButton("Toggle Word-Wrap");
 		newline = new JButton("Toggle AutoIndent");
 		inserttag = new JButton("Insert Tag...");
+		multipleindent = new JButton("Indent lines...");
 		
 		
 		toolBar.add(save);
@@ -79,6 +81,8 @@ public class BufferView extends JPanel implements Observer{
 		newline.addActionListener(buttonListener);
 		toolBar.add(inserttag);
 		inserttag.addActionListener(buttonListener);
+		toolBar.add(multipleindent);
+		multipleindent.addActionListener(buttonListener);
 
 		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
@@ -159,6 +163,9 @@ public class BufferView extends JPanel implements Observer{
 				
 			}else if(sourceText=="Insert Tag..."){
 				newCommand = new InsertCommand(textArea);
+				
+			}else if(sourceText=="Indent lines..."){
+				newCommand = new IndentLinesCommand(textArea);
 				
 			}else{
 				System.out.println("Unidentified command in BufferView");
