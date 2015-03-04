@@ -18,8 +18,11 @@ public class Buffer extends Observable {
 		public List<Line> lines;//list of all lines in the buffer
 		public String text;
 		
-		/*
-		 * Constructor
+		/**
+		 * Constructor for Buffer
+		 * Instantiates new undoStack and redoStack
+		 * Instantiates new empty array for lines
+		 * @param f file that the buffer is based on
 		 */
 		public Buffer(File f) {
 			sourceFile = f;
@@ -29,22 +32,30 @@ public class Buffer extends Observable {
 			this.hasView = false;
 		}
 		
-		/*
-		 * Adds the root node of an aggregate HTMLTag to the buffer
+		/**
+		 * Replaces the root tag of the document with a new root tag
+		 * @param root Should be the "html" tag
 		 */
 		public void addTag(HTMLTag root) { 
 			tag = root;
 		}
 		
-		/*
-		 * Has a view been intialized for this buffer?
+		/**
+		 * Boolean function stating whether or not the buffer has an 
+		 * associated BufferView
+		 * @return Whether or not the buffer has a view
 		 */
 		public boolean hasView() { 
 			return this.hasView;
 		}
 		
-		/*
+		/**
 		 * Sets the text of the buffer
+		 * 
+		 * Sets the text string in the buffer to the parameter
+		 * Iterates through the new text to create new Lines based on \n chars
+		 * Recreates the Lines array
+		 * @param s The new desired text in the buffer
 		 */
 		public void addText(String s) { 
 			this.lines.clear();
@@ -55,7 +66,7 @@ public class Buffer extends Observable {
 			int start = 0;
 			int end = 0;
 			
-			while(stillLines){
+			while(stillLines){	// Creates all lines
 				start = 0;
 				end = s.indexOf('\n');
 				if(end > 0){
@@ -70,7 +81,7 @@ public class Buffer extends Observable {
 					stillLines = false;
 					
 				}
-			}
+			}	// End of line Creation
 			notifyObservers(text);
 		}
 		
@@ -78,7 +89,8 @@ public class Buffer extends Observable {
 		 * (non-Javadoc)
 		 * @see java.lang.Object#toString()
 		 */
-		public String toString() { 
+		public String toString() {
+			// Contents of all the lines
 			String str = "";
 			for(Line line : lines) {
 				str += line.toString();
@@ -86,23 +98,29 @@ public class Buffer extends Observable {
 			return str;
 		}
 		
-		/*
-		 * Returns the root tag
+		/**
+		 * Getter method for the root tag of the document
+		 * @return the root tag (probably "html" tag)
 		 */
 		public HTMLTag getTag() {
 			return tag;
 		}
 		
-		/*
-		 * Add a line to the line's list
+		/**
+		 * Adds a new line to the end of the lines array
+		 * @param line new line to be added
 		 */
 		public void addLine(Line line) { 
 			lines.add(line);
 			
 		}
 		
-		/*
-		 * Checks to see if the tag is well-formed HTML
+		/**
+		 * Checks to see whether the tag tree is well-formed
+		 * 
+		 * Checks if every start tag has an end tag within the tree
+		 * @return true if the tag tree is well formed
+		 * @throws IncorrectHTMLException if any tags are missing an end tag
 		 */
 		public boolean checkHTML() throws IncorrectHTMLException{
 			//checks if every start tag has an end tag
@@ -127,15 +145,18 @@ public class Buffer extends Observable {
 			return true;
 		}
 		
-		/*
-		 * Push to the undo stack
+		/**
+		 * Pushes a state to the undo stack
+		 * @param state The contents of the buffer before a change
 		 */
 		public void addUndo(String state) {
 			undoStack.push(state);
 		}
 		
-		/*
-		 * Push to the redo stack
+		
+		/**
+		 * Pushes a state to the redo command
+		 * @param state The contents of the buffer before a change
 		 */
 		public void addRedo(String state) { 
 			redoStack.push(state);
@@ -143,6 +164,13 @@ public class Buffer extends Observable {
 		
 		/*
 		 * performs the undo operation on the buffer's text
+		 */
+		/**
+		 * Performs an undo operation
+		 * 
+		 * Pushes the current text to the redo stack 
+		 * Pops text from the undo stack to the buffer
+		 * Notifies observers of the change
 		 */
 		public void undo() { 
 			addRedo(text);
@@ -154,8 +182,12 @@ public class Buffer extends Observable {
 					
 		}
 		
-		/*
-		 * performs the redo operation on the buffer's text
+		/**
+		 * Performs a redo operation
+		 * 
+		 * Pushes the current text to the undo stack
+		 * Pops text from the redo stack to the buffer
+		 * Notifies observers of the change
 		 */
 		public void redo() {
 			addUndo(text);
@@ -166,22 +198,34 @@ public class Buffer extends Observable {
 			notifyObservers(text);
 		}
 		
-		/*
-		 * Gets the file
+		/**
+		 * Getter method for what file the Buffer cares about
+		 * 
+		 * @return The file the buffer references
 		 */
 		public File getFile() { 
 			return sourceFile;
 		}
 		
-		/*
-		 * Sets the file
+
+		/**
+		 * Setter method to designate a different file for the Buffer
+		 * 
+		 * Creates a new Java File object based on the input string
+		 * Sets the new File to the Buffer's new path
+		 * 
+		 * @param path Path of the new file
 		 */
 		public void setFile(String path) {
 			sourceFile = new File(path);
 		}
 		
-		/*
-		 * Sets the view
+
+		/**
+		 * Sets the boolean hasView
+		 * 
+		 * Indicates that the buffer has an associated BufferView
+		 * @param b
 		 */
 		public void setView(boolean b) { 
 			this.hasView = b;
