@@ -1,5 +1,6 @@
 import java.io.File;
 
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
@@ -13,7 +14,8 @@ import javax.swing.JTextArea;
 public class InsertCommand implements Command {
 	JTextArea textArea;
 	String insertedText;
-	public InsertCommand(JTextArea text_area, String tag_name){
+	public InsertCommand(JTextArea text_area){
+		String tag_name = new JOptionPane().showInputDialog(null, "Please enter the symbol of your desired tag");
 		insertedText = tagNameToTag(tag_name);
 		textArea = text_area;
 	}

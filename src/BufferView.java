@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -29,6 +30,7 @@ public class BufferView extends JPanel implements Observer{
 	private JButton paste;
 	private JButton wordwrap;
 	private JButton newline;
+	private JButton inserttag;
 	
 	/*
 	 * Constructor
@@ -56,6 +58,8 @@ public class BufferView extends JPanel implements Observer{
 		paste = new JButton("Paste");
 		wordwrap = new JButton("Toggle Word-Wrap");
 		newline = new JButton("Toggle AutoIndent");
+		inserttag = new JButton("Insert Tag...");
+		
 		
 		toolBar.add(save);
 		save.addActionListener(buttonListener);
@@ -73,6 +77,8 @@ public class BufferView extends JPanel implements Observer{
 		wordwrap.addActionListener(buttonListener);
 		toolBar.add(newline);
 		newline.addActionListener(buttonListener);
+		toolBar.add(inserttag);
+		inserttag.addActionListener(buttonListener);
 
 		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
@@ -151,9 +157,8 @@ public class BufferView extends JPanel implements Observer{
 				System.out.println("Auto-indent status: "+autoindent);
 				return;
 				
-			}else if(sourceText=="Insert"){
-				//newCommand = new InsertCommand(textArea);
-				System.out.println("NOT IMPLEMENTED YET");
+			}else if(sourceText=="Insert Tag..."){
+				newCommand = new InsertCommand(textArea);
 				
 			}else{
 				System.out.println("Unidentified command in BufferView");
