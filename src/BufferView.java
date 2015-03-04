@@ -15,7 +15,8 @@ import javax.swing.JToolBar;
 
 public class BufferView extends JPanel implements Observer{
 	
-	private Buffer buffer;  //the buffer being observed
+	private Buffer buffer;  	// the buffer being observed
+	private boolean autoindent; // whether or not to indent
 	
 	//GUI Elements
 	private JTextArea textArea;
@@ -28,19 +29,22 @@ public class BufferView extends JPanel implements Observer{
 	private JButton paste;
 	private JButton wordwrap;
 	private JButton newline;
-	private BufferView bv;
 	
 	/*
 	 * Constructor
 	 */
 	public BufferView(Buffer b){
-		bv = this;
 		textArea = new JTextArea();
-		this.setLayout(new BorderLayout());
+
+		// Variable initialization
+		getTextArea().setLineWrap(true);
+		autoindent = true;
 		b.addObserver(this);
+		
+		this.setLayout(new BorderLayout());
 		buffer = b;
 		getTextArea().setText(b.toString());
-		getTextArea().setLineWrap(false); // By default
+
 		
 		
 		toolBar = new JToolBar();
@@ -84,9 +88,17 @@ public class BufferView extends JPanel implements Observer{
 
 		@Override
 		public void keyTyped(KeyEvent e) {
+			Command newCommand = null;
+			if(e.getKeyChar()=='\n' && autoindent){
+				// Auto-indent
+				newCommand = new NewLineCommand(textArea);
+				newCommand.execute();
+			}
+			
+			// Save-state
 			Command buffState = new BuffStateCommand(buffer, textArea.getText());
 			buffState.execute();
-			System.out.println(textArea.getText());
+			
 		}
 
 		@Override
@@ -135,7 +147,9 @@ public class BufferView extends JPanel implements Observer{
 				newCommand = new WordWrapCommand(textArea);
 				
 			}else if(sourceText=="Toggle AutoIndent"){
-				newCommand = new NewLineCommand(textArea);
+				autoindent = !autoindent;
+				System.out.println("Auto-indent status: "+autoindent);
+				return;
 				
 			}else if(sourceText=="Insert"){
 				//newCommand = new InsertCommand(textArea);
@@ -154,6 +168,7 @@ public class BufferView extends JPanel implements Observer{
 			
 		}
 	};
+	
 	/**
 	 * @return the textArea
 	 */
