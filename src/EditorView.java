@@ -1,8 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -19,6 +17,9 @@ import javax.swing.*;
 
 public class EditorView extends JFrame implements Observer{
 	
+	
+	
+
 		HTMLEditor editor;
 	
 		//Components
@@ -189,7 +190,7 @@ public class EditorView extends JFrame implements Observer{
 				BufferView bv = new BufferView(b);
 				editor.setActiveView(bv);
 				//bv.addKeyListener(buffedit);
-				panel.add(bv, BorderLayout.CENTER);
+				//panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
 				if(b.hasView()) { 
 					continue;

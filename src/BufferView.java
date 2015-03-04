@@ -15,10 +15,9 @@ import javax.swing.JToolBar;
 
 public class BufferView extends JPanel implements Observer{
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
+	
+	
 	private Buffer buffer;  	// the buffer being observed
 	private boolean autoindent; // whether or not to indent
 	
@@ -52,8 +51,10 @@ public class BufferView extends JPanel implements Observer{
 		getTextArea().setText(b.toString());
 
 		
-		
+		//Buffer Tool Bar
 		toolBar = new JToolBar();
+		
+		//Buttons for the Tool Bar
 		save = new JButton("Save");
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
@@ -65,7 +66,7 @@ public class BufferView extends JPanel implements Observer{
 		inserttag = new JButton("Insert Tag...");
 		multipleindent = new JButton("Indent lines...");
 		
-		
+		//adding buttons and action listeners
 		toolBar.add(save);
 		save.addActionListener(buttonListener);
 		toolBar.add(undo);
