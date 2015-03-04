@@ -30,8 +30,10 @@ public class IndentLinesCommand implements Command {
 			if(i==0){					//if it's the first line in the buffer
 				text = '\t' + text;
 			}
-			if(text.charAt(i-1)=='\n'){	//if a new line character is in the selection
-				text = text.substring(0,i)+"\t"+text.substring(i);
+			if(i>0){
+				if(text.charAt(i-1)=='\n'){	//if a new line character is in the selection
+					text = text.substring(0,i)+"\t"+text.substring(i) + "\t";
+				}
 			}
 			i++;
 		}
