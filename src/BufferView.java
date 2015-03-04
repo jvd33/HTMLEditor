@@ -12,6 +12,7 @@ import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
+import javax.swing.SwingConstants;
 
 
 public class BufferView extends JPanel implements Observer{
@@ -83,8 +84,8 @@ public class BufferView extends JPanel implements Observer{
 		inserttag.addActionListener(buttonListener);
 		toolBar.add(multipleindent);
 		multipleindent.addActionListener(buttonListener);
-
-		this.add(toolBar, BorderLayout.NORTH);
+		toolBar.setOrientation(SwingConstants.VERTICAL);
+		this.add(toolBar, BorderLayout.EAST);
 		this.add(textArea, BorderLayout.CENTER);
 		
 		textArea.addKeyListener(buffedit);
