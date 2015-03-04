@@ -7,16 +7,18 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JEditorPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
-import javax.swing.SwingConstants;
+
 
 
 public class BufferView extends JPanel implements Observer{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Buffer buffer;  	// the buffer being observed
 	private boolean autoindent; // whether or not to indent
 	
@@ -113,7 +115,7 @@ public class BufferView extends JPanel implements Observer{
 
 		@Override
 		public void keyPressed(KeyEvent e) {
-			// TODO Auto-generated method stub
+			
 			
 		}
 
