@@ -15,8 +15,13 @@ public class BuffStateCommand implements Command {
 	
 	@Override
 	public void execute() {
-		b.addUndo(s);
-		b.addText(s);
+		try{
+			b.addUndo(s);
+			b.addText(s);
+		}catch(NullPointerException e){
+			javax.swing.JOptionPane.showMessageDialog(null, "No file entered", "File Not Found", javax.swing.JOptionPane.ERROR_MESSAGE);
+		}
+		
 		
 		
 	}

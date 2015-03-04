@@ -1,4 +1,6 @@
 import java.io.File;
+
+import javax.swing.JOptionPane;
 /**
  * 
  * @author Team Bash-Browns
@@ -34,10 +36,27 @@ public class OpenCommand implements Command {
 			}
 			
 		}
+		
+		
 		editor.addBuffer(b);
 		editor.setActiveBuffer(b);
 		editor.hasChanged();
 		editor.notifyObservers();
+		/*
+		try{
+			if(b.checkHTML()){}
+			editor.addBuffer(b);
+			editor.setActiveBuffer(b);
+			editor.hasChanged();
+			editor.notifyObservers();
+		}catch(IncorrectHTMLException e){
+			
+			javax.swing.JOptionPane.showMessageDialog(null, "This document has invalid HTML", "Incorrect HTML Exception", javax.swing.JOptionPane.ERROR_MESSAGE);
+		}*/
+			
+		
+			
+		
 	}
 
 }

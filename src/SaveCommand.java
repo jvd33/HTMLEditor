@@ -54,7 +54,9 @@ public class SaveCommand implements Command {
 			}
 			catch(IncorrectHTMLException e)
 			{
-				e.printStackTrace();
+				//e.printStackTrace();
+				//System.out.println("Just so you know, there's some invalid HTML that you might want to do something about...");
+				javax.swing.JOptionPane.showMessageDialog(null, "This document has invalid HTML", "Incorrect HTML Exception", javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
 			
 			

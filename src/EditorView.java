@@ -137,25 +137,31 @@ public class EditorView extends JFrame implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("Save Button pushed!");
 			Buffer currentBuffer = editor.getCurrentBuffer();
-			String textInBuffView = editor.getCurrentBuffer().text;
-			Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
-			buffState.execute();
-			if(editor.getCurrentBuffer().getFile() == null) { 
-				JFileChooser jfc = new JFileChooser();
-				jfc.showDialog(getParent(), "Save as");
-				try { 
+			String textInBuffView = "";
+			try{
+				textInBuffView = editor.getCurrentBuffer().text;
+				Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
+				buffState.execute();
+				
+				if(editor.getCurrentBuffer().getFile() == null) { 
+					JFileChooser jfc = new JFileChooser();
+					jfc.showDialog(getParent(), "Save as");
 					String path = jfc.getSelectedFile().toString();
 					editor.getCurrentBuffer().setFile(path);
 					editor.notifyObservers();
 					Command save = new SaveCommand(currentBuffer);
 					save.execute();
-				} catch(NullPointerException n) { 
-					System.out.println("No file entered");
+					
+					
 				}
+				Command save = new SaveCommand(currentBuffer);
+				save.execute();
 				
+			}catch(NullPointerException n){
+				javax.swing.JOptionPane.showMessageDialog(null, "No file entered", "File Not Found", javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
-			Command save = new SaveCommand(currentBuffer);
-			save.execute();
+			
+			
 		}
 	};
 	
@@ -183,6 +189,7 @@ public class EditorView extends JFrame implements Observer{
 				BufferView bv = new BufferView(b);
 				editor.setActiveView(bv);
 				//bv.addKeyListener(buffedit);
+				panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
 				if(b.hasView()) { 
 					continue;
