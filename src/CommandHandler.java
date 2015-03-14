@@ -1,8 +1,8 @@
 
 public class CommandHandler {
 	
-	java.util.Stack<Undoable> undoables;
-	java.util.Stack<Undoable> redoables;
+	private java.util.Stack<Undoable> undoables;
+	private java.util.Stack<Undoable> redoables;
 	
 	public CommandHandler(){
 		this.undoables = new java.util.Stack<Undoable>();
