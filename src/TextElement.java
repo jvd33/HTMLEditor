@@ -1,0 +1,37 @@
+import java.util.List;
+
+/**
+ * 
+ */
+
+/**
+ * @author Team Bash-Browns
+ *
+ */
+public class TextElement implements DocumentElement {
+	private String text;
+	/**
+	 * Constructor for TextElement
+	 * 
+	 * @param s The string that the element represents
+	 */
+	TextElement(String s){
+		text = s;
+	}
+	
+	@Override
+	public String print(){
+		return text;
+	}
+
+	@Override
+	public List<DocumentElement> getChildren() {
+		return null;
+	}
+
+	@Override
+	public String getEndTag() {
+		// Returns a non-null value indicating that the non-tags are well-formed
+		return "";
+	}
+}

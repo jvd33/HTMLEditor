@@ -8,13 +8,14 @@ import java.util.*;
  * @author Team Bash-Browns
  *
  */
-public class HTMLTag {
+public class HTMLTag implements DocumentElement{
 		
 		private HTMLTag parent;
-		private List<HTMLTag> children;
+		private List<DocumentElement> children;
 		private int startLine, endLine;
 		private String startTag, endTag;
 		private String attribute;
+		private boolean isCollapsed;
 		
 		public HTMLTag() { 
 		
@@ -24,9 +25,9 @@ public class HTMLTag {
 		 */
 		public HTMLTag(String t, HTMLTag parent) {
 			startTag = t;
-			children = new ArrayList<HTMLTag>();
+			children = new ArrayList<DocumentElement>();
 			this.setParent(parent);
-			
+			isCollapsed = false;
 			
 		}
 		
@@ -52,12 +53,12 @@ public class HTMLTag {
 		/*
 		 * gets and returns ALL children of the tag
 		 */
-		public List<HTMLTag> getChildren() { 
-			List<HTMLTag> allChildren = new ArrayList<HTMLTag>();
-			for(HTMLTag child : children) {
+		public List<DocumentElement> getChildren() { 
+			List<DocumentElement> allChildren = new ArrayList<DocumentElement>();
+			for(DocumentElement child : children) {
 				allChildren.add(child);
-				List<HTMLTag> childTags = child.getChildren();
-				allChildren.addAll(childTags);
+				List<DocumentElement> childElements = child.getChildren();
+				allChildren.addAll(childElements);
 			}
 			return allChildren;
 		}
@@ -106,5 +107,19 @@ public class HTMLTag {
 		 */
 		public void setParent(HTMLTag parent) {
 			this.parent = parent;
+		}
+		
+		@Override
+		public String print() {
+			String returnString = "";
+			if(isCollapsed){	// It should print its start tag
+				returnString = getStartTag();
+			}else{
+				for(DocumentElement de: children){
+					returnString += de.print();
+				}
+			}
+			return returnString;
+
 		}
 }
