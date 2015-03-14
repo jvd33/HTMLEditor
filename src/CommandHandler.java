@@ -47,6 +47,7 @@ interface Undoable{
 	 * IndentLinesCommand
 	 * InsertCommand
 	 * NewLineCommand
+	 * WordWrapCommand
 	 */
 
 	void undo();

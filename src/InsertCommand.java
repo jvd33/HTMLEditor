@@ -9,7 +9,7 @@ import javax.swing.JTextArea;
  * @author Team Bash-Browns
  *
  */
-public class InsertCommand implements Command {
+public class InsertCommand implements Command, Undoable {
 	JTextArea textArea;
 	String insertedText;
 	public InsertCommand(JTextArea text_area){
@@ -33,5 +33,17 @@ public class InsertCommand implements Command {
 	private String tagNameToTag(String s){
 		s = "<"+s+"></"+s+">";
 		return s;
+	}
+
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void redo() {
+		// TODO Auto-generated method stub
+		execute();
 	}
 }

@@ -43,15 +43,7 @@ public class IndentLinesCommand implements Command, Undoable {
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
-		int start = textArea.getSelectionStart();
-		int end = textArea.getSelectionEnd();
-		String text = textArea.getText();
 		
-		int i = start;
-		
-		while(i<end){
-			text = text.substring(text.indexOf("\t")+1);
-		}
 	}
 
 	@Override

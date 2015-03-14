@@ -12,7 +12,7 @@ import javax.swing.JTextArea;
  * @author Team Bash Browns
  *
  */
-public class NewLineCommand implements Command {
+public class NewLineCommand implements Command, Undoable {
 	
 	private JTextArea textArea;
 	
@@ -39,5 +39,17 @@ public class NewLineCommand implements Command {
 			i++;
 		}
 		textArea.insert(lineStart, carPos);
+	}
+
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void redo() {
+		// TODO Auto-generated method stub
+		execute();
 	}
 }

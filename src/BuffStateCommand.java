@@ -2,7 +2,7 @@
 /*
  * gets called when new text is entered into the buffer
  */
-public class BuffStateCommand implements Command {
+public class BuffStateCommand implements Command, Undoable {
 	
 	private Buffer b;
 	private String s;
@@ -23,6 +23,19 @@ public class BuffStateCommand implements Command {
 		}
 		
 		
+		
+	}
+
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void redo() {
+		// TODO Auto-generated method stub
+		execute();
 		
 	}
 	
