@@ -8,7 +8,7 @@ import javax.swing.JTextArea;
  * @author Team Bash Browns
  *
  */
-public class IndentLinesCommand implements Command {
+public class IndentLinesCommand implements Command, Undoable {
 	JTextArea textArea;
 	
 	IndentLinesCommand(JTextArea text_area){
@@ -40,4 +40,24 @@ public class IndentLinesCommand implements Command {
 		textArea.setText(text);
 	}
 
+	@Override
+	public void undo() {
+		// TODO Auto-generated method stub
+		int start = textArea.getSelectionStart();
+		int end = textArea.getSelectionEnd();
+		String text = textArea.getText();
+		
+		int i = start;
+		
+		while(i<end){
+			text = text.substring(text.indexOf("\t")+1);
+		}
+	}
+
+	@Override
+	public void redo() {
+		// TODO Auto-generated method stub
+		execute();
+	}	
 }
+

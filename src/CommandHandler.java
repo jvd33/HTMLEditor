@@ -42,6 +42,12 @@ public class CommandHandler {
 }
 
 interface Undoable{
+	/*
+	 * CutCommand
+	 * IndentLinesCommand
+	 * InsertCommand
+	 * NewLineCommand
+	 */
 
 	void undo();
 
