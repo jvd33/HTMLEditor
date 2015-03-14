@@ -89,8 +89,8 @@ public class Buffer extends Observable {
 			HTMLTag htmlToCheck = this.getTag();
 			System.out.println(htmlToCheck.toString());
 			if(htmlToCheck.getEndTag()!=null){
-				for(HTMLTag tag : htmlToCheck.getChildren()){
-					if(tag.getEndTag() != null){
+				for(DocumentElement de : htmlToCheck.getChildren()){
+					if(de.getEndTag() != null){
 						continue;
 					}
 					else { 
