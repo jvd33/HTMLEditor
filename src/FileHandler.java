@@ -43,13 +43,13 @@ public class FileHandler {
 
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 				String sCurrentLine = null;
+				String bufferText = "";
 				// adds lines from file to buffer
 				while ((sCurrentLine = br.readLine()) != null) {
-					Line l = new Line();	// Temporary new line
+					bufferText += sCurrentLine+'\n';
 					System.out.println(sCurrentLine);
-					l.setText(sCurrentLine);
-					buff.addLine(l);
 				}
+				buff.addText(bufferText);
 			}
 			catch (IOException e) {
 				e.printStackTrace();

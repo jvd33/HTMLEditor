@@ -15,7 +15,6 @@ public class Buffer extends Observable {
 		private Stack<String> redoStack;
 		private HTMLTag tag; //root tag for buffer
 		private boolean hasView;
-		public List<Line> lines;//list of all lines in the buffer
 		public String text;
 		
 		/**
@@ -28,7 +27,6 @@ public class Buffer extends Observable {
 			sourceFile = f;
 			undoStack = new Stack<String>();
 			redoStack = new Stack<String>();
-			this.lines = new ArrayList<Line>();
 			this.hasView = false;
 		}
 		
@@ -58,30 +56,7 @@ public class Buffer extends Observable {
 		 * @param s The new desired text in the buffer
 		 */
 		public void addText(String s) { 
-			this.lines.clear();
 			text = s;
-			Line line = new Line();
-			
-			boolean stillLines = true;
-			int start = 0;
-			int end = 0;
-			
-			while(stillLines){	// Creates all lines
-				start = 0;
-				end = s.indexOf('\n');
-				if(end > 0){
-					String tempText = s.substring(start, end);
-					line.setText(tempText);
-					this.addLine(line);
-					start = end;
-					s = s.substring(start);
-				}
-				else{
-					line.setText(s.substring(start));
-					stillLines = false;
-					
-				}
-			}	// End of line Creation
 			notifyObservers(text);
 		}
 		
@@ -91,11 +66,7 @@ public class Buffer extends Observable {
 		 */
 		public String toString() {
 			// Contents of all the lines
-			String str = "";
-			for(Line line : lines) {
-				str += line.toString();
-			}
-			return str;
+			return text;
 		}
 		
 		/**
@@ -105,16 +76,7 @@ public class Buffer extends Observable {
 		public HTMLTag getTag() {
 			return tag;
 		}
-		
-		/**
-		 * Adds a new line to the end of the lines array
-		 * @param line new line to be added
-		 */
-		public void addLine(Line line) { 
-			lines.add(line);
-			
-		}
-		
+				
 		/**
 		 * Checks to see whether the tag tree is well-formed
 		 * 
