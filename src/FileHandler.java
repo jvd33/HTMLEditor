@@ -10,6 +10,7 @@ import java.io.PrintWriter;
  */
 
 /**
+ * The class that loads a file and converts it into a buffer
  * @author Team Bash-Browns
  *
  */

@@ -5,9 +5,9 @@ import java.util.List;
  */
 
 /**
- * @author Team Bash-Browns
  * Enables the composite pattern to be more useful for our TextElement and
  * HTMLTag classes
+ * @author Team Bash-Browns
  */
 public interface DocumentElement {
 	/**

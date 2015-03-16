@@ -5,7 +5,7 @@
 
 /**
  * Class that automates checking whether the HTML in a buffer is well-formed
- * @author Bash-Browns
+ * @author Team Bash-Browns
  *
  */
 public class Checker{

@@ -1,12 +1,12 @@
 
 
 /**
- * @author Team Bash-Browns
  *
  */
 
 /**
  * Command object interface
+ * @author Team Bash-Browns
  */
 public interface Command {
 	/**

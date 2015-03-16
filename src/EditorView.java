@@ -12,7 +12,7 @@ import javax.swing.*;
 /**
  * View in the MVC for the editor model
  * Acts as a user interface for the editor
- * @Team Bash-Browns
+ * @author Team Bash-Browns
  *
  */
 public class EditorView extends JFrame implements Observer{

@@ -1,14 +1,7 @@
 /**
- * 
- */
-
-/**
+ * Parses a string into an aggregate HTMLTag class
  * @author Team Bash-Browns
  *
- */
-
-/*
- * Parses a string into an aggregate HTMLTag class
  */
 public class HTMLParser {
 	
@@ -24,8 +17,9 @@ public class HTMLParser {
 		
 	}
 	
-	/*
+	/**
 	 * parses the string into an html tag
+	 * @return The root html tag
 	 */
 	public HTMLTag parse() { 
 		String rootTag = iterator.next();
@@ -44,12 +38,12 @@ public class HTMLParser {
 	}
 	
 	
-	/*
-	 * @param tag - the parent of the new tag to create
-	 * @param temp - the tag that was found that is not the end of the root
-	 * creates a new tag, and adds children iteratively until
+	/**
+	 * Creates a new tag, and adds children iteratively until
 	 * there are no more children to add and all tags
 	 * have been processed
+	 * @param tag - the parent of the new tag to create
+	 * @param temp - the tag that was found that is not the end of the root
 	 */
 	private void tagHelper(HTMLTag tag, String temp) { 
 		HTMLTag child = new HTMLTag(temp, tag); //create a new child tag
@@ -75,7 +69,7 @@ public class HTMLParser {
 		}
 	}
 	
-	/*
+	/**
 	 * Iterates up through parent tags and tries to find
 	 * the matching start tag for the end tag that was matched
 	 * @param s, the html tag that was matched
@@ -91,17 +85,23 @@ public class HTMLParser {
 		}
 	}
 	
-	
-	/*
-	 * Checks to see if the tag given is the 
-	 * end of the tag
+	/**
+	 * Checks to see if the tag given is the end of the tag
+	 * Replaces the "<" in the start tag with "</" and sees
+	 * if the two are equal
+	 * 
+	 * @param startTag Text of the starting tag
+	 * @param endTag Text of the ending tag
+	 * @return Whether or not the start tag matches the end tag
 	 */
 	private boolean isEndTag(String startTag, String endTag) { 
 		return startTag.replace("<", "</").equals(endTag);
 	}
 	
-	/*
+	/**
 	 * Just checks a tag to see if it is a start html tag
+	 * @param tag Text of the tag
+	 * @return Whether or not the tag is a start tag
 	 */
 	private boolean isStartTag(String tag) {
 		return !tag.contains("</");

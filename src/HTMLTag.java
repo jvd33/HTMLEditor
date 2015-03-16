@@ -1,12 +1,10 @@
 import java.util.*;
 
 /**
- * 
- */
-
-/**
+ * HTML tag within an HTML document
+ * Acts as the composite within the composite pattern
+ * Contains many TextElements within the document
  * @author Team Bash-Browns
- *
  */
 public class HTMLTag implements DocumentElement{
 		
@@ -17,11 +15,10 @@ public class HTMLTag implements DocumentElement{
 		private String attribute;
 		private boolean isCollapsed;
 		
-		public HTMLTag() { 
-		
-		}
-		/*
-		 * constructor
+		/**
+		 * Constructor of the HTMLTag
+		 * @param t Start tag of the tag object
+		 * @param parent The tag it is a child of
 		 */
 		public HTMLTag(String t, HTMLTag parent) {
 			startTag = t;
@@ -31,26 +28,23 @@ public class HTMLTag implements DocumentElement{
 			
 		}
 		
-		/*
-		 * adds a child to the children list
+		/**
+		 * Adds a child to the children list
+		 * @param child Either an HTMLTag or a TextElement
 		 */
-		public void addChild(HTMLTag child) {
+		public void addChild(DocumentElement child) {
 			children.add(child);
 		}
 		
-		/*
-		 * sets the start and end line
+		/**
+		 * Sets the string of the end tag
+		 * @param in Text that the end tag should be
 		 */
-		public void setLines(int start, int end) {
-			startLine = start;
-			endLine = end;
-		}
-		
 		public void setEndTag(String in) { 
 			endTag = in;
 		}
 		
-		/*
+		/**
 		 * gets and returns ALL children of the tag
 		 */
 		public List<DocumentElement> getChildren() { 
@@ -63,47 +57,38 @@ public class HTMLTag implements DocumentElement{
 			return allChildren;
 		}
 		
-		/*
+		/**
 		 * Get the start tag
+		 * @return Text in the start tag
 		 */
 		public String getStartTag() {
 			return startTag;
 		}
 		
-		/*
+		/**
 		 * Gets the end tag
+		 * @return Text in the end tag
 		 */
 		public String getEndTag() { 
 			return endTag;
 		}
-		
-		/*Gets start line
-		 * 
-		 */
-		public int getStart() { 
-			return startLine;
-		}
-		
-		/*
-		 * Gets end line
-		 */
-		public int getEnd() {
-			return endLine;
-		}
 
+		@Override
         public String toString(){
             return startTag + " " + endTag;
         }
         
-        /*
+        /**
          * Gets the parent node
+         * return The HTMLTag it belongs to
          */
 		public HTMLTag getParent() {
 			return parent;
 		}
 		
-		/*
-		 * sets the parent node
+		/**
+		 * Sets the parent node
+		 * @param parent The HTMLTag it belongs to
 		 */
 		public void setParent(HTMLTag parent) {
 			this.parent = parent;
