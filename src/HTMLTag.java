@@ -100,9 +100,11 @@ public class HTMLTag implements DocumentElement{
 			if(isCollapsed){	// It should print its start tag
 				returnString = getStartTag();
 			}else{
+				returnString += getStartTag();
 				for(DocumentElement de: children){
 					returnString += de.print();
 				}
+				returnString += getEndTag();
 			}
 			return returnString;
 
