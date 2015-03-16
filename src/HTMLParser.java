@@ -114,7 +114,7 @@ public class HTMLParser {
 	 * @return Whether or not the tag is a start tag
 	 */
 	private boolean isStartTag(String tag) {
-		return !tag.contains("</");
+		return !tag.contains("</") && tag.contains("<");
 	}
 
 }
