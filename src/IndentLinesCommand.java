@@ -1,10 +1,9 @@
 import javax.swing.JTextArea;
 
-/**
- * 
- */
 
 /**
+ * Command that handles the input of a new line within the BufferView
+ * When autoindent is enabled, this will implement autoindentation
  * @author Team Bash Browns
  *
  */

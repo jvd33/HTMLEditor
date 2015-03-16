@@ -1,8 +1,10 @@
-/*
+/**
  * Thrown when HTML passed is not wellformed
  */
 public class IncorrectHTMLException extends Exception {
-	
+	/**
+	 * Constructor of IncorrectHTMLException
+	 */
 	public IncorrectHTMLException(){
 		super("Incorrect HTML");
 	}
