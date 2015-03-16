@@ -2,8 +2,9 @@ import javax.swing.JTextArea;
 
 
 /**
- * Command that handles the input of a new line within the BufferView
- * When autoindent is enabled, this will implement autoindentation
+ * Command that handles indentation of multiple lines in the buffer
+ * When the indent lines is pressed, it should add a tab to the start of
+ * each line selected in the buffer
  * @author Team Bash Browns
  *
  */
