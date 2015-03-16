@@ -2,14 +2,14 @@ import java.util.Iterator;
 import java.util.regex.*;
 import java.util.*;
 
-public class ParserIterator implements Iterator {
+public class ParserIterator implements Iterator<String> {
 	
 	private String iteratee;
 	private Matcher head;
 	private Matcher comment;
 	private Matcher text;
 	private List<String> tags;
-	private Iterator internal;
+	private Iterator<String> internal;
 	
 	public ParserIterator(String s) {
 		iteratee = s;
