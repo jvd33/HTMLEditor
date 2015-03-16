@@ -18,6 +18,7 @@ import javax.swing.*;
 public class EditorView extends JFrame implements Observer{
 	
 	HTMLEditor editor;
+	CommandHandler CHO;
 	
 	//Components
 	private JPanel panel;
@@ -42,6 +43,8 @@ public class EditorView extends JFrame implements Observer{
 	 */
 	public EditorView(String title, HTMLEditor htmleditor){
 		super(title);
+		
+		CHO= new CommandHandler();
 		
 		//The main panel of the document
 		panel = new JPanel(new BorderLayout());
@@ -106,7 +109,7 @@ public class EditorView extends JFrame implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			System.out.print("New Button pushed!");
 			Command newFile = new NewCommand(editor, null);
-			newFile.execute();
+			CHO.executeCommand(newFile);
 		}
 	};
 	
@@ -120,8 +123,9 @@ public class EditorView extends JFrame implements Observer{
 			JFileChooser jfc = new JFileChooser();
 			jfc.showDialog(getParent(), "Select");
 			try { 
+				
 				OpenCommand OPEN = new OpenCommand( editor, jfc.getSelectedFile().getPath() );
-				OPEN.execute();
+				CHO.executeCommand(OPEN);
 			} catch(NullPointerException n) { 
 				return;
 			}
@@ -140,7 +144,7 @@ public class EditorView extends JFrame implements Observer{
 			try{
 				textInBuffView = editor.getCurrentBuffer().text;
 				Command buffState = new BuffStateCommand(currentBuffer, textInBuffView);
-				buffState.execute();
+				CHO.executeCommand(buffState);
 				
 				if(editor.getCurrentBuffer().getFile() == null) { 
 					JFileChooser jfc = new JFileChooser();
@@ -148,11 +152,31 @@ public class EditorView extends JFrame implements Observer{
 					String path = jfc.getSelectedFile().toString();
 					editor.getCurrentBuffer().setFile(path);
 					editor.notifyObservers();
-					Command save = new SaveCommand(currentBuffer);
-					save.execute();
+					//I don't think these last two lines are necessary but they will stay here until that is determined
+					
+					//Command save = new SaveCommand(currentBuffer);
+					//CHO.executeCommand(save);
 				}
-				Command save = new SaveCommand(currentBuffer);
-				save.execute();
+				Checker checker = new Checker(currentBuffer);
+				if(checker.check()){
+					Command save = new SaveCommand(currentBuffer);
+					CHO.executeCommand(save);
+				}
+				else{
+					Object[] options = { "YES", "NO" };
+					int answer = JOptionPane.showOptionDialog(null, "This file contains invalid HTML. \n \n Are you sure you wish to continue?", "Warning",
+					JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE,
+					null, options, options[0]);
+					
+					if(answer == JOptionPane.YES_OPTION){
+						Command save = new SaveCommand(currentBuffer);
+						CHO.executeCommand(save);
+					}
+					else{
+						System.out.println("USER DID NOT SAVE THE FILE.");
+					}
+				}
+				
 				
 			}catch(NullPointerException n){
 				javax.swing.JOptionPane.showMessageDialog(null, "No file entered", "File Not Found", javax.swing.JOptionPane.ERROR_MESSAGE);
