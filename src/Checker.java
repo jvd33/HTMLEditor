@@ -24,7 +24,7 @@ public class Checker{
 	 */
 	public boolean check() {
 			HTMLParser parser = new HTMLParser(buff.text);
-			
+			buff.addTag(parser.parse());
 			return buff.checkHTML();
 			
 				
