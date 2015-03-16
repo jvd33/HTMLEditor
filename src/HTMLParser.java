@@ -5,16 +5,13 @@
  */
 public class HTMLParser {
 	
-	private String s;
 	private ParserIterator iterator;
 	
-	/*
+	/**
 	 * constructor, creates an iterator for the string
 	 */
 	public HTMLParser(String s) {
 		iterator = new ParserIterator(s);
-		
-		
 	}
 	
 	/**
@@ -33,7 +30,14 @@ public class HTMLParser {
 				root.setEndTag(temp); //set it and break
 				return root;
 			}
+			else { //if it gets this far, it's plaintext
+				TextElement txt = new TextElement(temp); 
+				root.addChild(txt);
+			}
 		}
+		
+		//TODO remove this print line
+		System.out.println(root.print());
 		return root; //return the root (aggregate of html tags)
 	}
 	
@@ -61,6 +65,11 @@ public class HTMLParser {
 				else { 
 					child.setEndTag(temp); //else set the tag
 				}
+			}
+			else if(!isEndTag(child.getStartTag(), temp) && //if it's plaintext
+					!isStartTag(temp)) { 
+				TextElement txt = new TextElement(temp); //create a text element and add a child
+				child.addChild(txt);
 			}
 			else { 
 				setParentTag(temp, child); //else check parents
