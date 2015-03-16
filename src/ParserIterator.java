@@ -7,15 +7,18 @@ public class ParserIterator implements Iterator {
 	private String iteratee;
 	private Matcher head;
 	private Matcher comment;
+	private Matcher text;
 	private List<String> tags;
 	private Iterator internal;
 	
 	public ParserIterator(String s) {
 		iteratee = s;
-		Pattern HTMLHead = Pattern.compile("<.*?>");;
+		Pattern HTMLHead = Pattern.compile("<.*?>");
 		Pattern commentP = Pattern.compile("<!--.*?-->");
+		Pattern textP = Pattern.compile("(.*?)<.*?>");
 		head = HTMLHead.matcher("");
 		comment = commentP.matcher("");
+		text = textP.matcher("");
 		tags = new ArrayList<String>();
 		stripText();
 		internal = tags.iterator();
@@ -46,9 +49,10 @@ public class ParserIterator implements Iterator {
 		}
 	}
 	
-	//Removes all comments in the input string- this will make it easier to parse (comments are irrelevant)
+	/**
+	 * Removes all comments from the input string
+	 */
 	private void stripComments() {
-		iteratee = iteratee.replaceAll("\\s+","");
 		comment.reset(iteratee);
 		while(comment.find()) { 
 			iteratee = comment.replaceAll("");
@@ -56,12 +60,22 @@ public class ParserIterator implements Iterator {
 		}
 	}
 	
+	/**
+	 * Transforms the text from a string into an array list of 
+	 * valid html elements and strings. Keeps the structure
+	 */
 	private void stripText() {
 		this.stripComments();
 		head.reset(iteratee);
+		text.reset(iteratee);
 		while(head.find()) { 
+			if(text.find()) { 
+				String temp = text.group(1);
+				if(!temp.equals("")) { tags.add(temp); } 
+			}
 			tags.add(head.group());
 		}
 	}
+	
 	
 }
