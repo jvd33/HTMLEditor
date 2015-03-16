@@ -26,28 +26,7 @@ public class HTMLEditor extends Observable{
 			this.activeBuffer = null;
 		}
 		
-		/**
-		 * Loads the file and reads it into the editor
-		 * @param file 
-		 */
-		public void loadFile(File file){
-			FileHandler fh = new FileHandler(file);
-			Buffer newBuffer = fh.readFile(file);
-			HTMLParser parser = new HTMLParser(newBuffer.toString());
-			
-			newBuffer.addTag(parser.parse());
-			try{
-				if(newBuffer.checkHTML())
-					this.addBuffer(newBuffer);
-			}
-			catch(IncorrectHTMLException e)
-			{
-				e.printStackTrace();
-			}
-			setChanged();
-			notifyObservers(buffers);
-		}
-
+		
 		/**
 		 * Adds a buffer to the list of active buffers
 		 * @param buffer adds a buffer into the editor

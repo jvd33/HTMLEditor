@@ -85,7 +85,7 @@ public class Buffer extends Observable {
 		 * @return true if the tag tree is well formed
 		 * @throws IncorrectHTMLException if any tags are missing an end tag
 		 */
-		public boolean checkHTML() throws IncorrectHTMLException{
+		public boolean checkHTML(){
 			//checks if every start tag has an end tag
 			HTMLTag htmlToCheck = this.getTag();
 			System.out.println(htmlToCheck.toString());
@@ -95,14 +95,14 @@ public class Buffer extends Observable {
 						continue;
 					}
 					else { 
-						throw new IncorrectHTMLException();
+						return false;
 					}
 				
 				}
 				
 				
 			} else { 
-				throw new IncorrectHTMLException();
+				return false;
 			}
 
 			return true;
