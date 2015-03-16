@@ -7,14 +7,15 @@ import javax.swing.JFileChooser;
  */
 
 /**
+ * Command in charge of saving the current buffer to a file
  * @author Bash-Browns
  *
  */
 public class SaveCommand implements Command {
 	Buffer buff;
 	/**
-	 * Creates a new New Concrete Command taking in HTMLEditor
-	 * @param htmle
+	 * Creates a new New Concrete Command taking in the buffer in question
+	 * @param b The buffer in question
 	 */	
 	public SaveCommand(Buffer b){
 		buff = b;

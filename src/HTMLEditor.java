@@ -6,6 +6,8 @@ import java.io.File;
  */
 
 /**
+ * The model of an editor
+ * Serves as the container for the buffers
  * @author Team Bash-Browns
  *
  */
@@ -15,21 +17,18 @@ public class HTMLEditor extends Observable{
 		private BufferView bufferView;
 		private List<Buffer> buffers;
 		
-		/*
-		 * 
-		 * Creates a Parser, parses buffer, checks html
-		 * If html is correct, creates a filehandler
-		 * Filehandler then writes buffer to file.
-		 * 
+		/**
+		 * Constructor for a new HTMLEditor
+		 * Creates a new empty list of buffers
 		 */
-		
 		public HTMLEditor(){
 			this.buffers = new java.util.ArrayList<Buffer>();
 			this.activeBuffer = null;
 		}
 		
-		/*
+		/**
 		 * Loads the file and reads it into the editor
+		 * @param file 
 		 */
 		public void loadFile(File file){
 			FileHandler fh = new FileHandler(file);
@@ -48,9 +47,10 @@ public class HTMLEditor extends Observable{
 			setChanged();
 			notifyObservers(buffers);
 		}
-		
-		/*
+
+		/**
 		 * Adds a buffer to the list of active buffers
+		 * @param buffer adds a buffer into the editor
 		 */
 		public void addBuffer(Buffer buffer){
 			buffers.add(buffer);
@@ -59,30 +59,34 @@ public class HTMLEditor extends Observable{
 			notifyObservers(buffers);
 		}
 		
-		/*
+		/**
 		 * Sets the current active buffer view
+		 * @param bv The editor's new current buffer view
 		 */
 		public void setActiveView(BufferView bv) { 
 			bufferView = bv;
 			
 		}
 		
-		/*
+		/**
 		 * Returns the active buffer view
+		 * @return The active buffer view within the editor
 		 */
 		public BufferView getActiveView() { 
 			return bufferView;
 		}
 		
-		/*
+		/**
 		 * Gets the current buffer
+		 * @return The active buffer within the editor
 		 */
 		public Buffer getCurrentBuffer(){
 			return activeBuffer;
 		}
 		
-		/*
+		/**
 		 * Get ALL the buffers
+		 * @return The list of all buffers within the editor
 		 */
 		public List<Buffer> getBuffers(){
 			return buffers;

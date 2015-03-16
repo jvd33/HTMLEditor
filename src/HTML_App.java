@@ -9,8 +9,8 @@ import javax.swing.SwingUtilities;
  */
 
 /**
- * @ Team Bash-Browns
  * Main file, run this to execute the app
+ * @Team Bash-Browns
  */
 public class HTML_App {
 	

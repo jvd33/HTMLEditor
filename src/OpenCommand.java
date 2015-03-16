@@ -1,18 +1,21 @@
 import java.io.File;
+
 /**
- * 
+ * Opens a file and reads it into a buffer
  * @author Team Bash-Browns
  *
- */
-
-/*
- * Opens a file and reads it into a buffer
  */
 public class OpenCommand implements Command {
 	
 	private HTMLEditor editor;
 	private File file;
 	
+	/**
+	 * Constructor for the open command
+	 * An editor command that opens a new file and creates a buffer for it
+	 * @param edit What editor the new buffer will be in
+	 * @param filepath What file the command is opening
+	 */
 	public OpenCommand(HTMLEditor edit, String filepath) { 
 		editor = edit;
 		file = new File(filepath);
@@ -35,26 +38,9 @@ public class OpenCommand implements Command {
 			
 		}
 		
-		
 		editor.addBuffer(b);
 		editor.setActiveBuffer(b);
 		editor.hasChanged();
 		editor.notifyObservers();
-		/*
-		try{
-			if(b.checkHTML()){}
-			editor.addBuffer(b);
-			editor.setActiveBuffer(b);
-			editor.hasChanged();
-			editor.notifyObservers();
-		}catch(IncorrectHTMLException e){
-			
-			javax.swing.JOptionPane.showMessageDialog(null, "This document has invalid HTML", "Incorrect HTML Exception", javax.swing.JOptionPane.ERROR_MESSAGE);
-		}*/
-			
-		
-			
-		
 	}
-
 }

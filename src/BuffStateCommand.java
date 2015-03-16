@@ -1,12 +1,19 @@
 
-/*
- * gets called when new text is entered into the buffer
+/**
+ * Gets called when new text is entered into the buffer
+ * Enables input of text to be undone
+ * Effectively acts as a save-state command for the text in the buffer
  */
 public class BuffStateCommand implements Command, Undoable {
 	
 	private Buffer b;
 	private String s;
 	
+	/**
+	 * Constructor for the BuffStateCommand
+	 * @param buff The buffer in question
+	 * @param newText The new text in the buffer that should be saved
+	 */
 	public BuffStateCommand(Buffer buff, String newText) { 
 		b = buff;
 		s = newText;

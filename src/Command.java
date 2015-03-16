@@ -5,7 +5,7 @@
  *
  */
 
-/*
+/**
  * Command object interface
  */
 public interface Command {

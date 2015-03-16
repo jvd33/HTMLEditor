@@ -10,35 +10,36 @@ import javax.swing.*;
 
 
 /**
- * @ Team Bash-Browns
+ * View in the MVC for the editor model
+ * Acts as a user interface for the editor
+ * @Team Bash-Browns
  *
  */
-
-
 public class EditorView extends JFrame implements Observer{
 	
+	HTMLEditor editor;
 	
+	//Components
+	private JPanel panel;
 	
-
-		HTMLEditor editor;
+	private	JMenuBar menuBar;
+	private JTabbedPane tabBar;
 	
-		//Components
-		private JPanel panel;
-		
-		private	JMenuBar menuBar;
-		private JTabbedPane tabBar;
-			
-		// File + items
-		private	JMenu file;
-		private	JMenuItem New;
-		private	JMenuItem open;
-		private	JMenuItem save;
-
-		// Help + items
-		private	JMenu help;
-		private	JMenuItem readme;
-
-
+	// File + items
+	private	JMenu file;
+	private	JMenuItem New;
+	private	JMenuItem open;
+	private	JMenuItem save;
+	
+	// Help + items
+	private	JMenu help;
+	private	JMenuItem readme;
+	
+	/**
+	 * Constructor for the editor view
+	 * @param title
+	 * @param htmleditor
+	 */
 	public EditorView(String title, HTMLEditor htmleditor){
 		super(title);
 		
@@ -124,9 +125,6 @@ public class EditorView extends JFrame implements Observer{
 			} catch(NullPointerException n) { 
 				return;
 			}
-			
-			
-			
 		}
 	};
 	
@@ -152,8 +150,6 @@ public class EditorView extends JFrame implements Observer{
 					editor.notifyObservers();
 					Command save = new SaveCommand(currentBuffer);
 					save.execute();
-					
-					
 				}
 				Command save = new SaveCommand(currentBuffer);
 				save.execute();
@@ -161,8 +157,6 @@ public class EditorView extends JFrame implements Observer{
 			}catch(NullPointerException n){
 				javax.swing.JOptionPane.showMessageDialog(null, "No file entered", "File Not Found", javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
-			
-			
 		}
 	};
 	
@@ -178,7 +172,6 @@ public class EditorView extends JFrame implements Observer{
 		}
 	};
 
-	
 	@Override
 	public void update(Observable o, Object arg) {
 		// TODO Auto-generated method stub
@@ -205,9 +198,6 @@ public class EditorView extends JFrame implements Observer{
 				}
 			}
 		}
-		
-		
 	}
-	
 }
 

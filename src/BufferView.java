@@ -12,7 +12,12 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 
 
-
+/**
+ * The graphic interface for a single buffer within the editor
+ * This class should act as the view for a buffer
+ * @author Team Bash-Browns
+ *
+ */
 public class BufferView extends JPanel implements Observer{
 	
 
@@ -35,8 +40,9 @@ public class BufferView extends JPanel implements Observer{
 	private JButton inserttag;
 	private JButton multipleindent;
 	
-	/*
-	 * Constructor
+	/**
+	 * MVC View for the buffer 
+	 * @param b Which buffer represents the model
 	 */
 	public BufferView(Buffer b){
 		textArea = new JTextArea();
@@ -185,6 +191,8 @@ public class BufferView extends JPanel implements Observer{
 	};
 	
 	/**
+	 * Getter method to enable operations on the text area
+	 * Helps find where the caret is in the text area and toggle the word wrap
 	 * @return the textArea
 	 */
 	public JTextArea getTextArea() {
@@ -192,13 +200,6 @@ public class BufferView extends JPanel implements Observer{
 	}
 
 	/**
-	 * @param textArea the textArea to set
-	 */
-	public void setTextArea(JTextArea textArea) {
-		this.textArea = textArea;
-	}
-
-	/*
 	 * (non-Javadoc) updates the view text
 	 * @see java.util.Observer#update(java.util.Observable, java.lang.Object)
 	 */

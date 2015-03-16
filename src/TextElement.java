@@ -5,6 +5,8 @@ import java.util.List;
  */
 
 /**
+ * Represents a non-HTML tag in the buffer html tree
+ * Leaf node of a composite pattern
  * @author Team Bash-Browns
  *
  */

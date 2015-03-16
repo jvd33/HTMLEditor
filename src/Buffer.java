@@ -5,8 +5,9 @@ import java.io.File;
  */
 
 /**
+ * Class that represents a single buffer within the editor
+ * This should act as the model for a buffer
  * @author Team Bash-Browns
- *
  */
 public class Buffer extends Observable {
 		
