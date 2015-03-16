@@ -15,7 +15,7 @@ public class ParserIterator implements Iterator<String> {
 		iteratee = s;
 		Pattern HTMLHead = Pattern.compile("<.*?>");
 		Pattern commentP = Pattern.compile("<!--.*?-->");
-		Pattern textP = Pattern.compile("(.*?)<.*?>");
+		Pattern textP = Pattern.compile("(.*?)<.*?>", Pattern.DOTALL);
 		head = HTMLHead.matcher("");
 		comment = commentP.matcher("");
 		text = textP.matcher("");
@@ -65,6 +65,7 @@ public class ParserIterator implements Iterator<String> {
 	 * valid html elements and strings. Keeps the structure
 	 */
 	private void stripText() {
+		System.out.println(iteratee);
 		this.stripComments();
 		head.reset(iteratee);
 		text.reset(iteratee);
@@ -76,6 +77,18 @@ public class ParserIterator implements Iterator<String> {
 			tags.add(head.group());
 		}
 	}
+	
+	/*
+	 * JUST INCASE THIS BREAKS AGAIN
+	public List get() { 
+		return tags;
+	}
+	
+	public static void main(String args[]) { 
+		String t = "<html>whoa\n    <div>sup</div></html>";
+		ParserIterator p = new ParserIterator(t);
+		System.out.println(p.get());
+	}*/
 	
 	
 }
