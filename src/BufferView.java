@@ -7,6 +7,7 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
@@ -24,6 +25,7 @@ public class BufferView extends JPanel implements Observer{
 	
 	
 	private Buffer buffer;  	// the buffer being observed
+	private CommandHandler commandHandler;
 	private boolean autoindent; // whether or not to indent
 	
 	//GUI Elements
@@ -51,6 +53,7 @@ public class BufferView extends JPanel implements Observer{
 		getTextArea().setLineWrap(true);
 		autoindent = true;
 		b.addObserver(this);
+		commandHandler = new CommandHandler();
 		
 		this.setLayout(new BorderLayout());
 		buffer = b;
@@ -74,25 +77,25 @@ public class BufferView extends JPanel implements Observer{
 		
 		//adding buttons and action listeners
 		toolBar.add(save);
-		save.addActionListener(buttonListener);
+		save.addActionListener(saveListener);
 		toolBar.add(undo);
-		undo.addActionListener(buttonListener);
+		undo.addActionListener(undoListener);
 		toolBar.add(redo);
-		redo.addActionListener(buttonListener);
+		redo.addActionListener(redoListener);
 		toolBar.add(cut);
-		cut.addActionListener(buttonListener);
+		cut.addActionListener(cutListener);
 		toolBar.add(copy);
-		copy.addActionListener(buttonListener);
+		copy.addActionListener(copyListener);
 		toolBar.add(paste);
-		paste.addActionListener(buttonListener);
+		paste.addActionListener(pasteListener);
 		toolBar.add(wordwrap);
-		wordwrap.addActionListener(buttonListener);
+		wordwrap.addActionListener(wordWrapListener);
 		toolBar.add(newline);
-		newline.addActionListener(buttonListener);
+		newline.addActionListener(autoIndentListener);
 		toolBar.add(inserttag);
-		inserttag.addActionListener(buttonListener);
+		inserttag.addActionListener(insertListener);
 		toolBar.add(multipleindent);
-		multipleindent.addActionListener(buttonListener);
+		multipleindent.addActionListener(indentLinesListener);
 		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
 		
@@ -133,63 +136,110 @@ public class BufferView extends JPanel implements Observer{
 		
 	};
 	
-	ActionListener buttonListener = new ActionListener(){
+	/*
+	 * Save file listener
+	 */
+	ActionListener saveListener = new ActionListener(){
 		@Override
-		public void actionPerformed(ActionEvent e) {			
-			JButton sourceButton = (JButton) e.getSource();
-			String sourceText = sourceButton.getText();
-			//new BuffStateCommand(buffer, textArea.getText()).execute();
-
-			Command newCommand = null;
-			if(sourceText=="Save"){
-				newCommand = new SaveCommand(buffer);
-				
-			}else if(sourceText=="Undo"){
-				newCommand = new UndoCommand(buffer);
-				
-			}else if(sourceText=="Redo"){
-				newCommand = new RedoCommand(buffer);
-				
-			}else if(sourceText=="Cut"){
-				//newCommand = new CutCommand("");
-				System.out.println("Use Ctrl+X for now");
-				
-			}else if(sourceText=="Copy"){
-				//newCommand = new CopyCommand();
-				System.out.println("Use Ctrl+C for now");
-				
-			}else if(sourceText=="Paste"){
-				//newCommand = new PasteCommand();
-				System.out.println("Use Ctrl+V for now");
-				
-			}else if(sourceText=="Toggle Word-Wrap"){
-				newCommand = new WordWrapCommand(textArea);
-				
-			}else if(sourceText=="Toggle AutoIndent"){
-				autoindent = !autoindent;
-				System.out.println("Auto-indent status: "+autoindent);
-				return;
-				
-			}else if(sourceText=="Insert Tag..."){
-				newCommand = new InsertCommand(textArea);
-				
-			}else if(sourceText=="Indent lines..."){
-				newCommand = new IndentLinesCommand(textArea);
-				
-			}else{
-				System.out.println("Unidentified command in BufferView");
-				return;
-			}
-			System.out.println("The " + sourceText + "button was pressed in BufferView");
-			try{
-				newCommand.execute();
-			}catch(NullPointerException n) {
-				n.printStackTrace();
-			}
-			
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new SaveCommand(buffer));
 		}
 	};
 	
+	/*
+	 * Undo button listener
+	 */
+	ActionListener undoListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new UndoCommand(buffer));
+		}
+	};	
+	
+	/*
+	 * Redo button listener
+	 */
+	ActionListener redoListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new RedoCommand(buffer));
+		}
+	};
+	
+	/*
+	 * Word-Wrap toggle listener
+	 */
+	ActionListener wordWrapListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new WordWrapCommand(textArea));
+		}
+	};
+	
+	/*
+	 * Insert tag listener
+	 */
+	ActionListener insertListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new InsertCommand(textArea));
+		}
+	};
+	
+	/*
+	 * Toggle Auto-Indent listener
+	 */
+	ActionListener autoIndentListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			autoindent = !autoindent;
+			System.out.println("Auto-indent status: "+autoindent);
+		}
+	};	
+	
+	/*
+	 * Indent lines listener
+	 */
+	ActionListener indentLinesListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new IndentLinesCommand(textArea));
+		}
+	};
+	
+	/*
+	 * Cut command listener
+	 */
+	ActionListener cutListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//commandHandler.executeCommand(new CutCommand(buffer));
+			System.out.println("Use ctrl+x");
+		}
+	};
+	
+	/*
+	 * Copy command listener
+	 */
+	ActionListener copyListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//commandHandler.executeCommand(new CopyCommand(buffer));
+			System.out.println("Use ctrl+c");
+		}
+	};	
+	
+	/*
+	 * Paste command listener
+	 */
+	ActionListener pasteListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			//commandHandler.executeCommand(new PasteCommand(buffer));
+			System.out.println("Use ctrl+v");
+		}
+	};	
+
 	/**
 	 * Getter method to enable operations on the text area
 	 * Helps find where the caret is in the text area and toggle the word wrap
