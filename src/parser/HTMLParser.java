@@ -1,4 +1,7 @@
 package parser;
+
+import elements.*;
+
 /**
  * Parses a string into an aggregate HTMLTag class
  * @author Team Bash-Browns

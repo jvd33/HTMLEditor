@@ -7,7 +7,7 @@ import javax.swing.SwingUtilities;
 import commands.Command;
 import commands.OpenCommand;
 import editor.EditorView;
-import elements.HTMLEditor;
+import editor.HTMLEditor;
 
 
 /**

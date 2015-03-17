@@ -16,7 +16,6 @@ import commands.CommandHandler;
 import commands.NewCommand;
 import commands.OpenCommand;
 import commands.SaveCommand;
-import elements.HTMLEditor;
 import buffer.Buffer;
 import buffer.BufferView;
 

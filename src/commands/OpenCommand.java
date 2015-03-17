@@ -3,7 +3,7 @@ import io.FileHandler;
 
 import java.io.File;
 
-import elements.HTMLEditor;
+import editor.HTMLEditor;
 import buffer.Buffer;
 
 /**

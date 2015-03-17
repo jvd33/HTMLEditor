@@ -1,4 +1,4 @@
-package elements;
+package editor;
 import java.util.List;
 import java.util.Observable;
 import java.io.File;
