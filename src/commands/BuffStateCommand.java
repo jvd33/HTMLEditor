@@ -1,3 +1,6 @@
+package commands;
+import buffer.Buffer;
+
 
 /**
  * Gets called when new text is entered into the buffer

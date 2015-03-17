@@ -1,3 +1,4 @@
+package elements;
 import java.util.List;
 
 /**
@@ -17,7 +18,7 @@ public class TextElement implements DocumentElement {
 	 * 
 	 * @param s The string that the element represents
 	 */
-	TextElement(String s){
+	public TextElement(String s){
 		System.out.println("Created text element with " + s);
 		text = s;
 	}

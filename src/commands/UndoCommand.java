@@ -1,15 +1,19 @@
+package commands;
 import java.util.EmptyStackException;
-public class RedoCommand implements Command {
+
+import buffer.Buffer;
+public class UndoCommand implements Command {
 	private Buffer b;
 	
-	public RedoCommand(Buffer buff) { 
+	public UndoCommand(Buffer buff) { 
 		b = buff;
 	}
 
 	@Override
 	public void execute() {
 		try {
-			b.redo();
+			b.addRedo(b.text);
+			b.undo();
 			b.notifyObservers(b.text);
 		} catch(EmptyStackException e) { 
 			return;

@@ -1,9 +1,14 @@
+package elements;
 import java.util.List;
 import java.util.Observable;
 import java.io.File;
 /**
  * 
  */
+
+
+import buffer.Buffer;
+import buffer.BufferView;
 
 /**
  * The model of an editor

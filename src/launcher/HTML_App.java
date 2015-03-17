@@ -1,7 +1,13 @@
+package launcher;
 import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+
+import commands.Command;
+import commands.OpenCommand;
+import editor.EditorView;
+import elements.HTMLEditor;
 
 
 /**

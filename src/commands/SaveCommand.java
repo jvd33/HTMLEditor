@@ -1,6 +1,11 @@
+package commands;
+import io.FileHandler;
+
 import java.io.File;
 
 import javax.swing.JFileChooser;
+
+import buffer.Buffer;
 
 /**
  * 

@@ -1,3 +1,4 @@
+package editor;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +8,17 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
+
+import parser.Checker;
+import commands.BuffStateCommand;
+import commands.Command;
+import commands.CommandHandler;
+import commands.NewCommand;
+import commands.OpenCommand;
+import commands.SaveCommand;
+import elements.HTMLEditor;
+import buffer.Buffer;
+import buffer.BufferView;
 
 
 /**

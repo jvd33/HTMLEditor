@@ -1,3 +1,4 @@
+package buffer;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,17 @@ import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
+
+import commands.BuffStateCommand;
+import commands.Command;
+import commands.CommandHandler;
+import commands.IndentLinesCommand;
+import commands.InsertCommand;
+import commands.NewLineCommand;
+import commands.RedoCommand;
+import commands.SaveCommand;
+import commands.UndoCommand;
+import commands.WordWrapCommand;
 
 
 /**

@@ -1,4 +1,10 @@
+package commands;
+import io.FileHandler;
+
 import java.io.File;
+
+import elements.HTMLEditor;
+import buffer.Buffer;
 
 /**
  * Opens a file and reads it into a buffer

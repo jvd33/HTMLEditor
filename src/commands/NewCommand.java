@@ -1,4 +1,8 @@
+package commands;
 import java.io.File;
+
+import elements.HTMLEditor;
+import buffer.Buffer;
 
 /**
  * 

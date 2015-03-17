@@ -1,3 +1,4 @@
+package commands;
 import javax.swing.JTextArea;
 
 
@@ -8,7 +9,7 @@ public class WordWrapCommand implements Command, Undoable {
 	 * Just toggles the word wrap setting
 	 * @param buffer_view
 	 */
-	WordWrapCommand(JTextArea text_area){
+	public WordWrapCommand(JTextArea text_area){
 		textArea = text_area;
 	}
 	

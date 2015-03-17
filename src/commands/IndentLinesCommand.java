@@ -1,3 +1,4 @@
+package commands;
 import javax.swing.JTextArea;
 
 
@@ -11,7 +12,7 @@ import javax.swing.JTextArea;
 public class IndentLinesCommand implements Command, Undoable {
 	JTextArea textArea;
 	
-	IndentLinesCommand(JTextArea text_area){
+	public IndentLinesCommand(JTextArea text_area){
 		textArea = text_area;
 	}
 

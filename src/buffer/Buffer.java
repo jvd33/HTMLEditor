@@ -1,8 +1,13 @@
+package buffer;
 import java.util.*;
 import java.io.File;
 /**
  * 
  */
+
+
+import elements.DocumentElement;
+import elements.HTMLTag;
 
 /**
  * Class that represents a single buffer within the editor
