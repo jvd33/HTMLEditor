@@ -37,8 +37,8 @@ public class EditorView extends JFrame implements Observer{
 	private JPanel panel;
 	
 	//tabCounter
-	private int i = 0;
-	private JButton closeBtn = new JButton("x");
+	private int i;
+	private JButton closeBtn;
 	
 	private	JMenuBar menuBar;
 	private JTabbedPane tabBar;
@@ -74,6 +74,8 @@ public class EditorView extends JFrame implements Observer{
 		//Components
 		menuBar = new JMenuBar();
 		tabBar = new JTabbedPane();
+		i = 0;
+		closeBtn = new JButton("x");
 		closeBtn.setSize(5, 5);
 		closeBtn.addActionListener(close);
 
@@ -220,9 +222,10 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			int z = tabBar.indexOfTabComponent((Component) e.getSource());
-		    if (i != -1) {
-		      tabBar.remove(z);
+		    if (i >= 0) {
+		      tabBar.remove(z+i);
 		      i--;
+		      editor.closeBuffer();
 		    }
 		}
 	};
@@ -246,16 +249,18 @@ public class EditorView extends JFrame implements Observer{
 				else {
 					b.setView(true);
 					try {
-						/*
-						 * JPanel tab = new JPanel(new FlowLayout());
-						 * JLabel title = new JLabel(b.getFile().getName());
-						 * tab.add(title, BorderLayout.WEST);
-						 * tab.add(closeBtn,BorderLayout.EAST);
-						 * tabBar.insertTab(null, null, bv, null, i);
-						 * tabBar.setTabComponentAt(i, tab );
-						 * i++;
-						 */
-						tabBar.addTab(b.getFile().getName(), bv);
+						
+						  JPanel tab = new JPanel(new FlowLayout());
+						  JLabel title = new JLabel(b.getFile().getName());
+						  tab.add(title, BorderLayout.WEST);
+						  tab.add(closeBtn,BorderLayout.EAST);
+						  tabBar.insertTab(null, null, bv, null, i);
+						  tabBar.setTabComponentAt(i, tab );
+						  System.out.println(i);
+						  i++;
+						  
+						 
+						//tabBar.addTab(b.getFile().getName(), bv);
 					} catch(NullPointerException e) { 
 						tabBar.addTab("New File", bv);
 					}
