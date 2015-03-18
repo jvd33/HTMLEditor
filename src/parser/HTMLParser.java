@@ -42,7 +42,7 @@ public class HTMLParser {
 		}
 		
 		//TODO remove this print line
-		System.out.println(root.print() + "root.print() called!");
+		System.out.print(root.print() + "root.print() called!");
 		return root; //return the root (aggregate of html tags)
 	}
 	
@@ -59,8 +59,11 @@ public class HTMLParser {
 		tag.addChild(child); //add it as a child to the tag passed in,
 		while(iterator.hasNext()) { //while there are still tags to parse,
 			temp = iterator.next(); 
-			if(isStartTag(temp)) { //if it's a start tag, recursively call again
+			if(isStartTag(temp) && child.getEndTag()==null) { //if it's a start tag, recursively call again
 				tagHelper(child, temp);
+			}
+			else if(isStartTag(temp) && child.getEndTag() != null) { 
+				tagHelper(tag, temp);
 			}
 			//if its the end tag of the tag we created,
 			else if(isEndTag(child.getStartTag(), temp)) { 

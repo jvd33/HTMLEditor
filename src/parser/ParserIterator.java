@@ -79,14 +79,14 @@ public class ParserIterator implements Iterator<String> {
 		}
 	}
 	
-	/*
-	 * JUST INCASE THIS BREAKS AGAIN
+	/**
+	// JUST INCASE THIS BREAKS AGAIN
 	public List get() { 
 		return tags;
 	}
 	
 	public static void main(String args[]) { 
-		String t = "<html>whoa\n    <div>sup</div></html>";
+		String t = "<html>\n<p></p>\n<div>hey</div>\n</html>";
 		ParserIterator p = new ParserIterator(t);
 		System.out.println(p.get());
 	}*/

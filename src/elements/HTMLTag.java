@@ -97,19 +97,19 @@ public class HTMLTag implements DocumentElement{
 		
 		@Override
 		public String print() {
-			String returnString = "";
+			String returnString = getStartTag();
 			if(isCollapsed){	// It should print its start tag
-				returnString = getStartTag();
+				return returnString;
 			}else{
-				returnString += getStartTag();
-				for(DocumentElement de: children){
+				for(DocumentElement de: children) {
 					returnString += de.print();
 				}
-				returnString += getEndTag();
+				returnString+=getEndTag();
 			}
 			return returnString;
-
 		}
+		/**
+		@Override
 		public boolean equals(Object obj){
 			if(obj instanceof HTMLTag){
 				HTMLTag castedObj = (HTMLTag) obj;
@@ -125,5 +125,5 @@ public class HTMLTag implements DocumentElement{
 				}
 			}
 			return false;
-		}
+		}*/
 }
