@@ -13,6 +13,7 @@ import java.util.List;
  *
  */
 public class TextElement implements DocumentElement {
+	private List children;
 	private String text;
 	/**
 	 * Constructor for TextElement
@@ -22,6 +23,7 @@ public class TextElement implements DocumentElement {
 	public TextElement(String s){
 		//System.out.println("Created text element with " + s);
 		text = s;
+		children = new ArrayList<DocumentElement>();
 	}
 	
 	@Override
@@ -31,7 +33,7 @@ public class TextElement implements DocumentElement {
 
 	@Override
 	public List<DocumentElement> getChildren() {
-		return new ArrayList<DocumentElement>();
+		return children;
 	}
 
 	@Override
