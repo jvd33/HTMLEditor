@@ -39,7 +39,7 @@ public class TextElementTest {
 	@Test
 	public void testGetEndTag() {
 		TextElement te = new TextElement("asdf");
-		assertNotEquals(te.getEndTag(), null);
+		assertNotSame(te.getEndTag(), null);
 	}
 
 	/**
@@ -48,7 +48,7 @@ public class TextElementTest {
 	@Test
 	public void testEqualsObject() {
 		assertEquals(new TextElement("asdf"), new TextElement("asdf"));
-		assertNotEquals(new TextElement("asdf"), new TextElement("fdsa"));
+		assertNotSame(new TextElement("asdf"), new TextElement("fdsa"));
 	}
 
 }
