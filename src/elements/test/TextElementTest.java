@@ -39,7 +39,7 @@ public class TextElementTest {
 	@Test
 	public void testGetEndTag() {
 		TextElement te = new TextElement("asdf");
-		assertEquals(te.getEndTag(), "");
+		assertNotEquals(te.getEndTag(), null);
 	}
 
 	/**
