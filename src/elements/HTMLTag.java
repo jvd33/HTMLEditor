@@ -108,7 +108,7 @@ public class HTMLTag implements DocumentElement{
 			}
 			return returnString;
 		}
-		/**
+		
 		@Override
 		public boolean equals(Object obj){
 			if(obj instanceof HTMLTag){
@@ -125,5 +125,5 @@ public class HTMLTag implements DocumentElement{
 				}
 			}
 			return false;
-		}*/
+		}
 }
