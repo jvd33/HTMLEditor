@@ -35,9 +35,12 @@ public class ParserIteratorTest {
 		assertTrue(cut.hasNext());
 		assertEquals("<head>", cut.next());
 		assertTrue(cut.hasNext());
+		assertEquals("asdf", cut.next());
+		assertTrue(cut.hasNext());
 		assertEquals("</head>", cut.next());
 		assertTrue(cut.hasNext());
 		assertEquals("</html>", cut.next());
+		assertFalse(cut.hasNext());
 	}
 
 	@Test
