@@ -74,10 +74,14 @@ public class HTMLParser {
 					child.setEndTag(temp); //else set the tag
 				}
 			}
-			else if(!temp.contains("<")) { 
+			else if(!temp.contains("<") && child.getEndTag()==null) { 
 				TextElement txt = new TextElement(temp); //create a text element and add a child
 				child.addChild(txt);
 				setParentTag(temp, child);
+			}
+			else if(!temp.contains("<") && child.getEndTag()!=null) { 
+				TextElement txt = new TextElement(temp);
+				tag.addChild(txt);
 			}
 			else { 
 				setParentTag(temp, child); //else check parents

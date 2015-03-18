@@ -1,4 +1,2 @@
-<html>
-<p></p>
-<div> hey </div>
-</html>
+<html><div>
+</div>text</html>
