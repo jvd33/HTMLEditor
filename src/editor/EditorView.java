@@ -1,5 +1,7 @@
 package editor;
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -33,6 +35,10 @@ public class EditorView extends JFrame implements Observer{
 	
 	//Components
 	private JPanel panel;
+	
+	//tabCounter
+	private int i = 0;
+	private JButton closeBtn = new JButton("x");
 	
 	private	JMenuBar menuBar;
 	private JTabbedPane tabBar;
@@ -68,6 +74,9 @@ public class EditorView extends JFrame implements Observer{
 		//Components
 		menuBar = new JMenuBar();
 		tabBar = new JTabbedPane();
+		closeBtn.setSize(5, 5);
+		closeBtn.addActionListener(close);
+
 		
 		// File + items
 		file = new JMenu("File");
@@ -206,6 +215,17 @@ public class EditorView extends JFrame implements Observer{
 			//readmecommand.execute();
 		}
 	};
+	// close listener
+	ActionListener close = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			int z = tabBar.indexOfTabComponent((Component) e.getSource());
+		    if (i != -1) {
+		      tabBar.remove(z);
+		      i--;
+		    }
+		}
+	};
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -225,7 +245,16 @@ public class EditorView extends JFrame implements Observer{
 				}
 				else {
 					b.setView(true);
-					try { 
+					try {
+						/*
+						 * JPanel tab = new JPanel(new FlowLayout());
+						 * JLabel title = new JLabel(b.getFile().getName());
+						 * tab.add(title, BorderLayout.WEST);
+						 * tab.add(closeBtn,BorderLayout.EAST);
+						 * tabBar.insertTab(null, null, bv, null, i);
+						 * tabBar.setTabComponentAt(i, tab );
+						 * i++;
+						 */
 						tabBar.addTab(b.getFile().getName(), bv);
 					} catch(NullPointerException e) { 
 						tabBar.addTab("New File", bv);
