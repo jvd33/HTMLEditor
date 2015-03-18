@@ -110,4 +110,20 @@ public class HTMLTag implements DocumentElement{
 			return returnString;
 
 		}
+		public boolean equals(Object obj){
+			if(obj instanceof HTMLTag){
+				HTMLTag castedObj = (HTMLTag) obj;
+				if(		castedObj.attribute.equals(attribute) &&
+						castedObj.children.equals(children) &&
+						castedObj.endTag.equals(endTag) &&
+						castedObj.startTag.equals(startTag)&&
+						castedObj.startLine==startLine &&
+						castedObj.endLine==endLine &&
+						castedObj.isCollapsed==isCollapsed &&
+						castedObj.parent.equals(parent)){
+					return true;
+				}
+			}
+			return false;
+		}
 }

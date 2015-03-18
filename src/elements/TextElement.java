@@ -19,7 +19,7 @@ public class TextElement implements DocumentElement {
 	 * @param s The string that the element represents
 	 */
 	public TextElement(String s){
-		System.out.println("Created text element with " + s);
+		//System.out.println("Created text element with " + s);
 		text = s;
 	}
 	
@@ -37,5 +37,15 @@ public class TextElement implements DocumentElement {
 	public String getEndTag() {
 		// Returns a non-null value indicating that the non-tags are well-formed
 		return "";
+	}
+	
+	@Override
+	public boolean equals(Object obj){
+		if(obj instanceof TextElement){
+			if(((TextElement) obj).text.equals(this.text)){
+				return true;
+			}
+		}
+		return false;
 	}
 }
