@@ -1,4 +1,5 @@
 package elements;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -30,7 +31,7 @@ public class TextElement implements DocumentElement {
 
 	@Override
 	public List<DocumentElement> getChildren() {
-		return null;
+		return new ArrayList<DocumentElement>();
 	}
 
 	@Override
