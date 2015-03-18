@@ -78,7 +78,6 @@ public class CommandHandler {
  * IndentLinesCommand
  * InsertCommand
  * NewLineCommand
- * WordWrapCommand
  *
  * @author Team Bash-Browns
  *

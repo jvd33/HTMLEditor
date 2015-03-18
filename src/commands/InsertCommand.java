@@ -45,7 +45,7 @@ public class InsertCommand implements Command, Undoable {
 		if(this.ix >= 0 && origText.substring(ix, ix+insertedText.length()).equals(insertedText)){
 			
 			String newText = origText.substring(0, ix) + origText.substring(ix+insertedText.length());
-			this.ix = -1;
+			//this.ix = -1;
 			textArea.setText(newText);
 		}
 		
@@ -54,7 +54,14 @@ public class InsertCommand implements Command, Undoable {
 	@Override
 	public void redo() {
 		// TODO Auto-generated method stub
-		execute();
+		String origText = textArea.getText();
+		if(this.ix >= 0 && this.insertedText.length() > 0){
+			
+			String newText = origText.substring(0, ix) + this.insertedText+ origText.substring(ix);
+			//this.ix = -1;
+			textArea.setText(newText);
+		}
+		//execute();
 	}
 	
 	/*

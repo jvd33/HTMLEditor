@@ -2,7 +2,7 @@ package commands;
 import javax.swing.JTextArea;
 
 
-public class WordWrapCommand implements Command, Undoable {
+public class WordWrapCommand implements Command{
 	JTextArea textArea;
 	
 	/**
@@ -19,16 +19,6 @@ public class WordWrapCommand implements Command, Undoable {
 		System.out.println("Word wrap is now "+textArea.getLineWrap());
 	}
 
-	@Override
-	public void undo() {
-		// TODO Auto-generated method stub
-		
-	}
 
-	@Override
-	public void redo() {
-		// TODO Auto-generated method stub
-		execute();
-	}
 
 }
