@@ -47,9 +47,6 @@ public class BufferView extends JPanel implements Observer{
 	private JButton save;
 	private JButton undo;
 	private JButton redo;
-	private JButton cut;
-	private JButton copy;
-	private JButton paste;
 	private JButton wordwrap;
 	private JButton newline;
 	private JButton inserttag;
@@ -80,9 +77,6 @@ public class BufferView extends JPanel implements Observer{
 		save = new JButton("Save");
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
-		cut = new JButton("Cut");
-		copy = new JButton("Copy");
-		paste = new JButton("Paste");
 		wordwrap = new JButton("Toggle Word-Wrap");
 		newline = new JButton("Toggle AutoIndent");
 		inserttag = new JButton("Insert Tag...");
@@ -95,12 +89,6 @@ public class BufferView extends JPanel implements Observer{
 		undo.addActionListener(undoListener);
 		toolBar.add(redo);
 		redo.addActionListener(redoListener);
-		toolBar.add(cut);
-		cut.addActionListener(cutListener);
-		toolBar.add(copy);
-		//copy.addActionListener(copyListener);
-		toolBar.add(paste);
-		paste.addActionListener(pasteListener);
 		toolBar.add(wordwrap);
 		wordwrap.addActionListener(wordWrapListener);
 		toolBar.add(newline);
@@ -219,30 +207,6 @@ public class BufferView extends JPanel implements Observer{
 			commandHandler.executeCommand(new IndentLinesCommand(textArea));
 		}
 	};
-	
-	/*
-	 * Cut command listener
-	 */
-	ActionListener cutListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//commandHandler.executeCommand(new CutCommand(buffer));
-			System.out.println("Use ctrl+x");
-		}
-	};
-	
-
-	
-	/*
-	 * Paste command listener
-	 */
-	ActionListener pasteListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//commandHandler.executeCommand(new PasteCommand(buffer));
-			System.out.println("Use ctrl+v");
-		}
-	};	
 
 	/**
 	 * Getter method to enable operations on the text area

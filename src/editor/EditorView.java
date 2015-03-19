@@ -52,6 +52,12 @@ public class EditorView extends JFrame implements Observer{
 	private	JMenuItem open;
 	private	JMenuItem save;
 	
+	// Edit + items
+	private JMenu edit;
+	private JMenuItem cut;
+	private JMenuItem copy;
+	private JMenuItem paste;
+	
 	// Help + items
 	private	JMenu help;
 	private	JMenuItem readme;
@@ -89,6 +95,12 @@ public class EditorView extends JFrame implements Observer{
 		open = new JMenuItem("Open");
 		save = new JMenuItem("Save");
 		
+		//
+		edit = new JMenu("Edit");
+		cut = new JMenuItem("Cut");
+		copy = new JMenuItem("Copy");
+		paste = new JMenuItem("Paste");
+		
 		// Help + items
 		help = new JMenu("Help");
 		readme = new JMenuItem("Open Readme");
@@ -105,6 +117,14 @@ public class EditorView extends JFrame implements Observer{
 		open.addActionListener(fileopen);
 		file.add(save);
 		save.addActionListener(filesave);
+		
+		menuBar.add(edit);
+		edit.add(cut);
+		cut.addActionListener(cutListener);
+		edit.add(copy);
+		copy.addActionListener(copyListener);
+		edit.add(paste);
+		paste.addActionListener(pasteListener);
 		
 		menuBar.add(help);
 		help.add(readme);
@@ -216,7 +236,7 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			CHO.executeCommand(new CopyCommand(editor.getActiveView().getTextArea(), editor));
-			System.out.println("Use ctrl+c");
+			System.out.println("Copy was called");
 		}
 	};	
 	
@@ -227,6 +247,7 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e){
 			CHO.executeCommand(new CutCommand(editor.getActiveView().getTextArea(), editor));
+			System.out.println("Cut was called");
 		}
 	};
 	
@@ -237,6 +258,7 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e){
 			CHO.executeCommand(new PasteCommand(editor.getActiveView().getTextArea(), editor));
+			System.out.println("Paste was called");
 		}
 	};
 	
