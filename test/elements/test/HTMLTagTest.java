@@ -125,4 +125,17 @@ public class HTMLTagTest {
 		assertFalse(rootHtml.equals(new HTMLTag("<div>", null)));
 		
 	}
+	
+	/**
+	 * Test method for {@link elements.HTMLTag#collapse}.
+	 */
+	@Test
+	public final void testCollapsedText() {
+		HTMLTag div = new HTMLTag("<div>", null);
+		TextElement child = new TextElement("test");
+		div.addChild(child);
+		div.setEndTag("</div>");
+		div.collapse();
+		assertEquals(div.print(), "<div>");
+	}
 }
