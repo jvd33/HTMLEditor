@@ -15,8 +15,11 @@ import parser.Checker;
 import commands.BuffStateCommand;
 import commands.Command;
 import commands.CommandHandler;
+import commands.CopyCommand;
+import commands.CutCommand;
 import commands.NewCommand;
 import commands.OpenCommand;
+import commands.PasteCommand;
 import commands.SaveCommand;
 import buffer.Buffer;
 import buffer.BufferView;
@@ -203,6 +206,37 @@ public class EditorView extends JFrame implements Observer{
 			}catch(NullPointerException n){
 				javax.swing.JOptionPane.showMessageDialog(null, "No file entered", "File Not Found", javax.swing.JOptionPane.ERROR_MESSAGE);
 			}
+		}
+	};
+	
+	/*
+	 * Copy command listener
+	 */
+	ActionListener copyListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			CHO.executeCommand(new CopyCommand(editor.getActiveView().getTextArea(), editor));
+			System.out.println("Use ctrl+c");
+		}
+	};	
+	
+	/*
+	 * Cut command listener
+	 */
+	ActionListener cutListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e){
+			CHO.executeCommand(new CutCommand(editor.getActiveView().getTextArea(), editor));
+		}
+	};
+	
+	/*
+	 * Paste command listener
+	 */
+	ActionListener pasteListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e){
+			CHO.executeCommand(new PasteCommand(editor.getActiveView().getTextArea(), editor));
 		}
 	};
 	

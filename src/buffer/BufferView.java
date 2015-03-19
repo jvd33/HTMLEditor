@@ -16,6 +16,7 @@ import javax.swing.JToolBar;
 import commands.BuffStateCommand;
 import commands.Command;
 import commands.CommandHandler;
+import commands.CopyCommand;
 import commands.IndentLinesCommand;
 import commands.InsertCommand;
 import commands.NewLineCommand;
@@ -97,7 +98,7 @@ public class BufferView extends JPanel implements Observer{
 		toolBar.add(cut);
 		cut.addActionListener(cutListener);
 		toolBar.add(copy);
-		copy.addActionListener(copyListener);
+		//copy.addActionListener(copyListener);
 		toolBar.add(paste);
 		paste.addActionListener(pasteListener);
 		toolBar.add(wordwrap);
@@ -230,16 +231,7 @@ public class BufferView extends JPanel implements Observer{
 		}
 	};
 	
-	/*
-	 * Copy command listener
-	 */
-	ActionListener copyListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			//commandHandler.executeCommand(new CopyCommand(buffer));
-			System.out.println("Use ctrl+c");
-		}
-	};	
+
 	
 	/*
 	 * Paste command listener

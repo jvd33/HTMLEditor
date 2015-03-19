@@ -19,6 +19,8 @@ public class CopyCommand implements Command {
 	
 	/**
 	 * Constructor of the copy command
+	 * @param ta Text area of the current buffer
+	 * @param e The HTML editor that holds the clipboard
 	 */
 	public CopyCommand(JTextArea ta, HTMLEditor e) {
 		textarea = ta;
