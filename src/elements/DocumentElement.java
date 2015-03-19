@@ -35,4 +35,5 @@ public interface DocumentElement {
 	 * @return Either the end tag (if correct) or a null value (if incorrect)
 	 */
 	public String getEndTag();
+	
 }

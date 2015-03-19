@@ -3,6 +3,13 @@ import java.util.Iterator;
 import java.util.regex.*;
 import java.util.*;
 
+/**
+ * 
+ * @author Team Bash-Browns (Team 4)
+ *ParserIterator populates a list of strings matching regexs for
+ *html tag constructs and plaintext. Also removes all comments
+ *from the string
+ */
 public class ParserIterator implements Iterator<String> {
 	
 	private String iteratee;
@@ -11,7 +18,7 @@ public class ParserIterator implements Iterator<String> {
 	private Matcher text;
 	private List<String> tags;
 	private Iterator<String> internal;
-	
+	//TODO get rid of the comment stripper, make the parser ignore instead?
 	public ParserIterator(String s) {
 		iteratee = s;
 		Pattern HTMLHead = Pattern.compile("<.*?>");
@@ -79,14 +86,14 @@ public class ParserIterator implements Iterator<String> {
 		}
 	}
 	
-	/**
+	/*
 	// JUST INCASE THIS BREAKS AGAIN
 	public List get() { 
 		return tags;
 	}
 	
 	public static void main(String args[]) { 
-		String t = "<html>\n<p></p>\n<div>hey</div>\n</html>";
+		String t = "<html><div><p>sup foig\n</p></div>text</html>";
 		ParserIterator p = new ParserIterator(t);
 		System.out.println(p.get());
 	}*/

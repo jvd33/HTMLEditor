@@ -28,7 +28,7 @@ public class HTMLParserTest {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		inputString = "<html>\n<p></p>\n<div>text</div>\n</html>";
+		inputString = "<html><div><p>sup \n</p>\n</div>text</html>";
 		testP = new HTMLParser(inputString);
 	}
 
@@ -37,7 +37,7 @@ public class HTMLParserTest {
 	 */
 	@Test
 	public final void testParse1() {
-		assertTrue(testP.parse().print().equals("<html>\n<p></p>\n<div>text</div>\n</html>"));
+		assertTrue(testP.parse().print().equals("<html><div><p>sup \n</p>\n</div>text</html>"));
 	}
 	
 	/**

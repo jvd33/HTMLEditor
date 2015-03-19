@@ -21,6 +21,7 @@ public class HTMLEditor extends Observable{
 		private Buffer activeBuffer;
 		private BufferView bufferView;
 		private List<Buffer> buffers;
+		private String clipboard;
 		
 		/**
 		 * Constructor for a new HTMLEditor
@@ -29,6 +30,7 @@ public class HTMLEditor extends Observable{
 		public HTMLEditor(){
 			this.buffers = new java.util.ArrayList<Buffer>();
 			this.activeBuffer = null;
+			this.clipboard = "";
 		}
 		
 		
@@ -75,9 +77,10 @@ public class HTMLEditor extends Observable{
 		public List<Buffer> getBuffers(){
 			return buffers;
 		}
-		
-		/*
-		 * Set the active buffer
+
+		/**
+		 * Set the active buffer in the editor
+		 * @param buffer The desired new active buffer
 		 */
 		public void setActiveBuffer(Buffer buffer){
 			this.activeBuffer = buffer;
@@ -85,13 +88,30 @@ public class HTMLEditor extends Observable{
 			notifyObservers(buffers);
 		}
 		
-		/*
-		 * only closes the active buffer since that will be the only one you can close.
+		/**
+		 * Only closes the active buffer since that will
+		 * be the only one you can close.
 		 */
 		public void closeBuffer(){
 			buffers.remove(activeBuffer);
 			activeBuffer = buffers.get(0);
 			setChanged();
 			notifyObservers(buffers);
+		}
+		
+		/**
+		 * Sets the inter-buffer clipboard's value for cut/copy
+		 * @param s The text that the clipboard will be set to
+		 */
+		public void setClipboard(String s){
+			clipboard = s;
+		}
+		
+		/**
+		 * Returns the inter-buffer clipboard's value for paste
+		 * @return The text currently in the clipboard
+		 */
+		public String getClipboard(){
+			return clipboard;
 		}
 }
