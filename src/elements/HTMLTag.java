@@ -58,6 +58,11 @@ public class HTMLTag implements DocumentElement{
 			return allChildren;
 		}
 		
+		//TODO mark this because this needs to go away after I test something
+		public List<DocumentElement> getChildrenThis() { 
+			return children;
+		}
+		
 		/**
 		 * Get the start tag
 		 * @return Text in the start tag
@@ -95,6 +100,10 @@ public class HTMLTag implements DocumentElement{
 			this.parent = parent;
 		}
 		
+		/**
+		 * Prints the HTMLTag's structure, from 
+		 * root all the way down
+		 */
 		@Override
 		public String print() {
 			String returnString = getStartTag();
@@ -108,7 +117,12 @@ public class HTMLTag implements DocumentElement{
 			}
 			return returnString;
 		}
-		
+		/**
+		 * collapse and uncollapses the tag
+		 */
+		public void collapse() { 
+			isCollapsed = !isCollapsed;
+		}
 		@Override
 		public boolean equals(Object obj){
 			if(obj instanceof HTMLTag){

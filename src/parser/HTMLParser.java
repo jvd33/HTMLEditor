@@ -35,14 +35,13 @@ public class HTMLParser {
 				return root;
 			}
 			else { //if it gets this far, it's plaintext
-				System.out.println("It got this far!");
 				TextElement txt = new TextElement(temp); 
 				root.addChild(txt);
 			}
 		}
 		
 		//TODO remove this print line
-		System.out.print(root.print() + "root.print() called!");
+		//System.out.print(root.print() + "root.print() called!");
 		return root; //return the root (aggregate of html tags)
 	}
 	
@@ -79,9 +78,13 @@ public class HTMLParser {
 				child.addChild(txt);
 				setParentTag(temp, child);
 			}
-			else if(!temp.contains("<") && child.getEndTag()!=null) { 
+			 //adds TextElements as children to the parent tag
+			else if(!temp.contains("<") && child.getEndTag()!=null	) { //this is gross
 				TextElement txt = new TextElement(temp);
-				tag.addChild(txt);
+				if(tag.getParent() != null) { 
+					tag.getParent().addChild(txt);
+				} else { tag.addChild(txt); } 
+				//tag.getParent().addChild(txt);
 			}
 			else { 
 				setParentTag(temp, child); //else check parents

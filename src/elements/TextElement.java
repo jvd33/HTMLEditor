@@ -41,7 +41,9 @@ public class TextElement implements DocumentElement {
 		// Returns a non-null value indicating that the non-tags are well-formed
 		return "";
 	}
-	
+	public String toString() { 
+		return text;
+	}
 	@Override
 	public boolean equals(Object obj){
 		if(obj instanceof TextElement){
