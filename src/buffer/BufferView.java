@@ -207,6 +207,10 @@ public class BufferView extends JPanel implements Observer{
 			commandHandler.executeCommand(new IndentLinesCommand(textArea));
 		}
 	};
+	
+	public Buffer getBuffer(){
+		return buffer;
+	}
 
 	/**
 	 * Getter method to enable operations on the text area

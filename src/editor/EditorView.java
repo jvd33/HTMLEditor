@@ -1,6 +1,7 @@
 package editor;
 import java.awt.BorderLayout;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -41,7 +42,7 @@ public class EditorView extends JFrame implements Observer{
 	
 	//tabCounter
 	private int i;
-	private JButton closeBtn;
+	//private JButton closeBtn;
 	
 	private	JMenuBar menuBar;
 	private JTabbedPane tabBar;
@@ -84,9 +85,9 @@ public class EditorView extends JFrame implements Observer{
 		menuBar = new JMenuBar();
 		tabBar = new JTabbedPane();
 		i = 0;
-		closeBtn = new JButton("x");
+		/*closeBtn = new JButton("x");
 		closeBtn.setSize(5, 5);
-		closeBtn.addActionListener(close);
+		closeBtn.addActionListener(close);*/
 
 		
 		// File + items
@@ -277,11 +278,16 @@ public class EditorView extends JFrame implements Observer{
 	ActionListener close = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			int z = tabBar.indexOfTabComponent((Component) e.getSource());
+			JPanel temp = ((CloseButton)e.getSource()).getTab();
+			int z = tabBar.indexOfTabComponent(temp);
 		    if (i >= 0) {
-		      tabBar.remove(z+i);
+		    	BufferView bv =null;
+		    	if(tabBar.getComponentAt(z) instanceof BufferView){
+		    		bv = (BufferView) tabBar.getComponentAt(z);
+		    	}
+		      tabBar.remove(z);
 		      i--;
-		      editor.closeBuffer();
+		      editor.closeBuffer(bv.getBuffer());
 		    }
 		}
 	};
@@ -305,14 +311,17 @@ public class EditorView extends JFrame implements Observer{
 				else {
 					b.setView(true);
 					try {
-						
+						  
+						  
 						  JPanel tab = new JPanel(new FlowLayout());
 						  JLabel title = new JLabel(b.getFile().getName());
+						  JButton closeBtn = new CloseButton("x", tab);
+						  closeBtn.setSize(5, 5);
+						  closeBtn.addActionListener(close);
 						  tab.add(title, BorderLayout.WEST);
 						  tab.add(closeBtn,BorderLayout.EAST);
 						  tabBar.insertTab(null, null, bv, null, i);
 						  tabBar.setTabComponentAt(i, tab );
-						  System.out.println(i);
 						  i++;
 						  
 						 

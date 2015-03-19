@@ -92,9 +92,14 @@ public class HTMLEditor extends Observable{
 		 * Only closes the active buffer since that will
 		 * be the only one you can close.
 		 */
-		public void closeBuffer(){
-			buffers.remove(activeBuffer);
-			activeBuffer = buffers.get(0);
+		public void closeBuffer(Buffer b){
+			buffers.remove(b);
+			if(!buffers.isEmpty()){
+				activeBuffer = buffers.get(0);
+			}
+			else{
+				activeBuffer = null;
+			}
 			setChanged();
 			notifyObservers(buffers);
 		}
