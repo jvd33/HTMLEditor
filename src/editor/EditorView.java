@@ -327,7 +327,16 @@ public class EditorView extends JFrame implements Observer{
 						 
 						//tabBar.addTab(b.getFile().getName(), bv);
 					} catch(NullPointerException e) { 
-						tabBar.addTab("New File", bv);
+						JPanel tab = new JPanel(new FlowLayout());
+						  JLabel title = new JLabel("New File");
+						  JButton closeBtn = new CloseButton("x", tab);
+						  closeBtn.setSize(5, 5);
+						  closeBtn.addActionListener(close);
+						  tab.add(title, BorderLayout.WEST);
+						  tab.add(closeBtn,BorderLayout.EAST);
+						  tabBar.insertTab(null, null, bv, null, i);
+						  tabBar.setTabComponentAt(i, tab );
+						  i++;
 					}
 				}
 			}
