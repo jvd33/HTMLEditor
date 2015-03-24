@@ -121,13 +121,19 @@ public class HTMLParser {
 	 * Checks to see if the tag given is the end of the tag
 	 * Replaces the "<" in the start tag with "</" and sees
 	 * if the two are equal
-	 * 
+	 * handles link tags as well
 	 * @param startTag Text of the starting tag
 	 * @param endTag Text of the ending tag
 	 * @return Whether or not the start tag matches the end tag
 	 */
-	private boolean isEndTag(String startTag, String endTag) { 
-		return startTag.replace("<", "</").equals(endTag);
+	private boolean isEndTag(String startTag, String endTag) {
+		if(startTag.length() >= 5 && startTag.substring(0, 5).equals("<a hr")
+				&& endTag.equals("</a>")) { //this is gross
+			return true;
+		}
+		else { 
+			return startTag.replace("<", "</").equals(endTag);
+		}
 	}
 	
 	/**

@@ -93,17 +93,24 @@ public class ParserIterator implements Iterator<String> {
 		}
 	}
 	
+	/**
+	 * Finds all the links in the text field
+	 */
 	private void findLinks() { 
 		url.reset(iteratee);
 		while(url.find()) { 
 			urls.add(url.group());
-			System.out.println(url.group());
 		}
 	}
 	
+	/**
+	 * Getter method for the links
+	 * @return a list of the links
+	 */
 	public List<String> getLinks() { 
 		return urls;
 	}
+	
 	/*
 	// JUST INCASE THIS BREAKS AGAIN
 	public List get() { 

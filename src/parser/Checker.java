@@ -1,5 +1,6 @@
 package parser;
 import buffer.Buffer;
+import java.util.List;
 
 
 /**
@@ -12,13 +13,15 @@ import buffer.Buffer;
  *
  */
 public class Checker{
-	Buffer buff;
+	private Buffer buff;
+	private HTMLParser parser;
 	/**
 	 * Creates a new New Concrete Command taking in the current buffer
 	 * @param b The buffer in question
 	 */	
 	public Checker(Buffer b){
 		buff = b;
+		parser = new HTMLParser(buff.text);
 	}
 	
 	/**
@@ -26,11 +29,15 @@ public class Checker{
 	 * @return Whether or not the buffer's html is well-formed
 	 */
 	public boolean check() {
-			HTMLParser parser = new HTMLParser(buff.text);
-			buff.addTag(parser.parse());
-			return buff.checkHTML();
-			
-				
-			
+		buff.addTag(parser.parse());
+		return buff.checkHTML();		
+	}
+	
+	/**
+	 * Returns a list of the urls found in the text
+	 */
+	
+	public List<String> getLinks() { 
+		return parser.getLinks();
 	}
 }

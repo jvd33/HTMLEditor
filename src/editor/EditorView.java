@@ -22,6 +22,7 @@ import commands.NewCommand;
 import commands.OpenCommand;
 import commands.PasteCommand;
 import commands.SaveCommand;
+import commands.*;
 import buffer.Buffer;
 import buffer.BufferView;
 
@@ -58,6 +59,7 @@ public class EditorView extends JFrame implements Observer{
 	private JMenuItem cut;
 	private JMenuItem copy;
 	private JMenuItem paste;
+	private JMenuItem links;
 	
 	// Help + items
 	private	JMenu help;
@@ -101,6 +103,7 @@ public class EditorView extends JFrame implements Observer{
 		cut = new JMenuItem("Cut");
 		copy = new JMenuItem("Copy");
 		paste = new JMenuItem("Paste");
+		links = new JMenuItem("View URLs");
 		
 		// Help + items
 		help = new JMenu("Help");
@@ -126,6 +129,8 @@ public class EditorView extends JFrame implements Observer{
 		copy.addActionListener(copyListener);
 		edit.add(paste);
 		paste.addActionListener(pasteListener);
+		edit.add(links);
+		links.addActionListener(linksListener);
 		
 		menuBar.add(help);
 		help.add(readme);
@@ -263,6 +268,17 @@ public class EditorView extends JFrame implements Observer{
 		}
 	};
 	
+	/*
+	 * Link view listener
+	 */
+	
+	ActionListener linksListener = new ActionListener() { 
+		@Override
+		public void actionPerformed(ActionEvent e) { 
+			CHO.executeCommand(new LinkCommand(editor.getCurrentBuffer()));
+			System.out.println("Links was called");
+		}
+	};
 	/*
 	 * ReadMe listener
 	 */
