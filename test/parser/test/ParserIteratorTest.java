@@ -49,5 +49,12 @@ public class ParserIteratorTest {
 		assertTrue(cut.hasNext());
 		assertEquals("<html>", cut.next());
 	}
+	
+	@Test
+	public void testLinks() {
+		String input = "<html><a href=\"https://www.google.com\"</a></html>";
+		ParserIterator URL = new ParserIterator(input);
+		assertEquals("https://www.google.com", URL.getLinks().get(0));
+	}
 
 }

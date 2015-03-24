@@ -1,5 +1,8 @@
 package parser;
 
+import java.util.List;
+import java.util.ArrayList;
+
 import elements.*;
 
 /**
@@ -10,12 +13,14 @@ import elements.*;
 public class HTMLParser {
 	
 	private ParserIterator iterator;
+	private List<String> links;
 	
 	/**
 	 * constructor, creates an iterator for the string
 	 */
 	public HTMLParser(String s) {
 		iterator = new ParserIterator(s);
+		links = iterator.getLinks();
 	}
 	
 	/**
@@ -45,6 +50,9 @@ public class HTMLParser {
 		return root; //return the root (aggregate of html tags)
 	}
 	
+	public List<String> getLinks() { 
+		return links;
+	}
 	
 	/**
 	 * Creates a new tag, and adds children iteratively until

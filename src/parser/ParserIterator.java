@@ -16,6 +16,8 @@ public class ParserIterator implements Iterator<String> {
 	private Matcher head;
 	private Matcher comment;
 	private Matcher text;
+	private Matcher url;
+	private List<String> urls;
 	private List<String> tags;
 	private Iterator<String> internal;
 	//TODO get rid of the comment stripper, make the parser ignore instead?
@@ -24,11 +26,16 @@ public class ParserIterator implements Iterator<String> {
 		Pattern HTMLHead = Pattern.compile("<.*?>");
 		Pattern commentP = Pattern.compile("<!--.*?-->");
 		Pattern textP = Pattern.compile("(.*?)<.*?>", Pattern.DOTALL);
+		String regex = "\\b(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+		Pattern urlP = Pattern.compile(regex);
+		url = urlP.matcher("");
 		head = HTMLHead.matcher("");
 		comment = commentP.matcher("");
 		text = textP.matcher("");
+		urls = new ArrayList<String>();
 		tags = new ArrayList<String>();
 		stripText();
+		findLinks();
 		internal = tags.iterator();
 	}
 	
@@ -73,7 +80,7 @@ public class ParserIterator implements Iterator<String> {
 	 * valid html elements and strings. Keeps the structure
 	 */
 	private void stripText() {
-		System.out.println(iteratee);
+		//System.out.println(iteratee);
 		this.stripComments();
 		head.reset(iteratee);
 		text.reset(iteratee);
@@ -86,6 +93,17 @@ public class ParserIterator implements Iterator<String> {
 		}
 	}
 	
+	private void findLinks() { 
+		url.reset(iteratee);
+		while(url.find()) { 
+			urls.add(url.group());
+			System.out.println(url.group());
+		}
+	}
+	
+	public List<String> getLinks() { 
+		return urls;
+	}
 	/*
 	// JUST INCASE THIS BREAKS AGAIN
 	public List get() { 
