@@ -45,8 +45,6 @@ public class HTMLParser {
 			}
 		}
 		
-		//TODO remove this print line
-		//System.out.print(root.print() + "root.print() called!");
 		return root; //return the root (aggregate of html tags)
 	}
 	
@@ -92,7 +90,6 @@ public class HTMLParser {
 				if(tag.getParent() != null) { 
 					tag.getParent().addChild(txt);
 				} else { tag.addChild(txt); } 
-				//tag.getParent().addChild(txt);
 			}
 			else { 
 				setParentTag(temp, child); //else check parents
