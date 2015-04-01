@@ -94,7 +94,6 @@ public class Buffer extends Observable {
 		public boolean checkHTML(){
 			//checks if every start tag has an end tag
 			HTMLTag htmlToCheck = this.getTag();
-			System.out.println(htmlToCheck.toString());
 			if(htmlToCheck.getEndTag()!=null){
 				for(DocumentElement de : htmlToCheck.getChildren()){
 					if(de.getEndTag() != null){

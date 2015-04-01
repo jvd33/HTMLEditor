@@ -61,14 +61,19 @@ public class HTMLParser {
 	 */
 	private void tagHelper(HTMLTag tag, String temp) { 
 		HTMLTag child = new HTMLTag(temp, tag); //create a new child tag
+		if(temp.substring(0,5).equals("<img ")) { 
+			child.setEndTag("");
+		}
 		tag.addChild(child); //add it as a child to the tag passed in,
 		while(iterator.hasNext()) { //while there are still tags to parse,
 			temp = iterator.next(); 
 			if(isStartTag(temp) && child.getEndTag()==null) { //if it's a start tag, recursively call again
 				tagHelper(child, temp);
+				
 			}
 			else if(isStartTag(temp) && child.getEndTag() != null) { 
 				tagHelper(tag, temp);
+				
 			}
 			//if its the end tag of the tag we created,
 			else if(isEndTag(child.getStartTag(), temp)) { 
@@ -128,6 +133,10 @@ public class HTMLParser {
 				&& endTag.equals("</a>")) { //this is gross
 			return true;
 		}
+		else if(startTag.length() >= 5 && startTag.substring(0, 5).equals("<img=")) { 
+			return true;
+		}
+		
 		else { 
 			return startTag.replace("<", "</").equals(endTag);
 		}
