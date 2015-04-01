@@ -3,17 +3,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
 /**
- * 
- */
-
-/**
+ * Command to insert tags into the current buffer
  * @author Team Bash-Browns
  *
  */
 public class InsertCommand implements Command, Undoable {
 	JTextArea textArea;
 	String insertedText;
-	int ix = -1;
+	int carPos = -1;
 	public InsertCommand(JTextArea text_area){
 		String tag_name = new JOptionPane().showInputDialog(null, "Please enter the symbol of your desired tag");
 		insertedText = tagNameToTag(tag_name);
@@ -27,24 +24,41 @@ public class InsertCommand implements Command, Undoable {
 	public void execute() {
 		String origText = textArea.getText();
 		String newText = "";
-		this.ix = textArea.getCaretPosition();
-		newText = origText.substring(0, ix) + insertedText +
-				origText.substring(ix);
+		this.carPos = textArea.getCaretPosition();
+		newText = origText.substring(0, carPos) + insertedText +
+				origText.substring(carPos);
 		textArea.setText(newText);
 	}
 	
+	/**
+	 * Helper function that takes the desired first tag, removes spaces,
+	 * and makes a matching end tag for it
+	 * 
+	 * @param s Desired first tag's contents
+	 * @return Resulting set of tags
+	 */
 	private String tagNameToTag(String s){
-		s = "<"+s+"></"+s+">";
-		return s;
+		String startTag = "<"+s+">";
+		String endTag;
+		String returnString;
+		
+		//Allows for arguments to be in the first tag but not the second
+		if(s.contains(" ")){
+			endTag = "</" + s.substring(0, s.indexOf(" ")) + ">";
+		}else{
+			endTag = "</" + s + ">";
+		}
+		returnString = startTag + endTag;
+		return returnString;
 	}
 
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
 		String origText = textArea.getText();
-		if(this.ix >= 0 && origText.substring(ix, ix+insertedText.length()).equals(insertedText)){
+		if(this.carPos >= 0 && origText.substring(carPos, carPos+insertedText.length()).equals(insertedText)){
 			
-			String newText = origText.substring(0, ix) + origText.substring(ix+insertedText.length());
+			String newText = origText.substring(0, carPos) + origText.substring(carPos+insertedText.length());
 			//this.ix = -1;
 			textArea.setText(newText);
 		}
@@ -55,9 +69,9 @@ public class InsertCommand implements Command, Undoable {
 	public void redo() {
 		// TODO Auto-generated method stub
 		String origText = textArea.getText();
-		if(this.ix >= 0 && this.insertedText.length() > 0){
+		if(this.carPos >= 0 && this.insertedText.length() > 0){
 			
-			String newText = origText.substring(0, ix) + this.insertedText+ origText.substring(ix);
+			String newText = origText.substring(0, carPos) + this.insertedText+ origText.substring(carPos);
 			//this.ix = -1;
 			textArea.setText(newText);
 		}
