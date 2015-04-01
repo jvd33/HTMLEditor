@@ -51,7 +51,7 @@ public class BufferView extends JPanel implements Observer{
 	private JButton newline;
 	private JButton inserttag;
 	private JButton multipleindent;
-	
+	private JPanel sidepanel;
 	/**
 	 * MVC View for the buffer 
 	 * @param b Which buffer represents the model
@@ -68,7 +68,7 @@ public class BufferView extends JPanel implements Observer{
 		this.setLayout(new BorderLayout());
 		buffer = b;
 		getTextArea().setText(b.toString());
-
+		sidepanel = new JPanel();//panel for collapsing buttons
 		
 		//Buffer Tool Bar
 		toolBar = new JToolBar();
@@ -99,7 +99,7 @@ public class BufferView extends JPanel implements Observer{
 		multipleindent.addActionListener(indentLinesListener);
 		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
-		
+		this.add(sidepanel, BorderLayout.WEST);
 		textArea.addKeyListener(buffedit);
 	}
 	
