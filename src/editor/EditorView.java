@@ -60,6 +60,7 @@ public class EditorView extends JFrame implements Observer{
 	private JMenuItem copy;
 	private JMenuItem paste;
 	private JMenuItem links;
+	private JMenuItem img;
 	
 	// Help + items
 	private	JMenu help;
@@ -104,6 +105,7 @@ public class EditorView extends JFrame implements Observer{
 		copy = new JMenuItem("Copy");
 		paste = new JMenuItem("Paste");
 		links = new JMenuItem("View URLs");
+		img = new JMenuItem("View Images");
 		
 		// Help + items
 		help = new JMenu("Help");
@@ -129,8 +131,10 @@ public class EditorView extends JFrame implements Observer{
 		copy.addActionListener(copyListener);
 		edit.add(paste);
 		paste.addActionListener(pasteListener);
-		edit.add(links);
+		file.add(links);
 		links.addActionListener(linksListener);
+		file.add(img);
+		img.addActionListener(imgListener);
 		
 		menuBar.add(help);
 		help.add(readme);
@@ -277,6 +281,17 @@ public class EditorView extends JFrame implements Observer{
 		public void actionPerformed(ActionEvent e) { 
 			CHO.executeCommand(new LinkCommand(editor.getCurrentBuffer()));
 			System.out.println("Links was called");
+		}
+	};
+	
+	/*
+	 * Image view listener
+	 */
+	ActionListener imgListener = new ActionListener() { 
+		@Override
+		public void actionPerformed(ActionEvent e) { 
+			CHO.executeCommand(new ImgCommand(editor.getCurrentBuffer()));
+			System.out.println("Images was called");
 		}
 	};
 	/*

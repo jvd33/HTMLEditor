@@ -61,7 +61,7 @@ public class HTMLParser {
 	 */
 	private void tagHelper(HTMLTag tag, String temp) { 
 		HTMLTag child = new HTMLTag(temp, tag); //create a new child tag
-		if(temp.substring(0,5).equals("<img ")) { 
+		if(temp.substring(0, 5).equals("<img ")) { 
 			child.setEndTag("");
 		}
 		tag.addChild(child); //add it as a child to the tag passed in,

@@ -198,5 +198,17 @@ public class Buffer extends Observable {
 		public void setView(boolean b) { 
 			this.hasView = b;
 		}
+		
+		public List<String> getImgs() { 
+			ArrayList<String> img = new ArrayList<String>();
+			for(DocumentElement e : tag.getChildren()) { 
+				if(e instanceof HTMLTag && e.getEndTag().equals("")) {
+					String temp = ((HTMLTag) e).getStartTag();
+					img.add(temp.substring(10, temp.length()-2));
+					
+				}
+			}
+			return img;
+		}
 
 }
