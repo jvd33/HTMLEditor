@@ -31,7 +31,13 @@ public class CommandHandler {
 		if(c instanceof BuffStateCommand){
 			this.redoables = new java.util.Stack<Undoable>();
 		}
-		c.execute();
+		if(c instanceof UndoCommand){
+			this.undoCommand();
+		}else if(c instanceof RedoCommand){
+			this.redoCommand();
+		}else{
+			c.execute();
+		}
 	}
 	
 	/**
