@@ -180,7 +180,11 @@ public class EditorView extends JFrame implements Observer{
 			try { 
 				
 				OpenCommand OPEN = new OpenCommand( editor, jfc.getSelectedFile().getPath() );
-				CHO.executeCommand(OPEN);
+				if (jfc.getSelectedFile().getPath().contains(".html")){
+					CHO.executeCommand(OPEN);
+				}else{
+					JOptionPane.showMessageDialog(null, "Sorry the file you tryed to open is not a '.html' file. Please try again.", "alert", JOptionPane.ERROR_MESSAGE);
+				}
 			} catch(NullPointerException n) { 
 				return;
 			}
