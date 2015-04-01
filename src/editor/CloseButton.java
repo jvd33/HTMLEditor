@@ -3,6 +3,12 @@ package editor;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+/**
+ * Special JButton that has an associated buffer's JPanel and allows
+ * the JPane to be closed
+ * @author Team Bash-Browns
+ *
+ */
 public class CloseButton extends JButton{
 	
 	private JPanel tab;//tab to close

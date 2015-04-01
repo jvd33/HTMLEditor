@@ -66,4 +66,14 @@ public class HTMLParserTest {
 		testP = new HTMLParser("<html><div>\n</div>text</html>");
 		assertTrue(testP.parse().print().equals("<html><div>\n</div>text</html>"));
 	}
+
+	/**
+	 * Test method for {@link parser.HTMLParser#parse()}.
+	 * Specifically relates to changes to InsertCommand
+	 */
+	@Test
+	public final void testParse5() {
+		testP = new HTMLParser("<a href=\"somestuff\"></a>");
+		assertTrue(testP.parse().print().equals("<a href=\"somestuff\"></a>"));
+	}
 }
