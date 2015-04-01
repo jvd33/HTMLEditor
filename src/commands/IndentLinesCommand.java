@@ -49,29 +49,7 @@ public class IndentLinesCommand implements Command, Undoable {
 
 	@Override
 	public void undo() {
-		// TODO Auto-generated method stub
-		/*int start = textArea.getSelectionStart();
-		int end = textArea.getSelectionEnd();
-		String text = textArea.getSelectedText();
-		java.util.ArrayList<String> lines = new java.util.ArrayList<String>();
 		
-		int i = start;
-		while(i < end){
-			String thisLine = "";
-			while(text.charAt(i)!='\n'){
-				if(text.charAt(i)!='\t'){
-					thisLine+=text.charAt(i);
-				}
-				i++;
-			}
-			lines.add(thisLine);
-		}
-		String newText = "";
-		for(String s:lines){
-			newText+=s+"\n";
-		}
-		text = textArea.getText();
-		textArea.setText(text.substring(0,start)+newText+text.substring(end));*/
 		if(this.start >= 0 && this.preText.length() > 0){
 			String newText = this.textArea.getText();
 			newText = newText.substring(0, this.start) + this.preText + newText.substring(this.start+this.postText.length());
@@ -82,21 +60,13 @@ public class IndentLinesCommand implements Command, Undoable {
 
 	@Override
 	public void redo() {
-		// TODO Auto-generated method stub
 		if(this.start >= 0 && this.postText.length() > 0){
 			String newText = this.textArea.getText();
 			newText = newText.substring(0, this.start) + this.postText + newText.substring(this.start+this.preText.length());
 			this.textArea.setText(newText);
 		}
-		//execute();
 	}
 	
-	/*public static void main(String args[]){
-		JTextArea testMe = new JTextArea("testMe");
-		IndentLinesCommand testCom = new IndentLinesCommand(testMe);
-		System.out.println(testMe.getText());
-		testCom.execute();
-		System.out.println(testMe.getText());
-	}*/
+	
 }
 
