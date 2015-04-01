@@ -1,4 +1,5 @@
 package commands;
+import parser.HTMLParser;
 import buffer.Buffer;
 
 
@@ -28,6 +29,8 @@ public class BuffStateCommand implements Command, Undoable {
 		try{
 			b.addUndo(s);
 			b.addText(s);
+			b.addTag(new HTMLParser(s).parse());
+			b.notifyObservers();
 		}catch(NullPointerException e){
 			javax.swing.JOptionPane.showMessageDialog(null, "No file entered", "File Not Found", javax.swing.JOptionPane.ERROR_MESSAGE);
 		}

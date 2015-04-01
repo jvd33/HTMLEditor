@@ -35,7 +35,6 @@ public class OpenCommand implements Command {
 		for(Buffer buff : editor.getBuffers()) {
 			if(buff.getFile().equals(file)) { 
 				editor.setActiveBuffer(buff);
-				System.out.println(editor.getBuffers());
 				return;
 			}
 			else { 
