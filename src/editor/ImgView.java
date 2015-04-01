@@ -17,9 +17,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
-
-import parser.Checker;
-
 import buffer.Buffer;
 
 /**
@@ -37,9 +34,6 @@ public class ImgView implements Observer {
 	private JLabel label;
 	private BufferedImage bi;
 	private ImageIcon icon;
-	
-	//ActionListeners
-	private ActionListener img;
 	
 	//logic
 	private List<String> imgPaths;
@@ -87,6 +81,10 @@ public class ImgView implements Observer {
 		
 	}
 	
+	/**
+	 * Loads the image and sets it to the label to display
+	 * @param f, the file
+	 */
 	private void loadImage(File f) { 
 		try {
 			bi = ImageIO.read(f);
