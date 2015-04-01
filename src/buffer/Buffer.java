@@ -210,5 +210,19 @@ public class Buffer extends Observable {
 			}
 			return img;
 		}
-
+		
+        /**
+		 * 
+		 */
+		public int getNumLines(){
+			String s = tag.print();
+			int numlines = 1;
+			for(char c : s.toCharArray()){
+				if(c == '\n'){
+					numlines++;
+				}
+			}
+			System.out.print(numlines);
+			return numlines;
+		}
 }

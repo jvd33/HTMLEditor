@@ -1,5 +1,6 @@
 package buffer;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -9,6 +10,7 @@ import java.util.Observer;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
@@ -52,6 +54,9 @@ public class BufferView extends JPanel implements Observer{
 	private JButton inserttag;
 	private JButton multipleindent;
 	private JPanel sidepanel;
+    private GridLayout gl;
+    private JPanel collapsepanel;
+    
 	/**
 	 * MVC View for the buffer 
 	 * @param b Which buffer represents the model
@@ -68,7 +73,21 @@ public class BufferView extends JPanel implements Observer{
 		this.setLayout(new BorderLayout());
 		buffer = b;
 		getTextArea().setText(b.toString());
-		sidepanel = new JPanel();//panel for collapsing buttons
+		
+		int bsize = buffer.getNumLines();
+        gl = new GridLayout(0,1,0,0);
+		gl.setHgap(0);
+	    gl.setVgap(0);
+	    collapsepanel = new JPanel(gl);
+		sidepanel = new JPanel(new BorderLayout());//panel for collapsing buttons
+		sidepanel.add(collapsepanel, BorderLayout.NORTH);
+		
+		String linenum;
+		System.out.println("this is the buffer size: "+ bsize);
+		for(int x = 0; x<=bsize; x++){
+			linenum = ""+(x+1);
+			collapsepanel.add(new JLabel(linenum));
+		}
 		
 		//Buffer Tool Bar
 		toolBar = new JToolBar();
