@@ -11,17 +11,9 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import parser.Checker;
-import commands.BuffStateCommand;
-import commands.Command;
-import commands.CommandHandler;
-import commands.CopyCommand;
-import commands.CutCommand;
-import commands.NewCommand;
-import commands.OpenCommand;
-import commands.PasteCommand;
-import commands.SaveCommand;
 import commands.*;
 import buffer.Buffer;
 import buffer.BufferView;
@@ -176,6 +168,8 @@ public class EditorView extends JFrame implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			
 			JFileChooser jfc = new JFileChooser();
+			FileNameExtensionFilter filter = new FileNameExtensionFilter("HTML Files", "html", "HTML");
+			    jfc.setFileFilter(filter);
 			jfc.showDialog(getParent(), "Select");
 			try { 
 				
