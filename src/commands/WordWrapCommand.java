@@ -1,7 +1,11 @@
 package commands;
 import javax.swing.JTextArea;
 
-
+/**
+ * Command to toggle the word-wrap functionality of the program
+ * @author Team Bash-Browns
+ *
+ */
 public class WordWrapCommand implements Command{
 	JTextArea textArea;
 	

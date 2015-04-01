@@ -4,13 +4,9 @@ import java.io.File;
 import editor.HTMLEditor;
 import buffer.Buffer;
 
-/**
- * 
- */
-
-
 
 /**
+ * Command that creates a new buffer and adds it into the HTMLEditor
  * @author Bash-Browns
  *
  */
