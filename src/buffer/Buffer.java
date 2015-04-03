@@ -222,7 +222,7 @@ public class Buffer extends Observable {
 					numlines++;
 				}
 			}
-			System.out.print(numlines);
+			
 			return numlines;
 		}
 }

@@ -83,7 +83,7 @@ public class BufferView extends JPanel implements Observer{
 		sidepanel.add(collapsepanel, BorderLayout.NORTH);
 		
 		String linenum;
-		System.out.println("this is the buffer size: "+ bsize);
+		//System.out.println("this is the buffer size: "+ bsize);
 		for(int x = 0; x<=bsize; x++){
 			linenum = ""+(x+1);
 			collapsepanel.add(new JLabel(linenum));
