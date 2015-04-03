@@ -16,7 +16,7 @@ import javax.swing.JTextArea;
 public class NewLineCommand implements Command, Undoable {
 	
 	private JTextArea textArea;
-	private int ix = -1;
+	private int carPos = -1;
 	private String insertedLine;
 	
 	public NewLineCommand(JTextArea text_area){
@@ -28,9 +28,8 @@ public class NewLineCommand implements Command, Undoable {
 	 */
 	@Override
 	public void execute() {	
-		int carPos = textArea.getCaretPosition();
+		carPos = textArea.getCaretPosition();
 		String text = textArea.getText();
-		this.ix = carPos;
 		int i = carPos;
 		while(text.charAt(i) !='\n'&&i>0){
 			i--;
@@ -49,10 +48,10 @@ public class NewLineCommand implements Command, Undoable {
 	public void undo() {
 		// TODO Auto-generated method stub
 		String origText = textArea.getText();
-		if(this.ix >= 0 && origText.substring(ix, ix+insertedLine.length()).equals(insertedLine)){
+		if(this.carPos >= 0 && origText.substring(carPos, carPos+insertedLine.length()).equals(insertedLine)){
 			
-			String newText = origText.substring(0, ix) + origText.substring(ix+insertedLine.length());
-			this.ix = -1;
+			String newText = origText.substring(0, carPos) + origText.substring(carPos+insertedLine.length());
+			this.carPos = -1;
 			textArea.setText(newText);
 		}
 	}
@@ -61,9 +60,9 @@ public class NewLineCommand implements Command, Undoable {
 	public void redo() {
 		// TODO Auto-generated method stub
 		String origText = textArea.getText();
-		if(this.ix >= 0 && this.insertedLine.length() > 0){
+		if(this.carPos >= 0 && this.insertedLine.length() > 0){
 			
-			String newText = origText.substring(0, ix) + this.insertedLine+ origText.substring(ix);
+			String newText = origText.substring(0, carPos) + this.insertedLine+ origText.substring(carPos);
 			//this.ix = -1;
 			textArea.setText(newText);
 		}
