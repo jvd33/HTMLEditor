@@ -74,20 +74,15 @@ public class BufferView extends JPanel implements Observer{
 		buffer = b;
 		getTextArea().setText(b.toString());
 		
-		int bsize = buffer.getNumLines();
-        gl = new GridLayout(0,1,0,0);
+		
+        gl = new GridLayout(0,2,0,0);
 		gl.setHgap(0);
 	    gl.setVgap(0);
 	    collapsepanel = new JPanel(gl);
 		sidepanel = new JPanel(new BorderLayout());//panel for collapsing buttons
 		sidepanel.add(collapsepanel, BorderLayout.NORTH);
 		
-		String linenum;
-		//System.out.println("this is the buffer size: "+ bsize);
-		for(int x = 0; x<=bsize; x++){
-			linenum = ""+(x+1);
-			collapsepanel.add(new JLabel(linenum));
-		}
+		this.updateCollapsePanel();
 		
 		//Buffer Tool Bar
 		toolBar = new JToolBar();
@@ -140,6 +135,9 @@ public class BufferView extends JPanel implements Observer{
 			// Save-state
 			Command buffState = new BuffStateCommand(buffer, textArea.getText());
 			buffState.execute();
+			
+			//edit lines
+			updateCollapsePanel();
 			
 		}
 
@@ -250,8 +248,20 @@ public class BufferView extends JPanel implements Observer{
 			buffer = (Buffer) arg0;
 			String text = (String) arg1;
 			getTextArea().setText(text);
+			
 		}
 
+	}
+	
+	private void updateCollapsePanel(){
+		collapsepanel.removeAll();
+		int bsize = buffer.getNumLines();
+		String linenum;
+		for(int x = 0; x<=bsize; x++){
+			linenum = ""+(x+1);
+			collapsepanel.add(new JLabel(linenum));
+			collapsepanel.add(new CollapseButton(x+1));
+		}
 	}
 
 		

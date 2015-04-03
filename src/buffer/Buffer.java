@@ -42,6 +42,7 @@ public class Buffer extends Observable {
 		 */
 		public void addTag(HTMLTag root) { 
 			tag = root;
+			this.setChanged();
 		}
 		
 		/**
