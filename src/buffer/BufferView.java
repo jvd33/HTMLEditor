@@ -97,6 +97,9 @@ public class BufferView extends JPanel implements Observer{
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
 		wordwrap = new JButton("Toggle Word-Wrap");
+		wordwrap.setBackground(Color.GREEN);
+		wordwrap.setOpaque(true);
+		wordwrap.setBorderPainted(false);
 		newline = new JButton("Toggle AutoIndent");
 		inserttag = new JButton("Insert Tag...");
 		multipleindent = new JButton("Indent lines...");
@@ -182,15 +185,17 @@ public class BufferView extends JPanel implements Observer{
 	 * Word-Wrap toggle listener
 	 */
 	ActionListener wordWrapListener = new ActionListener(){
-		private Color GREEN;
-
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			commandHandler.executeCommand(new WordWrapCommand(textArea));
 			if (textArea.getLineWrap() == true){
-				wordwrap.setBackground(GREEN);
+				wordwrap.setBackground(Color.GREEN);
+				wordwrap.setOpaque(true);
+				wordwrap.setBorderPainted(false);
 			}else{
 				wordwrap.setBackground(null);
+				wordwrap.setOpaque(false);
+				wordwrap.setBorderPainted(true);
 			}
 		}
 	};
