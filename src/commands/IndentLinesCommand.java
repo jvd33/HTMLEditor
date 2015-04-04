@@ -30,6 +30,14 @@ public class IndentLinesCommand implements Command, Undoable {
 		String text = textArea.getSelectedText();
 		this.preText = text;//textArea.getSelectedText();
 		
+		
+		if(start == end || (!preText.contains("\n") && start != 0)){
+			//Fix for it printing null
+			postText = text;
+			return;
+		}
+		
+		
 		//go over each line from the start to the end of the selection and add a tab before it
 		int i = start;
 		while(i<end){
