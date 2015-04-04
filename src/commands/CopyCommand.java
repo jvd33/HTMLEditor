@@ -33,6 +33,7 @@ public class CopyCommand implements Command {
 	@Override
 	public void execute() {
 		htmleditor.setClipboard(textarea.getSelectedText());
+		System.out.println(htmleditor.getClipboard());
 	}
 
 }

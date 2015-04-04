@@ -1,8 +1,8 @@
 package commands;
 
 
+import links.LinkView;
 import buffer.Buffer;
-import editor.LinkView;
 
 
 /**
