@@ -100,7 +100,12 @@ public class BufferView extends JPanel implements Observer{
 		wordwrap.setBackground(Color.GREEN);
 		wordwrap.setOpaque(true);
 		wordwrap.setBorderPainted(false);
+		
 		newline = new JButton("Toggle AutoIndent");
+		newline.setBackground(Color.GREEN);
+		newline.setOpaque(true);
+		newline.setBorderPainted(false);
+		
 		inserttag = new JButton("Insert Tag...");
 		multipleindent = new JButton("Indent lines...");
 		
@@ -185,7 +190,6 @@ public class BufferView extends JPanel implements Observer{
 	 * Word-Wrap toggle listener
 	 */
 	ActionListener wordWrapListener = new ActionListener(){
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			commandHandler.executeCommand(new WordWrapCommand(textArea));
 			if (textArea.getLineWrap() == true){
@@ -214,10 +218,18 @@ public class BufferView extends JPanel implements Observer{
 	 * Toggle Auto-Indent listener
 	 */
 	ActionListener autoIndentListener = new ActionListener(){
-		@Override
 		public void actionPerformed(ActionEvent e) {
 			autoindent = !autoindent;
 			System.out.println("Auto-indent status: "+autoindent);
+			if (autoindent == true){
+				newline.setBackground(Color.GREEN);
+				newline.setOpaque(true);
+				newline.setBorderPainted(false);
+			}else{
+				newline.setBackground(null);
+				newline.setOpaque(false);
+				newline.setBorderPainted(true);
+			}
 		}
 	};	
 	
@@ -274,9 +286,9 @@ public class BufferView extends JPanel implements Observer{
 		JButton CollapseButton = new JButton();
 		CollapseButton.addActionListener(collapse);
 		collapsepanel.removeAll();
-		//int bsize = buffer.getNumLines();
+		int bsize = buffer.getNumLines();
 		String linenum;
-		for(int x = 0; x<=textArea.getLineCount(); x++){
+		for(int x = 0; x<=bsize; x++){
 			linenum = ""+(x+1);
 			collapsepanel.add(new JLabel(linenum));
 			collapsepanel.add(new CollapseButton(x+1));
