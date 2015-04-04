@@ -11,7 +11,6 @@ import buffer.Buffer;
 public class ImgCommand implements Command {
 	
 	private Buffer b;
-	private ImgView img;
 	
 	public ImgCommand(Buffer buff) {
 		b = buff;
@@ -19,7 +18,7 @@ public class ImgCommand implements Command {
 	
 	@Override
 	public void execute() {
-		img = new ImgView(b);
+		new ImgView(b);
 		
 	}
 

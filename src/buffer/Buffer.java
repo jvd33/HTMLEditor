@@ -42,6 +42,7 @@ public class Buffer extends Observable {
 		 */
 		public void addTag(HTMLTag root) { 
 			tag = root;
+			this.setChanged();
 		}
 		
 		/**
@@ -210,5 +211,19 @@ public class Buffer extends Observable {
 			}
 			return img;
 		}
-
+		
+        /**
+		 * 
+		 */
+		public int getNumLines(){
+			String s = tag.print();
+			int numlines = 1;
+			for(char c : s.toCharArray()){
+				if(c == '\n'){
+					numlines++;
+				}
+			}
+			
+			return numlines;
+		}
 }

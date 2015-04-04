@@ -2,9 +2,10 @@ package commands;
 import io.FileHandler;
 
 import java.io.File;
-
+import parser.Checker;
 import editor.HTMLEditor;
 import buffer.Buffer;
+import parser.HTMLParser;
 
 /**
  * Opens a file and reads it into a buffer
@@ -34,7 +35,6 @@ public class OpenCommand implements Command {
 		for(Buffer buff : editor.getBuffers()) {
 			if(buff.getFile().equals(file)) { 
 				editor.setActiveBuffer(buff);
-				System.out.println(editor.getBuffers());
 				return;
 			}
 			else { 
@@ -43,7 +43,7 @@ public class OpenCommand implements Command {
 			}
 			
 		}
-		
+		b.addTag(new HTMLParser(b.text).parse());
 		editor.addBuffer(b);
 		editor.setActiveBuffer(b);
 		editor.hasChanged();

@@ -17,9 +17,6 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.SwingConstants;
-
-import parser.Checker;
-
 import buffer.Buffer;
 
 /**
@@ -38,11 +35,9 @@ public class ImgView implements Observer {
 	private BufferedImage bi;
 	private ImageIcon icon;
 	
-	//ActionListeners
-	private ActionListener img;
-	
 	//logic
 	private List<String> imgPaths;
+	private Buffer buff;
 	
 	/**
 	 * Constructor
@@ -58,6 +53,17 @@ public class ImgView implements Observer {
 		menu = new JMenu("Images");
 		label = new JLabel("", SwingConstants.CENTER);
 		label.setVisible(true);
+		addMenuItems(imgPaths);
+		frame.setContentPane(label);
+		frame.setLayout(new BorderLayout());
+		frame.add(menuB, BorderLayout.NORTH);
+		menuB.add(menu);
+		frame.setVisible(true);
+		frame.setSize(500, 500);
+		frame.repaint();
+		
+	}
+	private void addMenuItems(List<String> list) { 
 		for(final String s : imgPaths) { 
 			JMenuItem temp = new JMenuItem(s);
 			temp.addActionListener(new ActionListener() {
@@ -72,21 +78,18 @@ public class ImgView implements Observer {
 			menu.add(temp);
 			
 		}
-		frame.setContentPane(label);
-		frame.setLayout(new BorderLayout());
-		frame.add(menuB, BorderLayout.NORTH);
-		menuB.add(menu);
-		frame.setVisible(true);
-		frame.setSize(500, 500);
-		frame.repaint();
-		
 	}
 	@Override
 	public void update(Observable arg0, Object arg1) {
-		System.out.println("ImgView notified");
+		buff = (Buffer) arg0;
+		addMenuItems(((Buffer) arg0).getImgs());
 		
 	}
 	
+	/**
+	 * Loads the image and sets it to the label to display
+	 * @param f, the file
+	 */
 	private void loadImage(File f) { 
 		try {
 			bi = ImageIO.read(f);
