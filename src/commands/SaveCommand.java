@@ -4,6 +4,7 @@ import io.FileHandler;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 import buffer.Buffer;
 
@@ -50,7 +51,8 @@ public class SaveCommand implements Command {
 			File file= buff.getFile();
 			FileHandler fh = new FileHandler(file);
 			fh.writeToFile(buff);
-				
+			
+			JOptionPane.showMessageDialog(null, "File has been saved.");
 			
 			
 		

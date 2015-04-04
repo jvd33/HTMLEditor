@@ -46,7 +46,6 @@ public class BufferView extends JPanel implements Observer{
 	//GUI Elements
 	private JTextArea textArea;
 	private JToolBar toolBar;
-	private JButton save;
 	private JButton undo;
 	private JButton redo;
 	private JButton wordwrap;
@@ -74,7 +73,6 @@ public class BufferView extends JPanel implements Observer{
 		buffer = b;
 		getTextArea().setText(b.toString());
 		
-		
         gl = new GridLayout(0,2,0,0);
 		gl.setHgap(0);
 	    gl.setVgap(0);
@@ -82,13 +80,15 @@ public class BufferView extends JPanel implements Observer{
 		sidepanel = new JPanel(new BorderLayout());//panel for collapsing buttons
 		sidepanel.add(collapsepanel, BorderLayout.NORTH);
 		
-		this.updateCollapsePanel();
+		if(buffer.getTag() != null){
+			this.updateCollapsePanel();
+		}
+		
 		
 		//Buffer Tool Bar
 		toolBar = new JToolBar();
 		
 		//Buttons for the Tool Bar
-		save = new JButton("Save");
 		undo = new JButton("Undo");
 		redo = new JButton("Redo");
 		wordwrap = new JButton("Toggle Word-Wrap");
@@ -97,8 +97,6 @@ public class BufferView extends JPanel implements Observer{
 		multipleindent = new JButton("Indent lines...");
 		
 		//adding buttons and action listeners
-		toolBar.add(save);
-		save.addActionListener(saveListener);
 		toolBar.add(undo);
 		undo.addActionListener(undoListener);
 		toolBar.add(redo);
@@ -154,15 +152,6 @@ public class BufferView extends JPanel implements Observer{
 		
 	};
 	
-	/*
-	 * Save file listener
-	 */
-	ActionListener saveListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			commandHandler.executeCommand(new SaveCommand(buffer));
-		}
-	};
 	
 	/*
 	 * Undo button listener
