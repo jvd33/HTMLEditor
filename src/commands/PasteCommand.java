@@ -49,9 +49,6 @@ public class PasteCommand implements Command, Undoable {
 	@Override
 	public void execute() {
 		String pastedtext = editor.getClipboard();
-		String oldText = textarea.getText();
-		String newText = oldText.substring(0, textarea.getCaretPosition())
-				+ pastedtext + oldText.substring(textarea.getCaretPosition());
-		textarea.setText(newText);
+		textarea.insert(pastedtext, textarea.getCaretPosition());
 	}
 }
