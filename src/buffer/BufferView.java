@@ -277,21 +277,23 @@ public class BufferView extends JPanel implements Observer{
 	ActionListener collapse = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
+			CollapseButton cb = (CollapseButton)e.getSource();
+			cb.switchText();
 			
 		} 	
 	};
 	
 	private void updateCollapsePanel(){
-		JButton CollapseButton = new JButton();
-		CollapseButton.addActionListener(collapse);
+		JButton cb;
 		collapsepanel.removeAll();
 		//int bsize = buffer.getNumLines();
 		String linenum;
 		for(int x = 0; x<=textArea.getLineCount(); x++){
 			linenum = ""+(x+1);
 			collapsepanel.add(new JLabel(linenum));
-			collapsepanel.add(new CollapseButton(x+1));
+			cb = new CollapseButton(x+1); 
+			cb.addActionListener(collapse);
+			collapsepanel.add(cb);
 		}
 	}
 
