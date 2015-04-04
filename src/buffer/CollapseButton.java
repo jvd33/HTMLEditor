@@ -1,19 +1,21 @@
 package buffer;
 
+import java.awt.Dimension;
 import java.awt.Insets;
 
 import javax.swing.JButton;
 
 public class CollapseButton extends JButton{
 	final private String COLLAPSED = "+";
-	final private String COLLAPSABLE = "--";
+	final private String COLLAPSABLE = "-";
 	private int linenum;
 	
 	public CollapseButton(int line){
 		super();
 		super.setText(COLLAPSABLE);
-		super.setMargin(new Insets(1,1,1,1));
-		super.setSize(25,25);
+		super.setMargin(new Insets(0,0,0,0));
+		super.setPreferredSize(new Dimension(15,0));
+		
 		linenum = line;
 		
 	}
