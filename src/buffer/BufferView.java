@@ -1,5 +1,7 @@
 package buffer;
 import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +16,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
+
+import java.awt.color.*;
 
 import commands.BuffStateCommand;
 import commands.Command;
@@ -62,6 +66,7 @@ public class BufferView extends JPanel implements Observer{
 	 */
 	public BufferView(Buffer b){
 		textArea = new JTextArea();
+		textArea.setDragEnabled(true);
 
 		// Variable initialization
 		getTextArea().setLineWrap(true);
@@ -126,7 +131,7 @@ public class BufferView extends JPanel implements Observer{
 			Command newCommand = null;
 			if(e.getKeyChar()=='\n' && autoindent){
 				// Auto-indent
-				newCommand = new NewLineCommand(textArea, buffer);
+				newCommand = new NewLineCommand(textArea,buffer);
 				newCommand.execute();
 			}
 			
@@ -177,9 +182,16 @@ public class BufferView extends JPanel implements Observer{
 	 * Word-Wrap toggle listener
 	 */
 	ActionListener wordWrapListener = new ActionListener(){
+		private Color GREEN;
+
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			commandHandler.executeCommand(new WordWrapCommand(textArea));
+			if (textArea.getLineWrap() == true){
+				wordwrap.setBackground(GREEN);
+			}else{
+				wordwrap.setBackground(null);
+			}
 		}
 	};
 	
@@ -189,7 +201,7 @@ public class BufferView extends JPanel implements Observer{
 	ActionListener insertListener = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			commandHandler.executeCommand(new InsertCommand(textArea, buffer));
+			commandHandler.executeCommand(new InsertCommand(textArea,buffer));
 		}
 	};
 	
@@ -245,7 +257,17 @@ public class BufferView extends JPanel implements Observer{
 
 	}
 	
+	ActionListener collapse = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			
+		} 	
+	};
+	
 	private void updateCollapsePanel(){
+		JButton CollapseButton = new JButton();
+		CollapseButton.addActionListener(collapse);
 		collapsepanel.removeAll();
 		int bsize = buffer.getNumLines();
 		String linenum;
