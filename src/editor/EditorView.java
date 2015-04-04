@@ -54,10 +54,6 @@ public class EditorView extends JFrame implements Observer{
 	private JMenuItem links;
 	private JMenuItem img;
 	
-	// Help + items
-	private	JMenu help;
-	private	JMenuItem readme;
-	
 	/**
 	 * Constructor for the editor view
 	 * @param title
@@ -98,12 +94,7 @@ public class EditorView extends JFrame implements Observer{
 		paste = new JMenuItem("Paste");
 		links = new JMenuItem("View URLs");
 		img = new JMenuItem("View Images");
-		
-		// Help + items
-		help = new JMenu("Help");
-		readme = new JMenuItem("Open Readme");
-		
-		
+				
 		/* Added components to the frame
 		------------------------------ */
 		//This is the menu tabs
@@ -127,11 +118,7 @@ public class EditorView extends JFrame implements Observer{
 		links.addActionListener(linksListener);
 		file.add(img);
 		img.addActionListener(imgListener);
-		
-		menuBar.add(help);
-		help.add(readme);
-		readme.addActionListener(helpreadme);
-		
+				
 		this.add(menuBar, BorderLayout.NORTH);
 		
 		// For tab items 
