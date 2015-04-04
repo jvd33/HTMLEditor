@@ -1,9 +1,7 @@
 package commands;
 import javax.swing.JTextArea;
 
-/**
- * 
- */
+import buffer.Buffer;
 
 /**
  * This class should work on auto-indenting
@@ -18,9 +16,11 @@ public class NewLineCommand implements Command, Undoable {
 	private JTextArea textArea;
 	private int carPos = -1;
 	private String insertedLine;
+	private Buffer buff;
 	
-	public NewLineCommand(JTextArea text_area){
+	public NewLineCommand(JTextArea text_area, Buffer buffer){
 		textArea = text_area;
+		buff = buffer;
 	}
 
 	/* (non-Javadoc)
@@ -44,7 +44,7 @@ public class NewLineCommand implements Command, Undoable {
 		}
 		this.insertedLine=lineStart;
 		String newText = textArea.getText();
-		textArea.setText(newText.substring(0, carPos)+lineStart+newText.substring(carPos));
+		buff.addText(newText.substring(0, carPos)+lineStart+newText.substring(carPos));
 	}
 	
 	@Override
@@ -70,17 +70,5 @@ public class NewLineCommand implements Command, Undoable {
 			textArea.setText(newText);
 		}
 		execute();
-	}
-	
-	public static void main(String args[]){
-		JTextArea testMe = new JTextArea("\ttestMe 1newLine\n");
-		testMe.setCaretPosition(testMe.getText().length());
-		NewLineCommand testCom = new NewLineCommand(testMe);
-		System.out.println(testMe.getText());
-		testCom.execute();
-		testMe.setText(testMe.getText()+"this is where it ends");
-		System.out.println(testMe.getText());
-		testCom.undo();
-		System.out.println(testMe.getText());
 	}
 }

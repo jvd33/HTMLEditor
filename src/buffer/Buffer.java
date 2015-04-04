@@ -64,7 +64,7 @@ public class Buffer extends Observable {
 		 */
 		public void addText(String s) { 
 			text = s;
-			//setChanged();
+			setChanged();
 			notifyObservers(text);
 		}
 		

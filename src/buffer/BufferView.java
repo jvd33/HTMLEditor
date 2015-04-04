@@ -126,7 +126,7 @@ public class BufferView extends JPanel implements Observer{
 			Command newCommand = null;
 			if(e.getKeyChar()=='\n' && autoindent){
 				// Auto-indent
-				newCommand = new NewLineCommand(textArea);
+				newCommand = new NewLineCommand(textArea, buffer);
 				newCommand.execute();
 			}
 			
@@ -189,7 +189,7 @@ public class BufferView extends JPanel implements Observer{
 	ActionListener insertListener = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			commandHandler.executeCommand(new InsertCommand(textArea));
+			commandHandler.executeCommand(new InsertCommand(textArea, buffer));
 		}
 	};
 	
@@ -235,9 +235,12 @@ public class BufferView extends JPanel implements Observer{
 	public void update(Observable arg0, Object arg1) {
 		if( arg0 instanceof Buffer && arg1 instanceof String){
 			buffer = (Buffer) arg0;
-			String text = (String) arg1;
-			getTextArea().setText(text);
-			
+			String newText = (String) arg1;
+			String origText = this.textArea.getText();
+			int posBeforeUpdate = getTextArea().getCaretPosition();
+			getTextArea().setText(newText);
+			int posAfterUpdate = posBeforeUpdate + (newText.length() - origText.length());
+			getTextArea().setCaretPosition(posAfterUpdate);
 		}
 
 	}

@@ -2,6 +2,8 @@ package commands;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 
+import buffer.Buffer;
+
 /**
  * Command to insert tags into the current buffer
  * @author Team Bash-Browns
@@ -11,10 +13,13 @@ public class InsertCommand implements Command, Undoable {
 	JTextArea textArea;
 	String insertedText;
 	int carPos = -1;
-	public InsertCommand(JTextArea text_area){
+	Buffer buff;
+	
+	public InsertCommand(JTextArea text_area, Buffer buffer){
 		String tag_name = new JOptionPane().showInputDialog(null, "Please enter the symbol of your desired tag");
 		insertedText = tagNameToTag(tag_name);
 		textArea = text_area;
+		buff = buffer;
 	}
 
 	/* (non-Javadoc)
@@ -27,7 +32,8 @@ public class InsertCommand implements Command, Undoable {
 		this.carPos = textArea.getCaretPosition();
 		newText = origText.substring(0, carPos) + insertedText +
 				origText.substring(carPos);
-		textArea.setText(newText);
+		buff.addText(newText);
+		//textArea.setText(newText);
 	}
 	
 	/**
