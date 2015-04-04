@@ -30,20 +30,23 @@ public class NewLineCommand implements Command, Undoable {
 	public void execute() {	
 		carPos = textArea.getCaretPosition();
 		String text = textArea.getText();
-		int i = carPos;
+		int i = carPos-2; //Go to the prior line
 		while(text.charAt(i) !='\n'&&i>0){
 			i--;
 		}
-		String lineStart ="\n";
+		String lineStart ="";
 		while(Character.isWhitespace(text.charAt(i)) && i < text.length()-1){
-			lineStart+=text.charAt(i);
+			if(text.charAt(i)!='\n'){
+				lineStart+=text.charAt(i);
+			}
 			i++;
+
 		}
 		this.insertedLine=lineStart;
 		String newText = textArea.getText();
 		textArea.setText(newText.substring(0, carPos)+lineStart+newText.substring(carPos));
 	}
-
+	
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
@@ -70,10 +73,12 @@ public class NewLineCommand implements Command, Undoable {
 	}
 	
 	public static void main(String args[]){
-		JTextArea testMe = new JTextArea("\ttestMe 1newLine");
+		JTextArea testMe = new JTextArea("\ttestMe 1newLine\n");
+		testMe.setCaretPosition(testMe.getText().length());
 		NewLineCommand testCom = new NewLineCommand(testMe);
 		System.out.println(testMe.getText());
 		testCom.execute();
+		testMe.setText(testMe.getText()+"this is where it ends");
 		System.out.println(testMe.getText());
 		testCom.undo();
 		System.out.println(testMe.getText());
