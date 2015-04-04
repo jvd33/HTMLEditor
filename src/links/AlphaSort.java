@@ -1,7 +1,9 @@
-package editor;
+package links;
 
 import java.util.List;
+
 import javax.swing.JTextArea;
+
 import java.util.Collections;
 import java.util.ArrayList;
 

@@ -1,6 +1,6 @@
 package commands;
 
-import editor.ImgView;
+import img.ImgView;
 import buffer.Buffer;
 
 /**
