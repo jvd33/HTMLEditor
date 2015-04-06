@@ -1,4 +1,5 @@
 package links;
+import java.util.List;
 import javax.swing.JTextArea;
 
 /**
@@ -10,10 +11,10 @@ public interface Behavior {
 	
 	/**
 	 * Sets the links in the view to reflect the links in the buffer
-	 * @param o
+	 * @param l, the list
 	 * @param a the area to edit
 	 */
-	public void setLinks(Object o, JTextArea a);
+	public void setLinks(List<String> l, JTextArea a);
 	
 	
 }

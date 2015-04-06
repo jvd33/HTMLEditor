@@ -16,14 +16,12 @@ import java.util.List;
  */
 public class AlphaSort implements Behavior {
 	private TreeMap<String, Integer> tempLinks;
-	private List<String> l;
 	
 	/**
 	 * Constructor
 	 * @param list is the list of all links found in the buffer
 	 */
-	public AlphaSort(List<String> list) { 
-		l = list;
+	public AlphaSort() { 
 		tempLinks = new TreeMap<String, Integer>();
 	}
 	
@@ -32,8 +30,8 @@ public class AlphaSort implements Behavior {
 	 * then sorts it according to the number of occurrences of each URL
 	 */
 	@Override
-	public void setLinks(Object o, JTextArea a) {
-		List<String> tempList = new ArrayList<String>(l);
+	public void setLinks(List<String> list, JTextArea a) {
+		List<String> tempList = new ArrayList<String>(list);
 		Collections.sort(tempList);
 		a.setEditable(true);
 		for(String s : tempList) {

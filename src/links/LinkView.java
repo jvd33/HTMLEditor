@@ -26,10 +26,12 @@ public class LinkView implements Observer {
 	//ActionListeners
 	private ActionListener alpha;
 	private ActionListener occu;
+	private ActionListener refresh;
 	
 	//Menu Buttons
 	private JMenuItem alphaM;
 	private JMenuItem occuM;
+	private JMenuItem refreshB;
 	
 	//Listing components
 	private Checker c;
@@ -45,12 +47,20 @@ public class LinkView implements Observer {
 		c = new Checker(b);
 		links = c.getLinks();
 		
-		//Action listeners
+		//action listeners
+		refresh = new ActionListener() { 
+			@Override
+			public void actionPerformed(ActionEvent e) { 
+				area.setText("");
+				behavior.setLinks(links, area);
+			}
+		};
+		
 		alpha = new ActionListener() { 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				area.setText("");
-				setSortBehavior(new AlphaSort(links));
+				setSortBehavior(new AlphaSort());
 			}
 		};
 		
@@ -58,7 +68,7 @@ public class LinkView implements Observer {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				area.setText("");
-				setSortBehavior(new OccurrenceSort(links));
+				setSortBehavior(new OccurrenceSort());
 			}
 		};
 		
@@ -68,9 +78,12 @@ public class LinkView implements Observer {
 		occuM = new JMenuItem("By Occurrence (default)");
 		occuM.addActionListener(occu);
 		bar = new JMenuBar();
-		menu = new JMenu("Sort");
+		refreshB = new JMenuItem("Refresh");
+		refreshB.addActionListener(refresh);
+		menu = new JMenu("Options");
 		menu.add(alphaM);
 		menu.add(occuM);
+		menu.add(refreshB);
 		bar.add(menu);
 		
 		//Frame behavior
@@ -80,7 +93,7 @@ public class LinkView implements Observer {
 		frame.setVisible(true);
 		frame.setSize(500, 500);
 		area = new JTextArea();
-		behavior = new OccurrenceSort(links);
+		behavior = new OccurrenceSort();
 		behavior.setLinks(links, area);
 		frame.add(area);
 		frame.setVisible(true);
@@ -93,8 +106,10 @@ public class LinkView implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		c = new Checker((Buffer)arg0);
 		links = c.getLinks();
+		area.setText("");
 		behavior.setLinks(links, area);
-		
+		System.out.println(area.getText());
+		System.out.println(links);
 	}
 	
 	/**

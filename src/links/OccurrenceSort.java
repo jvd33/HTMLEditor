@@ -12,23 +12,21 @@ import java.util.List;
  */
 public class OccurrenceSort implements Behavior {
 	
-	private List<String> list;
-	
 	/**
 	 * constructor
 	 * @param l- the list of all strings in the text
 	 */
-	public OccurrenceSort(List<String> l) { 
-		list = l;
+	public OccurrenceSort() { 
+		
 	}
 	
 	/**
 	 * Sets the links in the text area
 	 */
 	@Override
-	public void setLinks(Object o, JTextArea a) {
+	public void setLinks(List<String> l, JTextArea a) {
 		a.setEditable(true);
-		for(String s : list) { 
+		for(String s : l) { 
 			a.append(s + "\n");
 		}
 		a.setEditable(false);
