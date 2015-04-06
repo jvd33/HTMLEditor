@@ -7,6 +7,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -30,6 +32,9 @@ import commands.RedoCommand;
 import commands.SaveCommand;
 import commands.UndoCommand;
 import commands.WordWrapCommand;
+import elements.DocumentElement;
+import elements.HTMLTag;
+import elements.TextElement;
 
 
 /**
@@ -286,14 +291,54 @@ public class BufferView extends JPanel implements Observer{
 	private void updateCollapsePanel(){
 		JButton cb;
 		collapsepanel.removeAll();
-		//int bsize = buffer.getNumLines();
+		List<DocumentElement> list = new ArrayList<DocumentElement>();
+		list.add(buffer.getTag());
+		list.addAll(buffer.getTag().getChildren());
+		List<HTMLTag> listoftags = new ArrayList<HTMLTag>();
+		
+		CollapseButton [] barray = new  CollapseButton [textArea.getLineCount()];
+		HTMLTag linetag = null;
+		boolean newlinefound = false;
+		for(int arindex = 0; arindex <barray.length;arindex++){
+			
+			for(DocumentElement de: list){
+				if(de instanceof HTMLTag){
+					linetag = (HTMLTag)de;
+				}
+				else{
+					if(de.print().contains("\n")){
+						newlinefound = true;
+						break;
+					}
+				}
+				if(newlinefound){
+					break;
+				}
+			}
+			if(linetag != null){
+				cb = new CollapseButton(arindex, linetag);
+				cb.addActionListener(collapse);
+				barray[arindex]= (CollapseButton) cb;
+			}
+			else{
+				barray[arindex]= null;
+			}
+			newlinefound = false;
+			linetag = null;
+		}
+		
 		String linenum;
-		for(int x = 0; x<=textArea.getLineCount(); x++){
+		for(int x = 0; x<textArea.getLineCount(); x++){
 			linenum = ""+(x+1);
 			collapsepanel.add(new JLabel(linenum));
-			cb = new CollapseButton(x+1); 
-			cb.addActionListener(collapse);
-			collapsepanel.add(cb);
+			
+			if(barray[x]!=null){
+				collapsepanel.add(barray[x]);
+			}
+			else{
+				collapsepanel.add(new JLabel(" "));
+			}
+			
 		}
 	}
 
