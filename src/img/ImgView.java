@@ -64,6 +64,11 @@ public class ImgView implements Observer {
 		frame.repaint();
 		
 	}
+	
+	/**
+	 * adds the img files referenced in the text to the menu bar
+	 * @param list, a list of paths
+	 */
 	private void addMenuItems(List<String> list) { 
 		for(final String s : imgPaths) { 
 			JMenuItem temp = new JMenuItem(s);
@@ -80,6 +85,10 @@ public class ImgView implements Observer {
 			
 		}
 	}
+	
+	/**
+	 * updates the view if you add more imgs
+	 */
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		buff = (Buffer) arg0;
@@ -102,9 +111,7 @@ public class ImgView implements Observer {
 		label.setIcon(icon);
 		label.repaint();
 		frame.repaint();
-		frame.pack();
-		
-		
+		frame.pack();	
 	}
 
 }

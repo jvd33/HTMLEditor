@@ -46,6 +46,10 @@ public class HTMLParser {
 		return root; //return the root (aggregate of html tags)
 	}
 	
+	/**
+	 * gets all links in the parsed text
+	 * @return List<String>
+	 */
 	public List<String> getLinks() { 
 		return links;
 	}

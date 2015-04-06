@@ -15,6 +15,7 @@ import java.util.List;
 public class Checker{
 	private Buffer buff;
 	private HTMLParser parser;
+	
 	/**
 	 * Creates a new New Concrete Command taking in the current buffer
 	 * @param b The buffer in question
@@ -36,7 +37,6 @@ public class Checker{
 	/**
 	 * Returns a list of the urls found in the text
 	 */
-	
 	public List<String> getLinks() { 
 		return parser.getLinks();
 	}

@@ -6,7 +6,6 @@ import javax.swing.JTextArea;
  * @author Team Bash-Browns
  *
  */
-
 public interface Behavior {
 	
 	/**

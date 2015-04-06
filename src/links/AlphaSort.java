@@ -1,15 +1,13 @@
 package links;
 
 import javax.swing.JTextArea;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * Algorithm to sort the links and remove all duplicates
@@ -60,29 +58,4 @@ public class AlphaSort implements Behavior {
 		
 	}
 
-}
-
-/**
- * Comparator to sort the map by values 
- * @author Team Bash-Browns
- *
- */
-class ValueComparator implements Comparator<Object> {
-	
-	Map<String, Integer> map;
-	
-	public ValueComparator(Map<String, Integer> unsorted) { 
-		map = unsorted;
-	}
-	
-	
-	@Override
-	public int compare(Object arg0, Object arg1) {
-		if(map.get(arg0).equals(map.get(arg1))) { 
-			return 1;
-		} else { 
-			return -(map.get(arg0).compareTo(map.get(arg1)));
-		}
-	} 
-	
 }
