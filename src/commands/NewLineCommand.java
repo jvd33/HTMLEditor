@@ -41,13 +41,8 @@ public class NewLineCommand implements Command, Undoable {
 		// Put the index right before the \n character
 		i--;
 		int tagIndentation = 0;
-		while(text.charAt(i)!='\n' && i >= 0){
-			// Not loving this fix, but it accounts for the
-			// first char being whitespace
-			if(i==0 && Character.isWhitespace(text.charAt(i))){
-				lineStart += text.charAt(i);
-				break;
-			}
+		
+		while(i >= 0 && text.charAt(i)!='\n' ){
 			if(text.charAt(i)=='>'){
 				// Will add or subtract 1 based 
 				// on whether it's a start or end tag
