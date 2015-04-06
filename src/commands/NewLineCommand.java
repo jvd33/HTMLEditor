@@ -41,12 +41,23 @@ public class NewLineCommand implements Command, Undoable {
 		// Put the index right before the \n character
 		i--;
 		int tagIndentation = 0;
-		while(text.charAt(i)!='\n' && i > 0){
+		while(text.charAt(i)!='\n' && i >= 0){
+			// Not loving this fix, but it accounts for the
+			// first char being whitespace
+			if(i==0 && Character.isWhitespace(text.charAt(i))){
+				lineStart += text.charAt(i);
+				break;
+			}
 			if(text.charAt(i)=='>'){
+				// Will add or subtract 1 based 
+				// on whether it's a start or end tag
 				tagIndentation += determineTagIndentation(text, i);
 			}
 			i--;
 		}
+		
+		// Adds tabs if there are more start tags than end tags
+		// (Probably shouldn't do the opposite if vice versa?)
 		for(int j = 0; j<tagIndentation; j++){
 			lineStart += "\t";
 		}
@@ -91,8 +102,8 @@ public class NewLineCommand implements Command, Undoable {
 	 * Helper method that takes in a valid tag and checks if it
 	 * is a start or end tag to determine the amount of
 	 * indentation that should be added
-	 * @param tag
-	 * @return
+	 * @param tag String of the tag in question
+	 * @return Whether the tag is a start tag or an end
 	 */
 	private boolean isStartTag(String tag){
 		if(tag.contains("</") || tag.contains("<img")){
