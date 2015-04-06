@@ -300,9 +300,10 @@ public class EditorView extends JFrame implements Observer{
 		    	BufferView bv =null;
 		    	if(tabBar.getComponentAt(z) instanceof BufferView){
 		    		bv = (BufferView) tabBar.getComponentAt(z);
-		    		if(JOptionPane.showConfirmDialog(null,"Would you like to save?", "Save?", JOptionPane.YES_NO_OPTION) == 0){
-		    			//If the user chooses to save
-		    			CHO.executeCommand(new SaveCommand(editor.getCurrentBuffer()));
+		    		Buffer toSave = bv.getBuffer();
+		    		//If the user chooses to save
+		    		if(JOptionPane.showConfirmDialog(null,"Would you like to save "+toSave.getFile().toString()+"?", "Save?", JOptionPane.YES_NO_OPTION) == 0){
+		    			CHO.executeCommand(new SaveCommand(toSave));
 		    		}
 		    		
 		    	}
