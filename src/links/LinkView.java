@@ -108,8 +108,6 @@ public class LinkView implements Observer {
 		links = c.getLinks();
 		area.setText("");
 		behavior.setLinks(links, area);
-		System.out.println(area.getText());
-		System.out.println(links);
 	}
 	
 	/**
