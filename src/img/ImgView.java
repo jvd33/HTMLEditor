@@ -70,6 +70,7 @@ public class ImgView implements Observer {
 	 * @param list, a list of paths
 	 */
 	private void addMenuItems(List<String> list) { 
+		menu.removeAll();
 		for(final String s : imgPaths) { 
 			JMenuItem temp = new JMenuItem(s);
 			temp.addActionListener(new ActionListener() {
@@ -92,7 +93,8 @@ public class ImgView implements Observer {
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		buff = (Buffer) arg0;
-		addMenuItems(((Buffer) arg0).getImgs());
+		imgPaths = buff.getImgs();
+		addMenuItems(imgPaths);
 		
 	}
 	
