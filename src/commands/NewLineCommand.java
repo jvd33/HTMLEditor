@@ -28,24 +28,79 @@ public class NewLineCommand implements Command, Undoable {
 	 */
 	@Override
 	public void execute() {	
+		// The whitespace that will be at the start of the new line
+		String lineStart = "";
+		
+		// Carat position should be right after the \n character
 		carPos = textArea.getCaretPosition();
+		
+		// Index of the \n character (I think)
+		int i = carPos-1;
 		String text = textArea.getText();
-		int i = carPos-2; //Go to the prior line
-		while(text.charAt(i) !='\n'&&i>0){
+
+		// Put the index right before the \n character
+		i--;
+		int tagIndentation = 0;
+		while(text.charAt(i)!='\n' && i > 0){
+			if(text.charAt(i)=='>'){
+				tagIndentation += determineTagIndentation(text, i);
+			}
 			i--;
 		}
-		String lineStart ="";
-		while(Character.isWhitespace(text.charAt(i)) && i < text.length()-1){
-			if(text.charAt(i)!='\n'){
-				lineStart+=text.charAt(i);
-			}
-			i++;
-
+		for(int j = 0; j<tagIndentation; j++){
+			lineStart += "\t";
 		}
+		i++;
+		
+		//Very long conditional; basically says "is this the start of a line?"
+		while(Character.isWhitespace(text.charAt(i)) &&	text.charAt(i) != '\n' && i < text.length()){
+			lineStart += text.charAt(i);
+			i++;
+		}
+		
 		this.insertedLine=lineStart;
 		String newText = textArea.getText();
 		buff.addText(newText.substring(0, carPos)+lineStart+newText.substring(carPos));
 	}
+	
+	/**
+	 * Checks to see if the editor should indent another
+	 * level based on if a start tag is in the prior line
+	 * 
+	 * @param text Text of the document
+	 * @param i Index of the '>' character of a tag
+	 * @return the amount of tabs that should be added (this will be negative on end tags)
+	 */
+	private int determineTagIndentation(String text, int i){
+		String tag = "";
+		while(text.charAt(i)!='\n' && i > 0){
+			tag = text.charAt(i) + tag;
+			
+			if(text.charAt(i)=='<'){
+				if(isStartTag(tag))
+					return 1;
+				else
+					return -1;
+			}
+			i--;
+		}
+		return 0;
+	}
+	
+	/**
+	 * Helper method that takes in a valid tag and checks if it
+	 * is a start or end tag to determine the amount of
+	 * indentation that should be added
+	 * @param tag
+	 * @return
+	 */
+	private boolean isStartTag(String tag){
+		if(tag.contains("</") || tag.contains("<img")){
+			return false;
+		}
+		return true;
+	}
+	
 	
 	@Override
 	public void undo() {
@@ -55,7 +110,7 @@ public class NewLineCommand implements Command, Undoable {
 			
 			String newText = origText.substring(0, carPos) + origText.substring(carPos+insertedLine.length());
 			this.carPos = -1;
-			textArea.setText(newText);
+			buff.addText(newText);
 		}
 	}
 
@@ -67,7 +122,7 @@ public class NewLineCommand implements Command, Undoable {
 			
 			String newText = origText.substring(0, carPos) + this.insertedLine+ origText.substring(carPos);
 			//this.ix = -1;
-			textArea.setText(newText);
+			buff.addText(newText);
 		}
 		execute();
 	}
