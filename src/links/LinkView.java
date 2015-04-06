@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Creates the popup window when link command is called
- * @author joe
+ * @author Team Bash-Browns
  *
  */
 public class LinkView implements Observer {
@@ -28,12 +28,10 @@ public class LinkView implements Observer {
 	
 	//ActionListeners
 	private ActionListener alpha;
-	private ActionListener num;
 	private ActionListener occu;
 	
 	//Menu Buttons
 	private JMenuItem alphaM;
-	private JMenuItem numO;
 	private JMenuItem occuM;
 	
 	//Listing components
@@ -59,14 +57,6 @@ public class LinkView implements Observer {
 			}
 		};
 		
-		num = new ActionListener() { 
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				area.setText("");
-				setSortBehavior(new DuplicateSort(links));
-			}
-		};
-		
 		occu = new ActionListener() { 
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -78,14 +68,11 @@ public class LinkView implements Observer {
 		//menu items
 		alphaM = new JMenuItem("Alphabetically");
 		alphaM.addActionListener(alpha);
-		numO = new JMenuItem("Number of Occurrences (Descending)");
-		numO.addActionListener(num);
 		occuM = new JMenuItem("By Occurrence (default)");
 		occuM.addActionListener(occu);
 		bar = new JMenuBar();
 		menu = new JMenu("Sort");
 		menu.add(alphaM);
-		menu.add(numO);
 		menu.add(occuM);
 		bar.add(menu);
 		

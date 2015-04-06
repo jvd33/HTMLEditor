@@ -22,7 +22,7 @@ import buffer.Buffer;
 /**
  * Allows the user to display all the images in the source text
  * only displays files on the user's local system
- * @author joe
+ * @author Team Bash-Browns
  *
  */
 public class ImgView implements Observer {
@@ -44,7 +44,8 @@ public class ImgView implements Observer {
 	 * @param b the active buffer
 	 */
 	public ImgView(Buffer b) { 
-		b.addObserver(this);
+		buff = b;
+		buff.addObserver(this);
 		imgPaths = b.getImgs();
 		
 		//Swing

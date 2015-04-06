@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Default sorting behavior, sorts the links by their occurrence
  * in the text.
- * @author joe
+ * @author Team Bash-Browns
  *
  */
 public class OccurrenceSort implements Behavior {

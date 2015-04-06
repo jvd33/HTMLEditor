@@ -1,38 +1,88 @@
 package links;
 
-import java.util.List;
-
 import javax.swing.JTextArea;
 
-import java.util.Collections;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Comparator;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Algorithm to sort the link view alphabetically
+ * Algorithm to sort the links and remove all duplicates
  * @author Team Bash-Browns
  *
  */
 public class AlphaSort implements Behavior {
+	private TreeMap<String, Integer> tempLinks;
+	private List<String> l;
 	
-	private List<String> list;
-	private List<String> tempList;
-	
-	public AlphaSort(List<String> l) { 
-		list = l;
-	}
-
-
 	/**
-	 * Sorts the list alphabetically and updates the text area
+	 * Constructor
+	 * @param list is the list of all links found in the buffer
+	 */
+	public AlphaSort(List<String> list) { 
+		l = list;
+		tempLinks = new TreeMap<String, Integer>();
+	}
+	
+	/**
+	 * Takes a list of URLs, counts the occurrences
+	 * then sorts it according to the number of occurrences of each URL
 	 */
 	@Override
 	public void setLinks(Object o, JTextArea a) {
-		tempList = new ArrayList<String>(list);
+		List<String> tempList = new ArrayList<String>(l);
 		Collections.sort(tempList);
 		a.setEditable(true);
-		for(String s : tempList) { 
-			a.append(s + "\n");
+		for(String s : tempList) {
+			int count = 1;
+			if(tempLinks.containsKey(s)) { 
+				count = tempLinks.get(s);
+				tempLinks.put(s, count + 1);
+			}
+			else { 
+				tempLinks.put(s, count);
+			}
+		}
+		Set<String> set = tempLinks.keySet();
+		Iterator<String> it = set.iterator();
+		while(it.hasNext()) { 
+			String key = it.next();
+			int count = tempLinks.get(key);
+			a.append(key + ": " + count + "\n");
+			
 		}
 		a.setEditable(false);
+		
 	}
+
+}
+
+/**
+ * Comparator to sort the map by values 
+ * @author Team Bash-Browns
+ *
+ */
+class ValueComparator implements Comparator<Object> {
+	
+	Map<String, Integer> map;
+	
+	public ValueComparator(Map<String, Integer> unsorted) { 
+		map = unsorted;
+	}
+	
+	
+	@Override
+	public int compare(Object arg0, Object arg1) {
+		if(map.get(arg0).equals(map.get(arg1))) { 
+			return 1;
+		} else { 
+			return -(map.get(arg0).compareTo(map.get(arg1)));
+		}
+	} 
+	
 }
