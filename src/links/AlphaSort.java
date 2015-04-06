@@ -53,6 +53,7 @@ public class AlphaSort implements Behavior {
 			
 		}
 		a.setEditable(false);
+		tempLinks.clear();
 		
 	}
 
