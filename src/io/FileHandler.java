@@ -78,6 +78,8 @@ public class FileHandler {
 			
 			catch (FileNotFoundException e) {
 				e.printStackTrace();
+			}catch(NullPointerException e){
+				System.out.println("file not found");
 			}
 			System.out.println("Saved the file!");
 			return file;
