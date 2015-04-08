@@ -284,6 +284,8 @@ public class BufferView extends JPanel implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			CollapseButton cb = (CollapseButton)e.getSource();
 			cb.switchText();
+			cb.getTag().collapse();
+			System.out.print("Collapse this tag"+ cb.getTag().print());
 			
 		} 	
 	};
@@ -294,7 +296,7 @@ public class BufferView extends JPanel implements Observer{
 		List<DocumentElement> list = new ArrayList<DocumentElement>();
 		list.add(buffer.getTag());
 		list.addAll(buffer.getTag().getChildren());
-		List<HTMLTag> listoftags = new ArrayList<HTMLTag>();
+		
 		
 		CollapseButton [] barray = new  CollapseButton [textArea.getLineCount()];
 		HTMLTag linetag = null;

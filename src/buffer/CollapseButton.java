@@ -36,5 +36,8 @@ public class CollapseButton extends JButton{
 		return  linenum;
 	}
 	
+	public HTMLTag getTag(){
+		return tag;
+	}
 	
 }
