@@ -33,6 +33,7 @@ public class Buffer extends Observable {
 			sourceFile = f;
 			undoStack = new Stack<String>();
 			redoStack = new Stack<String>();
+			tag = new HTMLTag(null, null);
 			this.hasView = false;
 		}
 		
