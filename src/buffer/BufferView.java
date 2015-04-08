@@ -301,33 +301,34 @@ public class BufferView extends JPanel implements Observer{
 		CollapseButton [] barray = new  CollapseButton [textArea.getLineCount()];
 		HTMLTag linetag = null;
 		boolean newlinefound = false;
-		for(int arindex = 0; arindex <barray.length;arindex++){
+		int arindex = 0;
 			
-			for(DocumentElement de: list){
-				if(de instanceof HTMLTag){
-					linetag = (HTMLTag)de;
+		for(DocumentElement de: list){
+			if(de instanceof HTMLTag){
+				linetag = (HTMLTag)de;
+			}
+			else if(de.print().contains("\n")){
+					newlinefound = true;
+			}
+			
+			if(newlinefound){
+				if(linetag != null){
+					cb = new CollapseButton(arindex, linetag);
+					cb.addActionListener(collapse);
+					barray[arindex]= (CollapseButton) cb;
 				}
 				else{
-					if(de.print().contains("\n")){
-						newlinefound = true;
-						break;
-					}
+					barray[arindex]= null;
 				}
-				if(newlinefound){
-					break;
-				}
+				arindex++;
+				newlinefound = false;
+				linetag = null;
 			}
-			if(linetag != null){
-				cb = new CollapseButton(arindex, linetag);
-				cb.addActionListener(collapse);
-				barray[arindex]= (CollapseButton) cb;
-			}
-			else{
-				barray[arindex]= null;
-			}
-			newlinefound = false;
-			linetag = null;
+				
 		}
+			
+			
+		
 		
 		String linenum;
 		for(int x = 0; x<textArea.getLineCount(); x++){
