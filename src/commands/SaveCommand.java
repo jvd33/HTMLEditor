@@ -32,32 +32,31 @@ public class SaveCommand implements Command {
 	 */
 	@Override
 	public void execute() {
-			if(buff.getFile() == null) { 
-				JFileChooser jfc = new JFileChooser();
-				jfc.showDialog(null, "Save as");
-				try { 
-					String path = jfc.getSelectedFile().toString();
-					System.out.println("SELECTED " + path);
-					buff.setFile(path);
-					buff.notifyObservers();
-				} catch(NullPointerException n) { 
-					System.out.println("No file entered");
-				}
-				
+		if(buff.getFile() == null) { 
+			JFileChooser jfc = new JFileChooser();
+			jfc.showDialog(null, "Save as");
+			try { 
+				String path = jfc.getSelectedFile().toString();
+				System.out.println("SELECTED " + path);
+				buff.setFile(path);
+				buff.notifyObservers();
+			} catch(NullPointerException n) { 
+				System.out.println("No file entered");
 			}
 			
-			try{
-				File file= buff.getFile();
-				FileHandler fh = new FileHandler(file);
-				fh.writeToFile(buff);
-				
+		}
+		
+		try{
+			File file= buff.getFile();
+			FileHandler fh = new FileHandler(file);
+			fh.writeToFile(buff);
+			if(file != null){
 				JOptionPane.showMessageDialog(null, "File has been saved.");
-			}catch(NullPointerException n){
-				JOptionPane.showMessageDialog(null, "Your file could not be saved");
 			}
-			
-			
+		}catch(NullPointerException n){
+			JOptionPane.showMessageDialog(null, "Your file could not be saved");
+		}
 		
 	}
-
+	
 }
