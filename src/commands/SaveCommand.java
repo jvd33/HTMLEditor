@@ -40,19 +40,21 @@ public class SaveCommand implements Command {
 					System.out.println("SELECTED " + path);
 					buff.setFile(path);
 					buff.notifyObservers();
-					Command save = new SaveCommand(buff);
-					save.execute();
 				} catch(NullPointerException n) { 
 					System.out.println("No file entered");
 				}
 				
 			}
 			
-			File file= buff.getFile();
-			FileHandler fh = new FileHandler(file);
-			fh.writeToFile(buff);
-			
-			JOptionPane.showMessageDialog(null, "File has been saved.");
+			try{
+				File file= buff.getFile();
+				FileHandler fh = new FileHandler(file);
+				fh.writeToFile(buff);
+				
+				JOptionPane.showMessageDialog(null, "File has been saved.");
+			}catch(NullPointerException n){
+				JOptionPane.showMessageDialog(null, "Your file could not be saved");
+			}
 			
 			
 		
