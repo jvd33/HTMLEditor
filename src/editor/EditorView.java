@@ -193,10 +193,6 @@ public class EditorView extends JFrame implements Observer{
 					String path = jfc.getSelectedFile().toString();
 					editor.getCurrentBuffer().setFile(path);
 					editor.notifyObservers();
-					//I don't think these last two lines are necessary but they will stay here until that is determined
-					
-					//Command save = new SaveCommand(currentBuffer);
-					//CHO.executeCommand(save);
 				}
 				Checker checker = new Checker(currentBuffer);
 				if(checker.check()){
@@ -280,17 +276,7 @@ public class EditorView extends JFrame implements Observer{
 			System.out.println("Images was called");
 		}
 	};
-	/*
-	 * ReadMe listener
-	 */
-	ActionListener helpreadme = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			System.out.print("readme Button pushed!");
-			//Command readmecommand = new ReadMeCommand();
-			//readmecommand.execute();
-		}
-	};
+	
 	// close listener
 	ActionListener close = new ActionListener(){
 		@Override
@@ -325,7 +311,6 @@ public class EditorView extends JFrame implements Observer{
 
 	@Override
 	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
 		if( arg instanceof ArrayList && o instanceof HTMLEditor){
 			editor = (HTMLEditor) o;
 			List<Buffer> list = (ArrayList<Buffer>) arg;
@@ -333,8 +318,6 @@ public class EditorView extends JFrame implements Observer{
 				
 				BufferView bv = new BufferView(b);
 				editor.setActiveView(bv);
-				//bv.addKeyListener(buffedit);
-				//panel.add(bv, BorderLayout.CENTER);
 				bv.setVisible(true);
 				if(b.hasView()) { 
 					continue;
@@ -356,7 +339,6 @@ public class EditorView extends JFrame implements Observer{
 						  i++;
 						  
 						 
-						//tabBar.addTab(b.getFile().getName(), bv);
 					} catch(NullPointerException e) { 
 						JPanel tab = new JPanel(new FlowLayout());
 						  JLabel title = new JLabel("New File");
