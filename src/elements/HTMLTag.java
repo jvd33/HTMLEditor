@@ -110,9 +110,9 @@ public class HTMLTag implements DocumentElement{
 			String returnString = getStartTag();
 			if(isCollapsed){	// It should print its start tag
 				if(returnString.contains("<a href")) { 
-					returnString = "<a>";
+					returnString = "<a+>";
 				}
-				return returnString;
+				return returnString.substring(0, getStartTag().length()-1)+"+>";
 			}else{
 				for(DocumentElement de: children) {
 					returnString += de.print();
