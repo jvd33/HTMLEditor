@@ -15,7 +15,6 @@ public class HTMLTag implements DocumentElement{
 		private String startTag, endTag;
 		private String attribute;
 		private boolean isCollapsed;
-		private int linesSpanned = 1;
 		
 		/**
 		 * Constructor of the HTMLTag
@@ -59,7 +58,10 @@ public class HTMLTag implements DocumentElement{
 			return allChildren;
 		}
 		
-		//TODO mark this because this needs to go away after I test something
+		/**
+		 * Get this specific tag's children
+		 * @return
+		 */
 		public List<DocumentElement> getChildrenThis() { 
 			return children;
 		}
@@ -110,9 +112,9 @@ public class HTMLTag implements DocumentElement{
 			String returnString = getStartTag();
 			if(isCollapsed){	// It should print its start tag
 				if(returnString.contains("<a href")) { 
-					returnString = "<a>";
+					returnString = "<a+>";
 				}
-				return returnString;
+				return returnString.substring(0, getStartTag().length()-1)+"+>";
 			}else{
 				for(DocumentElement de: children) {
 					returnString += de.print();

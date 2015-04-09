@@ -18,9 +18,13 @@ public class NewLineCommand implements Command, Undoable {
 	private String insertedLine;
 	private Buffer buff;
 	
+	private String preText;
+	private String postText;
+	
 	public NewLineCommand(JTextArea text_area, Buffer buffer){
 		textArea = text_area;
 		buff = buffer;
+		this.preText = buffer.toString();
 	}
 
 	/* (non-Javadoc)
@@ -67,6 +71,7 @@ public class NewLineCommand implements Command, Undoable {
 		this.insertedLine=lineStart;
 		String newText = textArea.getText();
 		buff.addText(newText.substring(0, carPos)+lineStart+newText.substring(carPos));
+		this.postText = buff.toString();
 	}
 	
 	/**
@@ -111,25 +116,31 @@ public class NewLineCommand implements Command, Undoable {
 	@Override
 	public void undo() {
 		// TODO Auto-generated method stub
-		String origText = textArea.getText();
+		/*String origText = textArea.getText();
 		if(this.carPos >= 0 && origText.substring(carPos, carPos+insertedLine.length()).equals(insertedLine)){
 			
 			String newText = origText.substring(0, carPos) + origText.substring(carPos+insertedLine.length());
 			this.carPos = -1;
 			buff.addText(newText);
+		}*/
+		if(this.preText != null){
+			this.buff.addText(preText);
 		}
 	}
 
 	@Override
 	public void redo() {
 		// TODO Auto-generated method stub
-		String origText = textArea.getText();
+		/*String origText = textArea.getText();
 		if(this.carPos >= 0 && this.insertedLine.length() > 0){
 			
 			String newText = origText.substring(0, carPos) + this.insertedLine+ origText.substring(carPos);
 			//this.ix = -1;
 			buff.addText(newText);
 		}
-		execute();
+		execute();*/
+		if(this.postText != null){
+			this.buff.addText(postText);
+		}
 	}
 }

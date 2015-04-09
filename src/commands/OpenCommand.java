@@ -2,7 +2,6 @@ package commands;
 import io.FileHandler;
 
 import java.io.File;
-import parser.Checker;
 import editor.HTMLEditor;
 import buffer.Buffer;
 import parser.HTMLParser;
