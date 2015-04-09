@@ -20,7 +20,11 @@ public class ParserIterator implements Iterator<String> {
 	private List<String> urls;
 	private List<String> tags;
 	private Iterator<String> internal;
-	//TODO get rid of the comment stripper, make the parser ignore instead?
+	
+	/**
+	 * Constructor
+	 * @param s, the text to parse
+	 */
 	public ParserIterator(String s) {
 		iteratee = s;
 		Pattern HTMLHead = Pattern.compile("<.*?>");
@@ -80,7 +84,6 @@ public class ParserIterator implements Iterator<String> {
 	 * valid html elements and strings. Keeps the structure
 	 */
 	private void stripText() {
-		//System.out.println(iteratee);
 		this.stripComments();
 		head.reset(iteratee);
 		text.reset(iteratee);
@@ -110,18 +113,5 @@ public class ParserIterator implements Iterator<String> {
 	public List<String> getLinks() { 
 		return urls;
 	}
-	
-	/*
-	// JUST INCASE THIS BREAKS AGAIN
-	public List get() { 
-		return tags;
-	}
-	
-	public static void main(String args[]) { 
-		String t = "<html><div><p>sup foig\n</p></div>text</html>";
-		ParserIterator p = new ParserIterator(t);
-		System.out.println(p.get());
-	}*/
-	
-	
+		
 }
