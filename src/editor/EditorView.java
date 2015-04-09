@@ -49,9 +49,6 @@ public class EditorView extends JFrame implements Observer{
 	
 	// Edit + items
 	private JMenu edit;
-	private JMenuItem cut;
-	private JMenuItem copy;
-	private JMenuItem paste;
 	private JMenuItem links;
 	private JMenuItem img;
 	
@@ -86,9 +83,6 @@ public class EditorView extends JFrame implements Observer{
 		
 		//
 		edit = new JMenu("Edit");
-		cut = new JMenuItem("Cut");
-		copy = new JMenuItem("Copy");
-		paste = new JMenuItem("Paste");
 		links = new JMenuItem("View URLs");
 		img = new JMenuItem("View Images");
 				
@@ -105,12 +99,6 @@ public class EditorView extends JFrame implements Observer{
 		save.addActionListener(filesave);
 		
 		menuBar.add(edit);
-		edit.add(cut);
-		cut.addActionListener(cutListener);
-		edit.add(copy);
-		copy.addActionListener(copyListener);
-		edit.add(paste);
-		paste.addActionListener(pasteListener);
 		file.add(links);
 		links.addActionListener(linksListener);
 		file.add(img);
@@ -214,36 +202,7 @@ public class EditorView extends JFrame implements Observer{
 			}
 		}
 	};
-	
-	/*
-	 * Copy command listener
-	 */
-	ActionListener copyListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			CHO.executeCommand(new CopyCommand(editor.getActiveView().getTextArea(), editor));
-		}
-	};	
-	
-	/*
-	 * Cut command listener
-	 */
-	ActionListener cutListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e){
-			CHO.executeCommand(new CutCommand(editor.getActiveView().getTextArea(), editor));
-		}
-	};
-	
-	/*
-	 * Paste command listener
-	 */
-	ActionListener pasteListener = new ActionListener(){
-		@Override
-		public void actionPerformed(ActionEvent e){
-			CHO.executeCommand(new PasteCommand(editor.getActiveView().getTextArea(), editor));
-		}
-	};
+
 	
 	/*
 	 * Link view listener

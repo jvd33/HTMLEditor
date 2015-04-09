@@ -46,6 +46,9 @@ public class BufferView extends JPanel implements Observer{
 	private JButton newline;
 	private JButton inserttag;
 	private JButton multipleindent;
+	private JButton copy;
+	private JButton cut;
+	private JButton paste;
 	private JPanel sidepanel;
     private GridLayout gl;
     private JPanel collapsepanel;
@@ -99,6 +102,10 @@ public class BufferView extends JPanel implements Observer{
 		inserttag = new JButton("Insert Tag...");
 		multipleindent = new JButton("Indent lines...");
 		
+		copy = new JButton("Copy");
+		cut = new JButton("Cut");
+		paste = new JButton("Paste");
+		
 		//adding buttons and action listeners
 		toolBar.add(undo);
 		undo.addActionListener(undoListener);
@@ -112,6 +119,12 @@ public class BufferView extends JPanel implements Observer{
 		inserttag.addActionListener(insertListener);
 		toolBar.add(multipleindent);
 		multipleindent.addActionListener(indentLinesListener);
+		toolBar.add(copy);
+		copy.addActionListener(copyListener);
+		toolBar.add(cut);
+		cut.addActionListener(cutListener);
+		toolBar.add(paste);
+		paste.addActionListener(pasteListener);
 		this.add(toolBar, BorderLayout.NORTH);
 		this.add(textArea, BorderLayout.CENTER);
 		this.add(sidepanel, BorderLayout.WEST);
@@ -232,6 +245,27 @@ public class BufferView extends JPanel implements Observer{
 		public void actionPerformed(ActionEvent e) {
 			commandHandler.executeCommand(new IndentLinesCommand(textArea));
 		}
+	};
+	
+	ActionListener copyListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new CopyCommand(textArea));
+		} 	
+	};
+	
+	ActionListener cutListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new CutCommand(textArea, buffer));
+		} 	
+	};
+	
+	ActionListener pasteListener = new ActionListener(){
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			commandHandler.executeCommand(new PasteCommand(textArea, buffer));
+		} 	
 	};
 	
 	public Buffer getBuffer(){

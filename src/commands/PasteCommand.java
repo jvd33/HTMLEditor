@@ -1,7 +1,14 @@
 package commands;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.DataFlavor;
+import java.awt.datatransfer.StringSelection;
+
 import javax.swing.JTextArea;
 
+import parser.HTMLParser;
+import buffer.Buffer;
 import editor.HTMLEditor;
 
 /**
@@ -13,16 +20,16 @@ import editor.HTMLEditor;
 public class PasteCommand implements Command, Undoable {
 	
 	private JTextArea textarea;
-	private HTMLEditor editor;
+	private Buffer buffer;
 
 	/**
 	 * Constructor of the cut command
 	 * @param jta Text area of the current buffer
 	 * @param e The HTML editor that holds the clipboard
 	 */
-	public PasteCommand(JTextArea jta, HTMLEditor e){
+	public PasteCommand(JTextArea jta, Buffer b){
 		textarea = jta;
-		editor = e;
+		buffer = b;
 	}
 
 	/* (non-Javadoc)
@@ -48,7 +55,17 @@ public class PasteCommand implements Command, Undoable {
 	 */
 	@Override
 	public void execute() {
-		String pastedtext = editor.getClipboard();
-		textarea.insert(pastedtext, textarea.getCaretPosition());
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		String pasteText = "";
+		try{
+			pasteText = (String) clipboard.getContents(null).getTransferData(DataFlavor.stringFlavor);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		
+		
+		String newText = textarea.getText().substring(0, textarea.getCaretPosition()) + pasteText
+				+ textarea.getText().substring(textarea.getCaretPosition());
+		buffer.addText(newText);
 	}
 }

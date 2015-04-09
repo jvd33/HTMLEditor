@@ -1,5 +1,9 @@
 package commands;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+
 import javax.swing.JTextArea;
 
 import editor.HTMLEditor;
@@ -15,16 +19,14 @@ import buffer.BufferView;
 public class CopyCommand implements Command {
 	
 	private JTextArea textarea;
-	private HTMLEditor htmleditor;
 	
 	/**
 	 * Constructor of the copy command
 	 * @param ta Text area of the current buffer
 	 * @param e The HTML editor that holds the clipboard
 	 */
-	public CopyCommand(JTextArea ta, HTMLEditor e) {
+	public CopyCommand(JTextArea ta) {
 		textarea = ta;
-		htmleditor = e;
 	}
 
 	/* (non-Javadoc)
@@ -32,9 +34,9 @@ public class CopyCommand implements Command {
 	 */
 	@Override
 	public void execute() {
-		System.out.println("this is the text: " + textarea.getText());
-		htmleditor.setClipboard(textarea.getSelectedText());
-		System.out.println(htmleditor.getClipboard());
+		StringSelection selection = new StringSelection(textarea.getSelectedText());
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+		clipboard.setContents(selection, selection);
 	}
 
 }
