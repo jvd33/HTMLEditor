@@ -135,13 +135,14 @@ public class BufferView extends JPanel implements Observer{
 				/*newCommand = new NewLineCommand(textArea,buffer);
 				newCommand.execute();*/
 				commandHandler.executeCommand(new NewLineCommand(textArea,buffer));
-			}
+			}else{
 			
-			// Save-state
-			/*Command buffState = new BuffStateCommand(buffer, textArea.getText());
-			buffState.execute();*/
-			commandHandler.executeCommand(new BuffStateCommand(buffer, textArea.getText()));
-			//edit lines
+				// Save-state
+				/*Command buffState = new BuffStateCommand(buffer, textArea.getText());
+				buffState.execute();*/
+				commandHandler.executeCommand(new BuffStateCommand(buffer, textArea.getText()));
+				//edit lines
+			}
 			updateCollapsePanel();
 			
 		}
