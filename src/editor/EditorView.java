@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
@@ -300,6 +301,7 @@ public class EditorView extends JFrame implements Observer{
 		    	BufferView bv =null;
 		    	if(tabBar.getComponentAt(z) instanceof BufferView){
 		    		bv = (BufferView) tabBar.getComponentAt(z);
+		    		
 		    		try{
 		    			Buffer toSave = bv.getBuffer();
 		    			//If the user chooses to save
@@ -307,7 +309,11 @@ public class EditorView extends JFrame implements Observer{
 		    				CHO.executeCommand(new SaveCommand(toSave));
 		    			}
 		    		}catch(NullPointerException npe){
-		    			JOptionPane.showMessageDialog(null, "Your file could not be saved");
+		    			Buffer toSave = bv.getBuffer();
+		    			//If the user chooses to save
+		    			if(JOptionPane.showConfirmDialog(null,"Would you like to save as a new file?", "Save?", JOptionPane.YES_NO_OPTION) == 0){
+		    				CHO.executeCommand(new SaveCommand(toSave));
+		    			}
 		    		}
 		    	}
 		      tabBar.remove(z);
