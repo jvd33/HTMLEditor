@@ -20,7 +20,6 @@ public class WordWrapCommand implements Command{
 	@Override
 	public void execute() {
 		textArea.setLineWrap(!textArea.getLineWrap());
-		System.out.println("Word wrap is now "+textArea.getLineWrap());
 	}
 
 

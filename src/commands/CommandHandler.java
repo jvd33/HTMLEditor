@@ -36,7 +36,6 @@ public class CommandHandler {
 		}else if(c instanceof RedoCommand){
 			this.redoCommand();
 		}else{
-			System.out.println("Executing "+c.getClass());
 			c.execute();
 		}
 	}
@@ -52,7 +51,6 @@ public class CommandHandler {
 			return;
 		}
 		Undoable c = (Undoable)this.undoables.pop();
-		System.out.println("Undoing "+c.getClass());
 		c.undo();
 		redoables.push(c);
 	}
@@ -68,14 +66,8 @@ public class CommandHandler {
 			return;
 		}
 		Undoable c = (Undoable)this.redoables.pop();
-		System.out.println("Redoing "+c.getClass());
 		c.redo();
 		undoables.push(c);
-	}
-	
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
@@ -103,7 +95,6 @@ interface Undoable{
 	 * Takes the steps necessary to redo any changes that were undone
 	 * by the undo method
 	 */
-	//Should this be done with the execute command?
 	void redo();
 	
 }

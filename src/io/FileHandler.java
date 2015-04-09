@@ -51,15 +51,12 @@ public class FileHandler {
 				// adds lines from file to buffer
 				while ((sCurrentLine = br.readLine()) != null) {
 					bufferText += sCurrentLine+'\n';
-					System.out.println(sCurrentLine);
 				}
 				buff.addText(bufferText);
 			}
 			catch (IOException e) {
 				e.printStackTrace();
 			}
-			
-			System.out.println("Contents of file: " + buff);
 			return buff;
 		}
 		/**
