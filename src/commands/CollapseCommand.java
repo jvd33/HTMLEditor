@@ -36,14 +36,11 @@ public class CollapseCommand implements Command, Undoable {
 
 	@Override
 	public void undo() {
-		// TODO Auto-generated method stub
 		this.b.undo();
 	}
 
 	@Override
 	public void redo() {
-		// TODO Auto-generated method stub
-		//execute();
 		this.b.redo();
 		
 	}

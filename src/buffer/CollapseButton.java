@@ -7,12 +7,22 @@ import javax.swing.JButton;
 
 import elements.HTMLTag;
 
+/**
+ * Button that allows for collapsing of HTMLTags
+ * @author Team Bash-Browns
+ *
+ */
 public class CollapseButton extends JButton{
 	final private String COLLAPSED = "+";
 	final private String COLLAPSABLE = "-";
 	private int linenum;
 	private HTMLTag tag;
 	
+	/**
+	 * Constructor
+	 * @param line, the line number its on
+	 * @param t, the tag to attach
+	 */
 	public CollapseButton(int line, HTMLTag t){
 		super();
 		super.setText(COLLAPSABLE);
@@ -23,6 +33,9 @@ public class CollapseButton extends JButton{
 		
 	}
 	
+	/**
+	 * Switch the state of the button
+	 */
 	public void switchText(){
 		if(this.getText().equals(COLLAPSABLE)){
 			this.setText(COLLAPSED);

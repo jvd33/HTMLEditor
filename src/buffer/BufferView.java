@@ -1,6 +1,5 @@
 package buffer;
 import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -13,16 +12,14 @@ import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
-import java.awt.color.*;
 import commands.*;
 import elements.DocumentElement;
 import elements.HTMLTag;
-import elements.TextElement;
+
 
 
 /**
