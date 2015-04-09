@@ -18,20 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JToolBar;
-
 import java.awt.color.*;
-
-import commands.BuffStateCommand;
-import commands.Command;
-import commands.CommandHandler;
-import commands.CopyCommand;
-import commands.IndentLinesCommand;
-import commands.InsertCommand;
-import commands.NewLineCommand;
-import commands.RedoCommand;
-import commands.SaveCommand;
-import commands.UndoCommand;
-import commands.WordWrapCommand;
+import commands.*;
 import elements.DocumentElement;
 import elements.HTMLTag;
 import elements.TextElement;
@@ -286,11 +274,14 @@ public class BufferView extends JPanel implements Observer{
 			CollapseButton cb = (CollapseButton)e.getSource();
 			cb.switchText();
 			cb.getTag().collapse();
-			System.out.print("Collapse this tag"+ cb.getTag().print());
+			commandHandler.executeCommand(new CollapseCommand(buffer, buffer.getTag().print()));
 			
 		} 	
 	};
 	
+	/**
+	 * Updates the side panel when new tags are added
+	 */
 	private void updateCollapsePanel(){
 		JButton cb;
 		collapsepanel.removeAll();

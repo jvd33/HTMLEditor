@@ -5,7 +5,7 @@ import buffer.Buffer;
 
 /**
  * Command that instantiates a new image view for the buffer
- * @author joe
+ * @author Team Bash-Browns
  *
  */
 public class ImgCommand implements Command {

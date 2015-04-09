@@ -15,6 +15,7 @@ public class HTMLTag implements DocumentElement{
 		private String startTag, endTag;
 		private String attribute;
 		private boolean isCollapsed;
+		private int linesSpanned = 1;
 		
 		/**
 		 * Constructor of the HTMLTag
@@ -108,6 +109,9 @@ public class HTMLTag implements DocumentElement{
 		public String print() {
 			String returnString = getStartTag();
 			if(isCollapsed){	// It should print its start tag
+				if(returnString.contains("<a href")) { 
+					returnString = "<a>";
+				}
 				return returnString;
 			}else{
 				for(DocumentElement de: children) {
@@ -116,6 +120,15 @@ public class HTMLTag implements DocumentElement{
 				returnString+=getEndTag();
 			}
 			return returnString;
+		}
+		
+		public String printFull() { 
+			String returnString = getStartTag();
+			for(DocumentElement de:children) { 
+				returnString += de.print();
+			}
+			returnString+=getEndTag();
+			return returnString;	
 		}
 		/**
 		 * collapse and uncollapses the tag
@@ -139,5 +152,19 @@ public class HTMLTag implements DocumentElement{
 				}
 			}
 			return false;
+		}
+		
+		/**
+		 * 
+		 * @return the number of lines spanned by the tag
+		 */
+		public int getLinesSpanned() { 
+			int lines = 0;
+			for(DocumentElement de : getChildrenThis()) { 
+				if(de instanceof TextElement && de.toString().contains("\n")) { 
+					lines += de.toString().length() - de.toString().replace("\n", "").length();
+				}
+			}
+			return lines;
 		}
 }

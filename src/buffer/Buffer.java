@@ -132,9 +132,6 @@ public class Buffer extends Observable {
 			redoStack.push(state);
 		}
 		
-		/*
-		 * performs the undo operation on the buffer's text
-		 */
 		/**
 		 * Performs an undo operation
 		 * 
