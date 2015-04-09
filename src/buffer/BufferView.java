@@ -212,7 +212,6 @@ public class BufferView extends JPanel implements Observer{
 	ActionListener autoIndentListener = new ActionListener(){
 		public void actionPerformed(ActionEvent e) {
 			autoindent = !autoindent;
-			System.out.println("Auto-indent status: "+autoindent);
 			if (autoindent == true){
 				newline.setBackground(Color.GREEN);
 				newline.setOpaque(true);

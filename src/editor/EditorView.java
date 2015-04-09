@@ -77,10 +77,6 @@ public class EditorView extends JFrame implements Observer{
 		menuBar = new JMenuBar();
 		tabBar = new JTabbedPane();
 		i = 0;
-		/*closeBtn = new JButton("x");
-		closeBtn.setSize(5, 5);
-		closeBtn.addActionListener(close);*/
-
 		
 		// File + items
 		file = new JMenu("File");
@@ -142,7 +138,6 @@ public class EditorView extends JFrame implements Observer{
 	ActionListener filenew = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.print("New Button pushed!");
 			Command newFile = new NewCommand(editor, null);
 			CHO.executeCommand(newFile);
 		}
@@ -179,7 +174,6 @@ public class EditorView extends JFrame implements Observer{
 	ActionListener filesave = new ActionListener(){
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.print("Save Button pushed!");
 			Buffer currentBuffer = editor.getCurrentBuffer();
 			String textInBuffView = "";
 			try{
@@ -228,7 +222,6 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			CHO.executeCommand(new CopyCommand(editor.getActiveView().getTextArea(), editor));
-			System.out.println("Copy was called");
 		}
 	};	
 	
@@ -239,7 +232,6 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e){
 			CHO.executeCommand(new CutCommand(editor.getActiveView().getTextArea(), editor));
-			System.out.println("Cut was called");
 		}
 	};
 	
@@ -250,7 +242,6 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e){
 			CHO.executeCommand(new PasteCommand(editor.getActiveView().getTextArea(), editor));
-			System.out.println("Paste was called");
 		}
 	};
 	
@@ -262,7 +253,6 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) { 
 			CHO.executeCommand(new LinkCommand(editor.getCurrentBuffer()));
-			System.out.println("Links was called");
 		}
 	};
 	
@@ -273,7 +263,6 @@ public class EditorView extends JFrame implements Observer{
 		@Override
 		public void actionPerformed(ActionEvent e) { 
 			CHO.executeCommand(new ImgCommand(editor.getCurrentBuffer()));
-			System.out.println("Images was called");
 		}
 	};
 	
